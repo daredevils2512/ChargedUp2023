@@ -43,14 +43,14 @@ public class XboxController {
     startArrow = new Trigger(controller::getStartButton);
     leftStickButton = new Trigger(controller::getLeftStickButton);
     rightStickButton = new Trigger(controller::getRightStickButton);
-    dPadUp = new POVButton(controller, Constants.XBOX_POV_UP_DEGREES);
-    dPadUpRight = new POVButton(controller, Constants.XBOX_POV_UP_RIGHT_DEGREES);
-    dPadRight = new POVButton(controller, Constants.XBOX_POV_RIGHT_DEGREES);
-    dPadDownRight = new POVButton(controller, Constants.XBOX_POV_DOWN_RIGHT_DEGREES);
-    dPadDown = new POVButton(controller, Constants.XBOX_POV_DOWN_DEGREES);
-    dPadDownLeft = new POVButton(controller, Constants.XBOX_POV_DOWN_LEFT_DEGREES);
-    dPadLeft = new POVButton(controller, Constants.XBOX_POV_LEFT_DEGREES);
-    dPadUpLeft = new POVButton(controller, Constants.XBOX_POV_UP_LEFT_DEGREES);
+    dPadUp = new POVButton(controller, Constants.IoConstants.XBOX_POV_UP_DEGREES);
+    dPadUpRight = new POVButton(controller, Constants.IoConstants.XBOX_POV_UP_RIGHT_DEGREES);
+    dPadRight = new POVButton(controller, Constants.IoConstants.XBOX_POV_RIGHT_DEGREES);
+    dPadDownRight = new POVButton(controller, Constants.IoConstants.XBOX_POV_DOWN_RIGHT_DEGREES);
+    dPadDown = new POVButton(controller, Constants.IoConstants.XBOX_POV_DOWN_DEGREES);
+    dPadDownLeft = new POVButton(controller, Constants.IoConstants.XBOX_POV_DOWN_LEFT_DEGREES);
+    dPadLeft = new POVButton(controller, Constants.IoConstants.XBOX_POV_LEFT_DEGREES);
+    dPadUpLeft = new POVButton(controller, Constants.IoConstants.XBOX_POV_UP_LEFT_DEGREES);
   
   }
 
@@ -88,14 +88,14 @@ public class XboxController {
    * @param amount The amount to rumble between 0 (inclusive) and 1 (inclusive)
    */
   public void setLeftRumble(double amount) {
-    controller.setRumble(Constants.XBOX_LEFT_RUMBLE, amount);
+    controller.setRumble(Constants.IoConstants.XBOX_LEFT_RUMBLE, amount);
   }
 
   /** Sets the right rumble
    * @param amount The amount to rumble between 0 (inclusive) and 1 (inclusive)
    */
   public void setRightRumble(double amount) {
-    controller.setRumble(Constants.XBOX_RIGHT_RUMBLE, amount);
+    controller.setRumble(Constants.IoConstants.XBOX_RIGHT_RUMBLE, amount);
   }
 
   /** Sets the right and left rumble
@@ -108,12 +108,12 @@ public class XboxController {
 
   /** Stops left rumble */
   public void stopLeftRumble() {
-    controller.setRumble(Constants.XBOX_LEFT_RUMBLE, 0.0);
+    controller.setRumble(Constants.IoConstants.XBOX_LEFT_RUMBLE, 0.0);
   }
 
   /** Stops right rumble */
   public void stopRightRumble() {
-    controller.setRumble(Constants.XBOX_RIGHT_RUMBLE, 0.0);
+    controller.setRumble(Constants.IoConstants.XBOX_RIGHT_RUMBLE, 0.0);
   }
 
   /** Stops rumble */
@@ -164,7 +164,7 @@ public class XboxController {
 
   /** @return True if the DPad is not being pressed. */
   public boolean getDPadReleased() {
-    return getDPad() == Constants.XBOX_POV_RELEASED_DEGREES;
+    return getDPad() == Constants.IoConstants.XBOX_POV_RELEASED_DEGREES;
   }
 
   /** @return The angle of the DPad in degrees.

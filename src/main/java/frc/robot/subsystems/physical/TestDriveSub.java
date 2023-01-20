@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import frc.robot.Constants;
 import frc.robot.subsystems.interfaces.Drivetrain;
+import frc.robot.utils.Constants;
 
 public class TestDriveSub implements Drivetrain{
     private final WPI_VictorSPX frontLeft; 

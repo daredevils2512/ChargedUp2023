@@ -6,8 +6,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import frc.robot.Constants;
 import frc.robot.subsystems.interfaces.Drivetrain;
+import frc.robot.utils.Constants;
 
 public class DriveSub implements Drivetrain {
     //Public finals :)
