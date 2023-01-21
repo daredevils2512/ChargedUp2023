@@ -26,7 +26,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   
   private final ElevatorSub m_ElevatorSub = new ElevatorSub();
-  
+
   private final Extreme m_Extreme = new Extreme(0); // Move port to constats
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -38,7 +38,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
   }
-
+// beware the watermelon man
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -49,7 +49,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    m_Extreme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, Constants.ELEVATOR_SPEED));
+    m_Extreme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> Constants.ELEVATOR_SPEED));
   }
    
 

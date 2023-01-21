@@ -1,10 +1,8 @@
 package frc.robot.utils;
 
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /** The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -17,10 +15,23 @@ public final class Constants {
 
   private Constants() { }
 
+  //elevator motors
   public static final int ELEVATOR_1ID = 1;
   public static final int ELEVATOR_2ID = 2;
   public static final double ELEVATOR_SPEED = 0.5;
 
+  //elevator encoders
+  public static final double ENCODER_PER_PULSE_DISTANCE = 123/123; //TODO not the right numbers
+  public static final int ELEVATOR_ENCODER_CHANNEL1ID = 1;
+  public static final int ELEVATOR_ENCODER_CHANNEL2ID = 2;
+
+
+  //double solenoid
+  public static final int FORWARD_CHANNEL = 0; //TODO channels might be wrong
+  public static final int REVERSE_CHANNEL = 1; //TODO
+  public static final DoubleSolenoid.Value EXTENDED = Value.kForward;
+  public static final DoubleSolenoid.Value RETRACTED = Value.kReverse;
+  
   // Xbox Controller
   public static final int XBOX_POV_UP_DEGREES = 0;
   public static final int XBOX_POV_UP_RIGHT_DEGREES = 45;

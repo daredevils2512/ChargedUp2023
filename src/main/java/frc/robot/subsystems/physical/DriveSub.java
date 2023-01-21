@@ -7,11 +7,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 //Imports go here :) 
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-
 
 public class DriveSub implements Subsystem {
     //Public finals :)
@@ -24,8 +20,6 @@ public class DriveSub implements Subsystem {
         frontLeft = new WPI_TalonFX(0); //TODO: put values into a constants folder. 
         left = new MotorControllerGroup(frontLeft, null);
         
-
-
     }
     
 }
