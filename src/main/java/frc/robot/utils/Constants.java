@@ -3,6 +3,11 @@ package frc.robot.utils;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 public final class Constants {
+  // Drivetrain
+  public static final int DRIVETRAIN_FRONT_LEFT_ID = -1;
+  public static final int DRIVETRAIN_BACK_LEFT_ID = -1;
+  public static final int DRIVETRAIN_FRONT_RIGHT_ID = -1;
+  public static final int DRIVETRAIN_BACK_RIGHT_ID = -1;
 
   // Gyro
   public static final int PIGEON_PORT = -1; // TODO: Find Value
