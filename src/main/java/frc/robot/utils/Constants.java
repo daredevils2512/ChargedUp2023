@@ -3,16 +3,10 @@ package frc.robot.utils;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 public final class Constants {
-  public static final int kDriverControllerPort = 0;
 
   // Gyro
   public static final int PIGEON_PORT = -1; // TODO: Find Value
   
-  // Control Board
-  public static final int XBOX_CONTROLLER_PORT = 0;
-  public static final int EXTREME_PORT = 1;
-  public static final int BUTTON_BOX_PORT = 2;
-
   // Xbox Controller
   public static final int XBOX_POV_UP_DEGREES = 0;
   public static final int XBOX_POV_UP_RIGHT_DEGREES = 45;

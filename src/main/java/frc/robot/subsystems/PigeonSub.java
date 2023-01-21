@@ -1,17 +1,24 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.sensors.WPI_PigeonIMU;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
 import frc.robot.utils.Constants;
 
 public class PigeonSub {
-    private final WPI_PigeonIMU pigeon;
+    private final WPI_Pigeon2 pigeon;
 
     public PigeonSub() {
-        pigeon = new WPI_PigeonIMU(Constants.PIGEON_PORT);
+        pigeon = new WPI_Pigeon2(Constants.PIGEON_PORT);
+    }
+
+    public double[] getGravityVector() {
+        double[] d = {0.0, 0.0, 0.0};
+        pigeon.getGravityVector(d);
+        return d;
     }
 
     public double[] getGyro() {
-        double[] d = {getYaw(), getPitch(), getRoll()};
+        double[] d = {0.0, 0.0, 0.0};
+        pigeon.getRawGyro(d);
         return d;
     }
 
