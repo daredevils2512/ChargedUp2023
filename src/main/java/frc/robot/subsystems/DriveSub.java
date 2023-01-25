@@ -1,15 +1,15 @@
 
-package frc.robot.subsystems.physical;
+package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.interfaces.Drivetrain;
 
-public class DriveSub implements Drivetrain {
+public class DriveSub extends SubsystemBase {
     //Public finals :)
     private final WPI_TalonFX frontLeft; 
     private final WPI_TalonFX frontRight;
@@ -32,7 +32,6 @@ public class DriveSub implements Drivetrain {
 
     }
 
-    @Override
     public void arcadeDrive(double move, double turn) {
         WheelSpeeds wheelSpeeds = DifferentialDrive.arcadeDriveIK(move, turn, true);
         left.set(wheelSpeeds.left);
