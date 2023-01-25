@@ -1,4 +1,4 @@
-package frc.robot.subsystems.physical;
+package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.interfaces.Drivetrain;
 
-public class TestDriveSub implements Drivetrain{
+public class TestDriveSub extends SubsystemBase{
     private final WPI_VictorSPX frontLeft; 
     private final WPI_VictorSPX backLeft; 
     private final WPI_VictorSPX frontRight; 
@@ -32,7 +32,6 @@ public class TestDriveSub implements Drivetrain{
         right = new MotorControllerGroup (frontRight, backRight);
     }
 
-    @Override
     public void arcadeDrive(double move, double turn) {
         WheelSpeeds wheelSpeeds = DifferentialDrive.arcadeDriveIK(move, turn, false);
         left.set(wheelSpeeds.left);
