@@ -18,7 +18,6 @@ import frc.robot.utils.Constants;
 public class ElevatorSub extends SubsystemBase{
     private final TalonSRX m_backMotor;
     private final TalonSRX m_frontMotor;
-    private final Encoder m_encoder;
     private final DigitalInput m_limitSwitch;
     private final DoubleSolenoid m_doubleSolenoid;
     private final PIDController m_pid = new PIDController(0, 0, 0);
@@ -31,9 +30,6 @@ public class ElevatorSub extends SubsystemBase{
 
         m_backMotor.follow(m_frontMotor);
         m_backMotor.setInverted(true);
-
-        m_encoder = new Encoder(Constants.ELEVATOR_ENCODER_CHANNEL1ID, Constants.ELEVATOR_ENCODER_CHANNEL2ID); 
-        m_encoder.setDistancePerPulse(Constants.ENCODER_PER_PULSE_DISTANCE);
 
         m_frontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
