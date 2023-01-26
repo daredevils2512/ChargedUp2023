@@ -21,16 +21,26 @@ public final class Constants {
   public static final double ELEVATOR_SPEED = 0.5;
 
   //elevator encoders
-  public static final double ENCODER_PER_PULSE_DISTANCE = 123/123; //TODO not the right numbers
-  public static final int ELEVATOR_ENCODER_CHANNEL1ID = 1;
+  public static final double ENCODER_PER_PULSE_DISTANCE = 0/0; //TODO fix numbers
+  public static final int ELEVATOR_ENCODER_CHANNEL1ID = 1; 
   public static final int ELEVATOR_ENCODER_CHANNEL2ID = 2;
+  
+  public static final int TICKS_PER_REVOLUTION = 4096;
+  public static final int DISTANCE_PER_REVOLUTION = 0/0; //TODO fix numbers
+  public static final double GEAR_RATIO = 0/0; //TODO fix numbersg
 
+  public static final int ELEVATOR_LIMIT_SWITCH_CHANNEL = 1; //TODO change channel
 
   //double solenoid
   public static final int FORWARD_CHANNEL = 0; //TODO channels might be wrong
   public static final int REVERSE_CHANNEL = 1; //TODO
   public static final DoubleSolenoid.Value EXTENDED = Value.kForward;
   public static final DoubleSolenoid.Value RETRACTED = Value.kReverse;
+
+  //elevator pid
+  public static final double ELEVATOR_PID_KP = 0; //TODO change all numbers
+  public static final double ELEVATOR_PID_KI = 0; //TODO
+  public static final double ELEVATOR_PID_KD = 0; //TODO
   
   // Xbox Controller
   public static final int XBOX_POV_UP_DEGREES = 0;
