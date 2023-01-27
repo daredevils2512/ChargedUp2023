@@ -2,15 +2,15 @@ package frc.robot.commands;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
-
+import java.util.logging.Logger;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.physical.ElevatorSub;
 import frc.robot.utils.Constants;
 
 public class ElevatorCommands {
+    public static final Logger m_logger = Logger.getLogger(ElevatorCommands.class.getSimpleName());
 
     private ElevatorCommands(){
 
@@ -18,6 +18,7 @@ public class ElevatorCommands {
 
     public static Command runElevator(ElevatorSub elevatorSub, DoubleSupplier speed){
         return new RunCommand(() -> elevatorSub.setSpeed(speed.getAsDouble()), elevatorSub)
+            .beforeStarting (() -> m_logger.info("runElevator" + speed.getAsDouble()))
             .finallyDo((interrupted) -> elevatorSub.setSpeed(0));
     }
 
@@ -27,19 +28,20 @@ public class ElevatorCommands {
         return runElevator(elevatorSub, speed).until(() -> elevatorSub.getLength() - length <= tolerance);
     }    
 
-    public static Command elevatorSet(ElevatorSub elevatorSub, boolean extended){
-        return elevatorSub.runOnce(() -> elevatorSub.setElevatorExtended(extended));
+    public static Command setElevatorExtended(ElevatorSub elevatorSub, boolean extended){
+        return elevatorSub.runOnce(() -> elevatorSub.setExtended(extended))
+            .beforeStarting(() -> m_logger.info("setElevatorExtended" + extended));
     }
 
     public static Command elevatorToggle(ElevatorSub elevatorSub){
-        return elevatorSub.runOnce(() -> elevatorSub.toggleElevatorExtended());
+        return elevatorSub.runOnce(elevatorSub::toggleElevatorExtended);
     }
 
     public static Command runToLengthPID(ElevatorSub elevatorSub, double length, double tolerance, double velocity){
         PIDController pid = new PIDController(Constants.ELEVATOR_PID_KP, Constants.ELEVATOR_PID_KI, Constants.ELEVATOR_PID_KD);
         pid.setTolerance(tolerance, velocity);
         return runElevator(elevatorSub, () -> pid.calculate(elevatorSub.getLength(), length))
-            .beforeStarting(() -> pid.reset())
-            .until(() -> pid.atSetpoint());
+            .beforeStarting(pid::reset)
+            .until(pid::atSetpoint);
     }
 }
