@@ -21,6 +21,9 @@ public final class Constants {
     public static final int driveFrontRightID = 3;
     public static final int driveBackRightID = 4;
   }
+   
+  public static final int dumpID = 0;
+  public static final double dumpSpeedID = 0.3;
 
   public static class IoConstants {
     
