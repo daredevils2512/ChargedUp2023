@@ -3,6 +3,9 @@ package frc.robot.utils;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 public final class Constants {
+  // Auto
+  public static final double AUTO_DESIRED_YAW = 100;
+
   // Drivetrain
   public static final int DRIVETRAIN_FRONT_LEFT_ID = -1;
   public static final int DRIVETRAIN_BACK_LEFT_ID = -1;
