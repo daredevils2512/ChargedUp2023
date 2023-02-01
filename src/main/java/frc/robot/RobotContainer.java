@@ -5,9 +5,16 @@
 package frc.robot;
 
 import frc.robot.commands.Autos;
+import frc.robot.commands.DumpyCommands;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.io.Extreme;
 import frc.robot.subsystems.DriveSub;
+import frc.robot.subsystems.DumpSub;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.utils.Constants;
+
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -21,10 +28,13 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   DriveSub driveSub = new DriveSub(); 
+  DumpSub dumpSub = new DumpSub();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driveController =
   new CommandXboxController(0);
+  private final Extreme m_extreme = new Extreme(1);
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -43,6 +53,10 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driveController.getLeftY(), m_driveController.getRightX())));
+    dumpSub.setDefaultCommand(DumpyCommands.moveDumpy(dumpSub, m_extreme.getStickY()));
+    m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpSub, Constants.beltSpeed));
+    m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpSub, -Constants.beltSpeed));
+
   }  
 
   /**
