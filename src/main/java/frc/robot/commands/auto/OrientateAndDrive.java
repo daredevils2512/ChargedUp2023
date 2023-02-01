@@ -1,31 +1,34 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
-import frc.robot.subsystems.interfaces.Drivetrain;
+
 import frc.robot.utils.Constants;
 
 public class OrientateAndDrive extends CommandBase {
-    private final Drivetrain drivetrain;
-    private final PigeonSub gyro;
+  
+    private final PigeonSub m_gyro;
+    private final DriveSub m_driveSub;
     private double startYaw;
 
-    public OrientateAndDrive(Drivetrain drivetrain, PigeonSub gyro) {
-        this.drivetrain = drivetrain;
-        this.gyro = gyro;
+    public OrientateAndDrive(DriveSub drivetrain, PigeonSub gyro) {
+       
+        m_driveSub = drivetrain;
+        m_gyro = gyro;
         addRequirements(drivetrain, gyro);
     }
 
     @Override
     public void initialize() {
-        startYaw = gyro.getYaw();
+        startYaw = m_gyro.getYaw();
     }
 
     @Override
     public void execute() {
         // turn left -> yaw+
         if (Constants.AUTO_DESIRED_YAW > startYaw) {
-            drivetrain.arcadeDrive(0.0, 1.0);
+            m_driveSub.arcadeDrive(0.0, 1.0);
         }
 
     }
