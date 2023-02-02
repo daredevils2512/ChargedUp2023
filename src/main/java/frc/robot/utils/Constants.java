@@ -12,14 +12,13 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
  */
 public final class Constants {
   public static class DrivetrainConstants {
-    public static final int driveFrontLeftID = 1; 
-    public static final int driveBackLeftID = 2;
-    public static final int driveFrontRightID = 3;
-    public static final int driveBackRightID = 4;
+    public static final int DRIVE_FRONT_LEFT_ID = 1; 
+    public static final int DRIVE_BACK_LEFT_ID = 2;
+    public static final int DRIVE_FRONT_RIGHT_ID = 3;
+    public static final int DRIVE_BACK_RIGHT_ID = 4;
   }
 
   public static class IoConstants {
-    
     // Control Board
     public static final int XBOX_CONTROLLER_PORT = 0;
     public static final int EXTREME_PORT = 1;

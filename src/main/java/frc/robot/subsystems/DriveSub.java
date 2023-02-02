@@ -21,10 +21,10 @@ public class DriveSub extends SubsystemBase {
         //Construct them bad bois
 
         //Motors here, name them something good like frontLeft, ect ect. 
-        frontLeft = new WPI_TalonFX(Constants.DrivetrainConstants.driveFrontLeftID);
-        backLeft = new WPI_TalonFX(Constants.DrivetrainConstants.driveBackLeftID);
-        frontRight = new WPI_TalonFX(Constants.DrivetrainConstants.driveFrontRightID);
-        backRight = new WPI_TalonFX(Constants.DrivetrainConstants.driveBackRightID);
+        frontLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_FRONT_RIGHT_ID);
+        backLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_BACK_RIGHT_ID);
+        frontRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_FRONT_LEFT_ID);
+        backRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_BACK_LEFT_ID);
 
         left = new MotorControllerGroup(frontLeft, backLeft);
         right = new MotorControllerGroup(frontRight, backRight);
