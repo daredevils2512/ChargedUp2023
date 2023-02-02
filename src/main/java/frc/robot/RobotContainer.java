@@ -1,15 +1,17 @@
 package frc.robot;
 
-import frc.robot.io.XboxController;
 import frc.robot.subsystems.DriveSub;
-import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.IoConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class RobotContainer {
   DriveSub driveSub = new DriveSub(); 
-  XboxController m_driverController = new XboxController(Constants.IoConstants.XBOX_CONTROLLER_PORT);
+
+  // Replace with CommandPS4Controller or CommandJoystick if needed
+   private final CommandXboxController m_driverController =
+  new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -27,7 +29,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driverController.getYAxisLeft(), m_driverController.getXAxisRight())));
+    driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driverController.getLeftX(), m_driverController.getRightY())));
   }
 
   /**
