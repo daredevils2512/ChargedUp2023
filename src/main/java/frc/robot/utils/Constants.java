@@ -24,11 +24,11 @@ public final class Constants {
    
   public static final int dumpyID = 0;
   public static final int dumpyBeltID = 1;
-  public static final double dumpSpeed = 0.3;
+  public static final double dumpySpeed = 0.3;
   public static final double beltSpeed = 0.5;
   public static final double DUMPY_SPEED = 0.5;
   public static final int ENCODER_RESOLUTION = 2048;
-  public static final int DEGREES_PER_ROTATION = 30;
+  public static final int DEGREES_PER_ROTATION = 30; 
   public static final double DUMPY_TOLERANCE = 0.5;
   public static final double DUMPY_UP = 45;
 

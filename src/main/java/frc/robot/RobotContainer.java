@@ -9,7 +9,7 @@ import frc.robot.commands.DumpyCommands;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.io.Extreme;
 import frc.robot.subsystems.DriveSub;
-import frc.robot.subsystems.DumpSub;
+import frc.robot.subsystems.DumpySub;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.utils.Constants;
 
@@ -28,7 +28,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   DriveSub driveSub = new DriveSub(); 
-  DumpSub dumpSub = new DumpSub();
+  DumpySub dumpSub = new DumpySub();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driveController =
