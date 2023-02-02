@@ -53,7 +53,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driveController.getLeftY(), m_driveController.getRightX())));
-    dumpSub.setDefaultCommand(DumpyCommands.moveDumpy(dumpSub, m_extreme.getStickY()));
+    dumpSub.setDefaultCommand(DumpyCommands.rotateDumpy(dumpSub, m_extreme.getStickY()));
     m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpSub, Constants.beltSpeed));
     m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpSub, -Constants.beltSpeed));
 

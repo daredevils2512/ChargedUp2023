@@ -17,7 +17,7 @@ public class DumpyCommands {
         
     }
 
-    public static Command moveDumpy(DumpySub dumpySub, double speed) {
+    public static Command rotateDumpy(DumpySub dumpySub, double speed) {
         return new RunCommand(() -> dumpySub.setDumpySpeed(speed), dumpySub)
         .finallyDo((interrupted) -> dumpySub.setDumpySpeed(0));
     }
@@ -30,7 +30,7 @@ public class DumpyCommands {
     public static Command dumpyToAngle(DumpySub dumpySub, double angle) {
         BooleanSupplier dumpyAngle = () -> dumpySub.getAngle() < angle;
         DoubleSupplier speed = ()-> dumpyAngle.getAsBoolean() ? Constants.DUMPY_SPEED : -Constants.DUMPY_SPEED;
-        return moveDumpy(dumpySub, speed.getAsDouble()).until(() -> dumpyAngle.getAsBoolean() ? dumpySub.getAngle() > angle : dumpySub.getAngle() < angle);
+        return rotateDumpy(dumpySub, speed.getAsDouble()).until(() -> dumpyAngle.getAsBoolean() ? dumpySub.getAngle() > angle : dumpySub.getAngle() < angle);
     }
 
     public static Command dumpyToAnglePID(DumpySub dumpySub, double angle) {
