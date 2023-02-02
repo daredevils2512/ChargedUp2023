@@ -23,7 +23,7 @@ public class PigeonSub extends SubsystemBase {
         pitchEntry = table.getEntry("Pitch");
         rollEntry = table.getEntry("Roll");
     }
-
+    
     public double[] getGravityVector() {
         double[] d = {0.0, 0.0, 0.0};
         pigeon.getGravityVector(d);
