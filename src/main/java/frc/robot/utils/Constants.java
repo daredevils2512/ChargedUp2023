@@ -24,6 +24,8 @@ public final class Constants {
   public static final double ENCODER_PER_PULSE_DISTANCE = 0/0; //TODO fix numbers
   public static final int ELEVATOR_ENCODER_CHANNEL1ID = 1; 
   public static final int ELEVATOR_ENCODER_CHANNEL2ID = 2;
+
+  public static final double MAX_ELEVATOR_LENGTH = 0;
   
   public static final int TICKS_PER_REVOLUTION = 4096;
   public static final int DISTANCE_PER_REVOLUTION = 0/0; //TODO fix numbers

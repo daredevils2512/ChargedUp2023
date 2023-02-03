@@ -7,15 +7,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.spline.PoseWithCurvature;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
@@ -52,12 +49,21 @@ public class ElevatorSub extends SubsystemBase {
         m_logger.setLevel(Level.INFO);
     }
     public void setSpeed(double speed) {
-        m_frontMotor.set(ControlMode.PercentOutput, m_limitSwitch.get() ? Math.max(0, speed) : speed);
+        if (m_limitSwitch.get()) { 
+            speed = Math.max(0, speed);
+        }
+        else if (getLength() >= Constants.MAX_ELEVATOR_LENGTH) {
+            speed = Math.min(speed, 0);
+        }
+
+        m_frontMotor.set(ControlMode.PercentOutput, speed);
         m_lastUsedPID = false;
         m_setSpeedEntry.setDouble(speed);
     }
+//once upon a time Kobi was a big dumb baby man, who smells like farts. then we desicrate him
 
     public void setLength(double length){
+
         if (! m_lastUsedPID) m_pid.reset();
         m_frontMotor.set(ControlMode.PercentOutput, m_pid.calculate(getLength(), length));
         m_lastUsedPID = true;
