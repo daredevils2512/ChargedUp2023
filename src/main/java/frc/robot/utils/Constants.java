@@ -4,6 +4,14 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 public final class Constants {
 
+  public static class Auto{ 
+    public static final double AUTO_DESIRED_YAW = 100;
+      public static final int PIGEON_PORT = 1;
+       //PID for Gyro
+       public static final double AutoK_P = .015;
+       public static final double AutoK_I = 0.04;
+       public static final double AutoK_D = 0.004;
+    }
   public static class DrivetrainConstants {
     public static final int DRIVE_FRONT_LEFT_ID = 1; 
     public static final int DRIVE_BACK_LEFT_ID = 2;
