@@ -5,6 +5,7 @@ import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
 
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.Auto;
 
 public class OrientateAndDrive extends CommandBase {
   
@@ -27,7 +28,7 @@ public class OrientateAndDrive extends CommandBase {
     @Override
     public void execute() {
         // turn left -> yaw+
-        if (Constants.AUTO_DESIRED_YAW > startYaw) {
+        if (Auto.AUTO_DESIRED_YAW > startYaw) {
             m_driveSub.arcadeDrive(0.0, 1.0);
         }
 

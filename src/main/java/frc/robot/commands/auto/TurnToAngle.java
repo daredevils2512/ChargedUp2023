@@ -3,6 +3,7 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.controller.PIDController;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.Auto;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
 
@@ -11,7 +12,7 @@ public class TurnToAngle extends CommandBase{
     private final PigeonSub m_PigeonSub;
     private double yawTarget;
     private final int m_angleToTurnTO;
-    PIDController pid = new PIDController(Constants.AutoK_P, Constants.AutoK_I, Constants.AutoK_D);
+    PIDController pid = new PIDController(Auto.AutoK_P, Auto.AutoK_I, Auto.AutoK_D);
 
 
     public TurnToAngle(DriveSub driveSub, PigeonSub pigeonSub, Integer angleToTurnTO) {

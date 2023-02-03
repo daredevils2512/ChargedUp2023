@@ -3,61 +3,66 @@ package frc.robot.utils;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 public final class Constants {
-  // Auto
-  public static final double AUTO_DESIRED_YAW = 100;
 
+  public static class Auto{ 
+  public static final double AUTO_DESIRED_YAW = 100;
+    public static final int PIGEON_PORT = 1;
      //PID for Gyro
      public static final double AutoK_P = .015;
      public static final double AutoK_I = 0.04;
      public static final double AutoK_D = 0.004;
+  }
+  public static class DrivetrainConstants {
+    public static final int DRIVE_FRONT_LEFT_ID = 1; 
+    public static final int DRIVE_BACK_LEFT_ID = 2;
+    public static final int DRIVE_FRONT_RIGHT_ID = 3;
+    public static final int DRIVE_BACK_RIGHT_ID = 4;
+  }
 
-  // Drivetrain
-  public static final int DRIVETRAIN_FRONT_LEFT_ID = -1;
-  public static final int DRIVETRAIN_BACK_LEFT_ID = -1;
-  public static final int DRIVETRAIN_FRONT_RIGHT_ID = -1;
-  public static final int DRIVETRAIN_BACK_RIGHT_ID = -1;
+  public static class IoConstants {
+    // Control Board
+    public static final int XBOX_CONTROLLER_PORT = 0;
+    public static final int EXTREME_PORT = 1;
+    public static final int BUTTON_BOX_PORT = 2;
 
-  // Gyro
-  public static final int PIGEON_PORT = -1; // TODO: Find Value
-  
-  // Xbox Controller
-  public static final int XBOX_POV_UP_DEGREES = 0;
-  public static final int XBOX_POV_UP_RIGHT_DEGREES = 45;
-  public static final int XBOX_POV_RIGHT_DEGREES = 90;
-  public static final int XBOX_POV_DOWN_RIGHT_DEGREES = 135;
-  public static final int XBOX_POV_DOWN_DEGREES = 180;
-  public static final int XBOX_POV_DOWN_LEFT_DEGREES = 225;
-  public static final int XBOX_POV_LEFT_DEGREES = 270;
-  public static final int XBOX_POV_UP_LEFT_DEGREES = 315;
-  public static final int XBOX_POV_RELEASED_DEGREES = -1;
-  public static final RumbleType XBOX_LEFT_RUMBLE = RumbleType.kLeftRumble;
-  public static final RumbleType XBOX_RIGHT_RUMBLE = RumbleType.kRightRumble;
+    // Xbox Controller
+    public static final int XBOX_POV_UP_DEGREES = 0;
+    public static final int XBOX_POV_UP_RIGHT_DEGREES = 45;
+    public static final int XBOX_POV_RIGHT_DEGREES = 90;
+    public static final int XBOX_POV_DOWN_RIGHT_DEGREES = 135;
+    public static final int XBOX_POV_DOWN_DEGREES = 180;
+    public static final int XBOX_POV_DOWN_LEFT_DEGREES = 225;
+    public static final int XBOX_POV_LEFT_DEGREES = 270;
+    public static final int XBOX_POV_UP_LEFT_DEGREES = 315;
+    public static final int XBOX_POV_RELEASED_DEGREES = -1;
+    public static final RumbleType XBOX_LEFT_RUMBLE = RumbleType.kLeftRumble;
+    public static final RumbleType XBOX_RIGHT_RUMBLE = RumbleType.kRightRumble;
 
-  // Extreme
-  public static final int EXTREME_TRIGGER_PORT = 1;
-  public static final int EXTREME_SIDE_BUTTON_PORT = 2;
-  public static final int EXTREME_JOYSTICK_BOTTOM_LEFT_PORT = 3;
-  public static final int EXTREME_JOYSTICK_BOTTOM_RIGHT_PORT = 4;
-  public static final int EXTREME_JOYSTICK_TOP_LEFT_PORT = 5;
-  public static final int EXTREME_JOYSTICK_TOP_RIGHT_PORT = 6;
-  public static final int EXTREME_BASE_FRONT_LEFT_PORT = 7;
-  public static final int EXTREME_BASE_FRONT_RIGHT_PORT = 8;
-  public static final int EXTREME_BASE_MIDDLE_LEFT_PORT = 9;
-  public static final int EXTREME_BASE_MIDDLE_RIGHT_PORT = 10;
-  public static final int EXTREME_BASE_BACK_LEFT_PORT = 11;
-  public static final int EXTREME_BASE_BACK_RIGHT_PORT = 12;
-  public static final int EXTREME_STICK_X_AXIS_ID = 0;
-  public static final int EXTREME_STICK_Y_AXIS_ID = 1;
-  public static final int EXTREME_STICK_Z_AXIS_ID = 2;
-  public static final int EXTREME_SLIDER_AXIS_ID = 3;
-  public static final int EXTREME_POV_UP_DEGREES = 0;
-  public static final int EXTREME_POV_UP_RIGHT_DEGREES = 45;
-  public static final int EXTREME_POV_RIGHT_DEGREES = 90;
-  public static final int EXTREME_POV_DOWN_RIGHT_DEGREES = 135;
-  public static final int EXTREME_POV_DOWN_DEGREES = 180;
-  public static final int EXTREME_POV_DOWN_LEFT_DEGREES = 225;
-  public static final int EXTREME_POV_LEFT_DEGREES = 270;
-  public static final int EXTREME_POV_UP_LEFT_DEGREES = 315;
+    // Extreme
+    public static final int EXTREME_TRIGGER_PORT = 1;
+    public static final int EXTREME_SIDE_BUTTON_PORT = 2;
+    public static final int EXTREME_JOYSTICK_BOTTOM_LEFT_PORT = 3;
+    public static final int EXTREME_JOYSTICK_BOTTOM_RIGHT_PORT = 4;
+    public static final int EXTREME_JOYSTICK_TOP_LEFT_PORT = 5;
+    public static final int EXTREME_JOYSTICK_TOP_RIGHT_PORT = 6;
+    public static final int EXTREME_BASE_FRONT_LEFT_PORT = 7;
+    public static final int EXTREME_BASE_FRONT_RIGHT_PORT = 8;
+    public static final int EXTREME_BASE_MIDDLE_LEFT_PORT = 9;
+    public static final int EXTREME_BASE_MIDDLE_RIGHT_PORT = 10;
+    public static final int EXTREME_BASE_BACK_LEFT_PORT = 11;
+    public static final int EXTREME_BASE_BACK_RIGHT_PORT = 12;
+    public static final int EXTREME_STICK_X_AXIS_ID = 0;
+    public static final int EXTREME_STICK_Y_AXIS_ID = 1;
+    public static final int EXTREME_STICK_Z_AXIS_ID = 2;
+    public static final int EXTREME_SLIDER_AXIS_ID = 3;
+    public static final int EXTREME_POV_UP_DEGREES = 0;
+    public static final int EXTREME_POV_UP_RIGHT_DEGREES = 45;
+    public static final int EXTREME_POV_RIGHT_DEGREES = 90;
+    public static final int EXTREME_POV_DOWN_RIGHT_DEGREES = 135;
+    public static final int EXTREME_POV_DOWN_DEGREES = 180;
+    public static final int EXTREME_POV_DOWN_LEFT_DEGREES = 225;
+    public static final int EXTREME_POV_LEFT_DEGREES = 270;
+    public static final int EXTREME_POV_UP_LEFT_DEGREES = 315;
 
   // Button Box
   public static final int BUTTON_BOX_TOP_WHITE_PORT = 2;
@@ -71,5 +76,6 @@ public final class Constants {
   public static final int BUTTON_BOX_YELLOW_PORT = 15;
   public static final int BUTTON_BOX_BOTTOM_RED_PORT = 16;
   
-  private Constants() { }
+}
+private Constants() { }
 }

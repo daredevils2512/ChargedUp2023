@@ -6,6 +6,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.Auto;
 
 public class PigeonSub extends SubsystemBase {
     private final WPI_Pigeon2 pigeon;
@@ -16,7 +17,7 @@ public class PigeonSub extends SubsystemBase {
     private final NetworkTableEntry rollEntry;
 
     public PigeonSub() {
-        pigeon = new WPI_Pigeon2(Constants.PIGEON_PORT);
+        pigeon = new WPI_Pigeon2(Auto.PIGEON_PORT);
         
         table = NetworkTableInstance.create().getTable("Gyro");
         yawEntry = table.getEntry("Yaw");
