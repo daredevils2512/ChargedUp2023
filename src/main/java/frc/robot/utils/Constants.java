@@ -2,15 +2,16 @@ package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
- * globally (i.e. public static). Do not put anything functional in this class.
- *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
- */
 public final class Constants {
+
+  public static class Auto{ 
+  public static final double AUTO_DESIRED_YAW = 100;
+    public static final int PIGEON_PORT = 1;
+     //PID for Gyro
+     public static final double AutoK_P = .015;
+     public static final double AutoK_I = 0.04;
+     public static final double AutoK_D = 0.004;
+  }
   public static class DrivetrainConstants {
     public static final int DRIVE_FRONT_LEFT_ID = 1; 
     public static final int DRIVE_BACK_LEFT_ID = 2;
@@ -63,18 +64,18 @@ public final class Constants {
     public static final int EXTREME_POV_LEFT_DEGREES = 270;
     public static final int EXTREME_POV_UP_LEFT_DEGREES = 315;
 
-    // Button Box
-    public static final int BUTTON_BOX_TOP_WHITE_PORT = 2;
-    public static final int BUTTON_BOX_BIG_WHITE_PORT = 3;
-    public static final int BUTTON_BOX_MIDDLE_RED_PORT = 4;
-    public static final int BUTTON_BOX_BOTTOM_WHITE_PORT = 5;
-    public static final int BUTTON_BOX_TOP_RED_PORT = 6;
-    public static final int BUTTON_BOX_GREEN_PORT = 7;
-    public static final int BUTTON_BOX_MIDDLE_WHITE_PORT = 8;
-    public static final int BUTTON_BOX_BIG_RED_PORT = 14;
-    public static final int BUTTON_BOX_YELLOW_PORT = 15;
-    public static final int BUTTON_BOX_BOTTOM_RED_PORT = 16;
-
-  }
-
+  // Button Box
+  public static final int BUTTON_BOX_TOP_WHITE_PORT = 2;
+  public static final int BUTTON_BOX_BIG_WHITE_PORT = 3;
+  public static final int BUTTON_BOX_MIDDLE_RED_PORT = 4;
+  public static final int BUTTON_BOX_BOTTOM_WHITE_PORT = 5;
+  public static final int BUTTON_BOX_TOP_RED_PORT = 6;
+  public static final int BUTTON_BOX_GREEN_PORT = 7;
+  public static final int BUTTON_BOX_MIDDLE_WHITE_PORT = 8;
+  public static final int BUTTON_BOX_BIG_RED_PORT = 14;
+  public static final int BUTTON_BOX_YELLOW_PORT = 15;
+  public static final int BUTTON_BOX_BOTTOM_RED_PORT = 16;
+  
+}
+private Constants() { }
 }
