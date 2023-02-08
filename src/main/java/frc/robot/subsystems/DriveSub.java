@@ -32,13 +32,36 @@ public class DriveSub extends SubsystemBase {
 
         left = new MotorControllerGroup(frontLeft, backLeft);
         right = new MotorControllerGroup(frontRight, backRight);
-//THIS IS IN THE MASTER BRANCH
     }
 
     public void arcadeDrive(double move, double turn) {
         WheelSpeeds wheelSpeeds = DifferentialDrive.arcadeDriveIK(move, turn, true);
         left.set(wheelSpeeds.left);
         right.set(wheelSpeeds.right); 
+    }
+
+    public int getLeftEncoder() { 
+        return m_leftEncoder.get();
+    }
+
+    public int getRightEncoder() { 
+        return m_rightEncoder.get();
+    }
+
+    public double getLeftDistance() { 
+        return m_leftEncoder.getDistance();
+    }
+
+    public double getRightDistance() { 
+        return m_rightEncoder.getDistance();
+    }
+
+    public void setLeftDistancePerPulse(double distancePerPulse){
+        m_leftEncoder.setDistancePerPulse(distancePerPulse);
+    }
+
+    public void setRightDistancePerPulse(double distancePerPulse){
+        m_rightEncoder.setDistancePerPulse(distancePerPulse);
     }
 
 }

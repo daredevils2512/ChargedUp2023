@@ -17,11 +17,15 @@ public final class AutoCommands {
   */
 
 
- public static Command turnToAngle(DriveSub driveSub, PigeonSub pigeonSub, Integer angleToTurnTO){
+ public static Command turnToAngle(DriveSub driveSub, PigeonSub pigeonSub, int angleToTurnTO){
     return new TurnToAngle(driveSub, pigeonSub, angleToTurnTO);
  }
 
+ public static Command driveDistance(DriveSub driveSub, int driveTarget){
+   return new DriveDistance(driveSub, driveTarget); //PUSH
+ }
+
  public static Command fullAuto(){
-    return null;
+    return null; 
     }
 }
