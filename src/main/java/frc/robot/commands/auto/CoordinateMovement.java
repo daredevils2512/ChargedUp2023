@@ -12,7 +12,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import frc.robot.utils.Constants;
 import frc.robot.subsystems.OdometrySub;
 
-public class RobotMovementTest extends CommandBase{
+public class CoordinateMovement extends CommandBase{
 
   private final OdometrySub auto_drivetrain;
   private final RamseteController ramseteControl;
@@ -20,7 +20,7 @@ public class RobotMovementTest extends CommandBase{
   private Translation2d goalTranslation;
   private Pose2d goalPose;
 
-  public RobotMovementTest(double targetX, double targetY, double targetAngleDegrees, OdometrySub odometer) {
+  public CoordinateMovement(double targetX, double targetY, double targetAngleDegrees, OdometrySub odometer) {
     
     auto_drivetrain = odometer;
 
