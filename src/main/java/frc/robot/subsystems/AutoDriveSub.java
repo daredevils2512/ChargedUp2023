@@ -15,8 +15,11 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 import frc.robot.utils.Constants.Auto;
+import frc.robot.utils.Constants.AutoDriveConstants;
+import frc.robot.utils.Constants.DrivetrainConstants;
 
-public class OdometrySub extends SubsystemBase {
+
+public class AutoDriveSub extends SubsystemBase {
     private final WPI_TalonFX frontLeft; 
     private final WPI_TalonFX frontRight;
     private final WPI_TalonFX backLeft;
@@ -33,7 +36,7 @@ public class OdometrySub extends SubsystemBase {
     private final PIDController leftPID;
     private final PIDController rightPID;
   
-    public OdometrySub() {
+    public AutoDriveSub() {
         //Construct them bad bois
 
         //Motors here, name them something good like frontLeft, ect ect. 
@@ -45,11 +48,11 @@ public class OdometrySub extends SubsystemBase {
         left = new MotorControllerGroup(frontLeft, backLeft);
         right = new MotorControllerGroup(frontRight, backRight);
 
-        leftEncoder = new Encoder(0,1);
-        rightEncoder = new Encoder(0,1);
+        leftEncoder = new Encoder(DrivetrainConstants.LEFT_ENCODER_1,DrivetrainConstants.LEFT_ENCODER_2);
+        rightEncoder = new Encoder(DrivetrainConstants.RIGHT_ENCODER_1,DrivetrainConstants.RIGHT_ENCODER_2);
 
-        leftEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
-        rightEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
+        leftEncoder.setDistancePerPulse(DrivetrainConstants.DRIVETRAIN_DISTANCE_PER_PULSE);
+        rightEncoder.setDistancePerPulse(DrivetrainConstants.DRIVETRAIN_DISTANCE_PER_PULSE);
 
         pigeon = new WPI_Pigeon2(Auto.PIGEON_PORT);
         
@@ -57,11 +60,11 @@ public class OdometrySub extends SubsystemBase {
             pigeon.getRotation2d(), getLeftDistance(), getRightDistance()
         );
 
-        kinematics = new DifferentialDriveKinematics(Constants.TRACK_WIDTH_METERS);
-        feedforward = new SimpleMotorFeedforward(Constants.FEEDFORWARD_KS, Constants.FEEDFORWARD_KV, Constants.FEEDFORWARD_KA);
+        kinematics = new DifferentialDriveKinematics(AutoDriveConstants.TRACK_WIDTH_METERS);
+        feedforward = new SimpleMotorFeedforward(AutoDriveConstants.FEEDFORWARD_KS, AutoDriveConstants.FEEDFORWARD_KV, AutoDriveConstants.FEEDFORWARD_KA);
         
-        leftPID = new PIDController(Constants.DRIVE_KP, Constants.DRIVE_KI, Constants.DRIVE_KD);
-        rightPID = new PIDController(Constants.DRIVE_KP, Constants.DRIVE_KI, Constants.DRIVE_KD);
+        leftPID = new PIDController(AutoDriveConstants.DRIVE_KP, AutoDriveConstants.DRIVE_KI, AutoDriveConstants.DRIVE_KD);
+        rightPID = new PIDController(AutoDriveConstants.DRIVE_KP, AutoDriveConstants.DRIVE_KI, AutoDriveConstants.DRIVE_KD);
 
     }
 

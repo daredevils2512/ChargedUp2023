@@ -9,20 +9,20 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import frc.robot.utils.Constants;
-import frc.robot.subsystems.OdometrySub;
+import frc.robot.subsystems.AutoDriveSub;
+import frc.robot.utils.Constants.Auto;
 
 public class CoordinateMovement extends CommandBase{
 
-  private final OdometrySub auto_drivetrain;
+  private final AutoDriveSub auto_drivetrain;
   private final RamseteController ramseteControl;
   private Rotation2d goalRotation;
   private Translation2d goalTranslation;
   private Pose2d goalPose;
 
-  public CoordinateMovement(double targetX, double targetY, double targetAngleDegrees, OdometrySub odometer) {
+  public CoordinateMovement(double targetX, double targetY, double targetAngleDegrees, AutoDriveSub drivetrain) {
     
-    auto_drivetrain = odometer;
+    auto_drivetrain = drivetrain;
 
     goalRotation = new Rotation2d(targetAngleDegrees * 180 / Math.PI);
     goalTranslation = new Translation2d(targetX, targetY);
@@ -30,7 +30,7 @@ public class CoordinateMovement extends CommandBase{
 
     ramseteControl = new RamseteController(); 
 
-    addRequirements(odometer);
+    addRequirements(drivetrain);
   
   }
 @Override
@@ -56,9 +56,9 @@ public class CoordinateMovement extends CommandBase{
   /** Returns true when the command should end. */
   @Override
   public boolean isFinished() {
-    BooleanSupplier reachedPosition = () -> Math.abs(auto_drivetrain.getRobotPosition().getX() - goalPose.getX()) < Constants.AUTO_ERROR 
-    && Math.abs(auto_drivetrain.getRobotPosition().getY() - goalPose.getY()) < Constants.AUTO_ERROR 
-    && Math.abs(auto_drivetrain.getRobotPosition().getRotation().minus(goalPose.getRotation()).getDegrees()) < Constants.AUTO__DEGREES_ERROR;
+    BooleanSupplier reachedPosition = () -> Math.abs(auto_drivetrain.getRobotPosition().getX() - goalPose.getX()) < Auto.AUTO_ERROR 
+    && Math.abs(auto_drivetrain.getRobotPosition().getY() - goalPose.getY()) < Auto.AUTO_ERROR 
+    && Math.abs(auto_drivetrain.getRobotPosition().getRotation().minus(goalPose.getRotation()).getDegrees()) < Auto.AUTO__DEGREES_ERROR;
     return reachedPosition.getAsBoolean();
   }
 }

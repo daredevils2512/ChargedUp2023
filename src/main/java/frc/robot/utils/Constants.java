@@ -1,37 +1,60 @@
 package frc.robot.utils;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 public final class Constants {
 
   public static class Auto{ 
-  public static final double AUTO_DESIRED_YAW = 100;
+    public static final double AUTO_DESIRED_YAW = 100;
     public static final int PIGEON_PORT = 1;
-     //PID for Gyro
-     public static final double AutoK_P = .015;
-     public static final double AutoK_I = 0.04;
-     public static final double AutoK_D = 0.004;
+
+    //PID for Gyro
+    public static final double AutoK_P = .015;
+    public static final double AutoK_I = 0.04;
+    public static final double AutoK_D = 0.004;
+
+    //Error for Coordinate Movement
+    public static final double AUTO_ERROR = 0.05;
+    public static final double AUTO__DEGREES_ERROR = 3;  
   }
+
   public static class DrivetrainConstants {
+    //IDs
     public static final int DRIVE_FRONT_LEFT_ID = 1; 
     public static final int DRIVE_BACK_LEFT_ID = 2;
     public static final int DRIVE_FRONT_RIGHT_ID = 3;
     public static final int DRIVE_BACK_RIGHT_ID = 4;
+    public static final int LEFT_ENCODER_1 = 0;
+    public static final int LEFT_ENCODER_2 = 1;
+    public static final int RIGHT_ENCODER_1 = 2;
+    public static final int RIGHT_ENCODER_2 = 3;
+    
+    //Encoder Constants
+    public static final int DRIVETRAIN_ENCODER_RESOLUTION = 1;
+    public static final double DRIVETRAIN_GEAR_RATIO = 1;
+    public static final double DRIVETRAIN_WHEEL_DIAMETER = 6;
+    public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
+    public static final double DRIVETRAIN_DISTANCE_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_GEAR_RATIO / DRIVETRAIN_ENCODER_RESOLUTION;
+  
   }
-  public static final int DRIVETRAIN_ENCODER_RESOLUTION = 1;
-  public static final double TRACK_WIDTH_METERS = 0.6;
-  public static final double DRIVETRAIN_GEAR_RATIO = 1;
-  public static final double DRIVETRAIN_WHEEL_DIAMETER = 6;
-  public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
-  public static final double DRIVETRAIN_DISTANCE_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_GEAR_RATIO / DRIVETRAIN_ENCODER_RESOLUTION;
-  public static final double FEEDFORWARD_KS = 1;
-  public static final double FEEDFORWARD_KV = 1;
-  public static final double FEEDFORWARD_KA = 1;
-  public static final double AUTO_ERROR = 0.05;
-  public static final double AUTO__DEGREES_ERROR = 3;
-  public static final double DRIVE_KP = 1;
-  public static final double DRIVE_KI = 1;
-  public static final double DRIVE_KD = 1;
+  
+  public static class AutoDriveConstants {
+    //Track Width for Kinematics
+    public static final double TRACK_WIDTH_INCHES = 27;
+    public static final double TRACK_WIDTH_METERS = Units.inchesToMeters(TRACK_WIDTH_INCHES);
+  
+    //Feedforward Control
+    public static final double FEEDFORWARD_KS = 1;
+    public static final double FEEDFORWARD_KV = 1;
+    public static final double FEEDFORWARD_KA = 1;
+
+    //PID Control
+    public static final double DRIVE_KP = 1;
+    public static final double DRIVE_KI = 1;
+    public static final double DRIVE_KD = 1;
+  
+  }
 
 
 

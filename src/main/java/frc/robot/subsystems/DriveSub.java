@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.DrivetrainConstants;
 
 public class DriveSub extends SubsystemBase {
     //Private finals :)
@@ -31,11 +32,11 @@ public class DriveSub extends SubsystemBase {
         left = new MotorControllerGroup(frontLeft, backLeft);
         right = new MotorControllerGroup(frontRight, backRight);
 
-        leftEncoder = new Encoder(0,1);
-        rightEncoder = new Encoder(0,1);
+        leftEncoder = new Encoder(DrivetrainConstants.LEFT_ENCODER_1,DrivetrainConstants.LEFT_ENCODER_2);
+        rightEncoder = new Encoder(DrivetrainConstants.RIGHT_ENCODER_1,DrivetrainConstants.RIGHT_ENCODER_2);
 
-        leftEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
-        rightEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
+        leftEncoder.setDistancePerPulse(DrivetrainConstants.DRIVETRAIN_DISTANCE_PER_PULSE);
+        rightEncoder.setDistancePerPulse(DrivetrainConstants.DRIVETRAIN_DISTANCE_PER_PULSE);
 
     }
 
