@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.PIDCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.DumpySub;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.DumpyConstants;
 
 public class DumpyCommands {
 
@@ -29,19 +30,19 @@ public class DumpyCommands {
 
     public static Command dumpyToAngle(DumpySub dumpySub, double angle) {
         BooleanSupplier dumpyAngle = () -> dumpySub.getAngle() < angle;
-        DoubleSupplier speed = ()-> dumpyAngle.getAsBoolean() ? Constants.DUMPY_SPEED : -Constants.DUMPY_SPEED;
+        DoubleSupplier speed = ()-> dumpyAngle.getAsBoolean() ? DumpyConstants.DUMPY_SPEED : -DumpyConstants.DUMPY_SPEED;
         return rotateDumpy(dumpySub, speed.getAsDouble()).until(() -> dumpyAngle.getAsBoolean() ? dumpySub.getAngle() > angle : dumpySub.getAngle() < angle);
     }
 
     public static Command dumpyToAnglePID(DumpySub dumpySub, double angle) {
         PIDController dumpyPID = new PIDController(0,0,0);
-        dumpyPID.setTolerance(Constants.DUMPY_TOLERANCE);
+        dumpyPID.setTolerance(DumpyConstants.DUMPY_TOLERANCE);
         return new PIDCommand(dumpyPID, () -> dumpySub.getAngle(), angle, (speed) -> dumpySub.setDumpySpeed(speed)).until(() -> dumpyPID.atSetpoint());
     }
 
     public static Command dumpyToggle(DumpySub dumpySub) {
-        BooleanSupplier defaultPosition = () -> Math.abs(dumpySub.getAngle()) < Constants.DUMPY_TOLERANCE;
-        DoubleSupplier angle = () -> defaultPosition.getAsBoolean() ? Constants.DUMPY_UP : 0;
+        BooleanSupplier defaultPosition = () -> Math.abs(dumpySub.getAngle()) < DumpyConstants.DUMPY_TOLERANCE;
+        DoubleSupplier angle = () -> defaultPosition.getAsBoolean() ? DumpyConstants.DUMPY_UP : 0;
         return dumpyToAnglePID(dumpySub, angle.getAsDouble());
     }
 

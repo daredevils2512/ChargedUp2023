@@ -12,6 +12,7 @@ import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.DumpySub;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.DumpyConstants;
 
 import java.util.function.DoubleSupplier;
 
@@ -54,8 +55,8 @@ public class RobotContainer {
   private void configureBindings() {
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driveController.getLeftY(), m_driveController.getRightX())));
     dumpSub.setDefaultCommand(DumpyCommands.rotateDumpy(dumpSub, m_extreme.getStickY()));
-    m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpSub, Constants.beltSpeed));
-    m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpSub, -Constants.beltSpeed));
+    m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpSub, DumpyConstants.beltSpeed));
+    m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpSub, -DumpyConstants.beltSpeed));
 
   }  
 

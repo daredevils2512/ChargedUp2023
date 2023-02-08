@@ -11,6 +11,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.DumpyConstants;
 
 public class DumpySub extends SubsystemBase{
 
@@ -28,9 +29,9 @@ public class DumpySub extends SubsystemBase{
 
     public DumpySub() {
         //Constructor
-        dumpyMotor = new WPI_VictorSPX(Constants.dumpyID);
-        beltMotor = new WPI_VictorSPX(Constants.dumpyBeltID);
-        slowRate = Constants.dumpySpeed;
+        dumpyMotor = new WPI_VictorSPX(DumpyConstants.dumpyID);
+        beltMotor = new WPI_VictorSPX(DumpyConstants.dumpyBeltID);
+        slowRate = DumpyConstants.dumpySpeed;
 
         dumpyMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
     }
@@ -47,11 +48,11 @@ public class DumpySub extends SubsystemBase{
     }
 
     public double getAngle() {
-        return dumpyMotor.getSelectedSensorPosition() / Constants.ENCODER_RESOLUTION * Constants.DEGREES_PER_ROTATION;
+        return dumpyMotor.getSelectedSensorPosition() / DumpyConstants.ENCODER_RESOLUTION * DumpyConstants.DEGREES_PER_ROTATION;
     }
 
     public boolean checkDumpyToggled() {
-        BooleanSupplier dumpyState = () -> Math.abs(getAngle() - Constants.DUMPY_UP) < Constants.DUMPY_TOLERANCE;
+        BooleanSupplier dumpyState = () -> Math.abs(getAngle() - DumpyConstants.DUMPY_UP) < DumpyConstants.DUMPY_TOLERANCE;
         return dumpyState.getAsBoolean();
     }
 
