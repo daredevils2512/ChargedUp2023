@@ -18,6 +18,22 @@ public final class Constants {
     public static final int DRIVE_FRONT_RIGHT_ID = 3;
     public static final int DRIVE_BACK_RIGHT_ID = 4;
   }
+  public static final int DRIVETRAIN_ENCODER_RESOLUTION = 1;
+  public static final double TRACK_WIDTH_METERS = 0.6;
+  public static final double DRIVETRAIN_GEAR_RATIO = 1;
+  public static final double DRIVETRAIN_WHEEL_DIAMETER = 6;
+  public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
+  public static final double DRIVETRAIN_DISTANCE_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_GEAR_RATIO / DRIVETRAIN_ENCODER_RESOLUTION;
+  public static final double FEEDFORWARD_KS = 1;
+  public static final double FEEDFORWARD_KV = 1;
+  public static final double FEEDFORWARD_KA = 1;
+  public static final double AUTO_ERROR = 0.05;
+  public static final double AUTO__DEGREES_ERROR = 3;
+  public static final double DRIVE_KP = 1;
+  public static final double DRIVE_KI = 1;
+  public static final double DRIVE_KD = 1;
+
+
 
   public static class IoConstants {
     // Control Board

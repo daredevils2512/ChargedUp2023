@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -9,13 +9,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
 
 public class DriveSub extends SubsystemBase {
-    //Public finals :)
+    //Private finals :)
     private final WPI_TalonFX frontLeft; 
     private final WPI_TalonFX frontRight;
     private final WPI_TalonFX backLeft;
     private final WPI_TalonFX backRight;
     private final MotorControllerGroup left;
     private final MotorControllerGroup right;
+    private final Encoder leftEncoder;
+    private final Encoder rightEncoder;
 
     public DriveSub() {
         //Construct them bad bois
@@ -29,6 +31,12 @@ public class DriveSub extends SubsystemBase {
         left = new MotorControllerGroup(frontLeft, backLeft);
         right = new MotorControllerGroup(frontRight, backRight);
 
+        leftEncoder = new Encoder(0,1);
+        rightEncoder = new Encoder(0,1);
+
+        leftEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
+        rightEncoder.setDistancePerPulse(Constants.DRIVETRAIN_DISTANCE_PER_PULSE);
+
     }
 
     public void arcadeDrive(double move, double turn) {
@@ -36,6 +44,35 @@ public class DriveSub extends SubsystemBase {
         left.set(wheelSpeeds.left);
         right.set(wheelSpeeds.right); 
         // TODO
+    }
+
+   //Encoder functions
+    public int getLeftEncoder() {
+        return leftEncoder.get();
+    }
+
+    public int getRightEncoder() {
+        return rightEncoder.get();
+    }
+
+    public double getLeftDistance() {
+        return leftEncoder.getDistance();
+    }
+
+    public double getRightDistance() {
+        return rightEncoder.getDistance();
+    }
+
+    public double getLeftSpeed() {
+        return leftEncoder.getRate();
+    }
+
+    public double getRightSpeed() {
+        return rightEncoder.getRate();
+    }
+
+    public double getDistance() {
+      return (getLeftDistance() + getRightDistance()) / 2;
     }
 
 }
