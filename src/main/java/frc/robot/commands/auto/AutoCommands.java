@@ -1,9 +1,12 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.Command;
-
+import frc.robot.commands.DumpyCommands;
 import frc.robot.subsystems.DriveSub;
+import frc.robot.subsystems.DumpySub;
 import frc.robot.subsystems.PigeonSub;
+import frc.robot.utils.Constants.DumpyConstants;
+
 
 
 public final class AutoCommands {
@@ -16,7 +19,7 @@ public final class AutoCommands {
   * @return The command to be used when called.
   */
 
-
+ //Drivetrain commands
  public static Command turnToAngle(DriveSub driveSub, PigeonSub pigeonSub, int angleToTurnTO){
     return new TurnToAngle(driveSub, pigeonSub, angleToTurnTO);
  }
@@ -25,7 +28,24 @@ public final class AutoCommands {
    return new DriveDistance(driveSub, driveTarget); //PUSH
  }
 
+ //Dumpy commands
+ public static Command dumpyUp(DumpySub dumpySub){
+  return DumpyCommands.dumpyToAnglePID(dumpySub, DumpyConstants.DUMPY_UP);
+ }
+
+ public static Command dumpyDown(DumpySub dumpySub){
+  return DumpyCommands.dumpyToAnglePID(dumpySub, 0);
+ }
+
+ public static Command beltSuck(DumpySub dumpySub){
+  return DumpyCommands.runBelt(dumpySub, DumpyConstants.AUTO_BELT).withTimeout(DumpyConstants.BELT_TIMER);
+ }
+
+ public static Command beltSpit(DumpySub dumpySub){
+  return DumpyCommands.runBelt(dumpySub, -DumpyConstants.AUTO_BELT).withTimeout(DumpyConstants.BELT_TIMER);
+ }
+
  public static Command fullAuto(){
     return null; 
-    }
+  }
 }
