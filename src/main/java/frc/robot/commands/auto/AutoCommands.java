@@ -1,7 +1,7 @@
 package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.Command;
-
+import frc.robot.subsystems.AutoDriveSub;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
 
@@ -16,6 +16,9 @@ public final class AutoCommands {
   * @return The command to be used when called.
   */
 
+  public static Command coordinateMovement(double targetX, double targetY, double targetAngleDegrees, AutoDriveSub drivetrain) {
+   return new CoordinateMovement(targetX, targetY, targetAngleDegrees, drivetrain);
+  }
 
  public static Command turnToAngle(DriveSub driveSub, PigeonSub pigeonSub, Integer angleToTurnTO){
     return new TurnToAngle(driveSub, pigeonSub, angleToTurnTO);

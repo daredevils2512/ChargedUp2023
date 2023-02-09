@@ -24,17 +24,23 @@ public class CoordinateMovement extends CommandBase{
     
     auto_drivetrain = drivetrain;
 
-    goalRotation = new Rotation2d(targetAngleDegrees * 180 / Math.PI);
+    goalRotation = new Rotation2d(targetAngleDegrees * Math.PI / 180);
     goalTranslation = new Translation2d(targetX, targetY);
     goalPose = new Pose2d(goalTranslation, goalRotation);
 
     ramseteControl = new RamseteController(); 
 
+    Rotation2d rotationTolerance = new Rotation2d(Auto.AUTO__DEGREES_ERROR * Math.PI / 180);
+    Translation2d transTolerance = new Translation2d(Auto.AUTO_ERROR, Auto.AUTO_ERROR);
+    Pose2d poseTolerance = new Pose2d(transTolerance, rotationTolerance);
+    ramseteControl.setTolerance(poseTolerance);
+
     addRequirements(drivetrain);
   
   }
+  
 @Override
-  public void initialize() {  
+  public void initialize() {
 
   }
 
@@ -42,7 +48,7 @@ public class CoordinateMovement extends CommandBase{
   @Override
   public void execute() {
     ChassisSpeeds driveSpeed = ramseteControl.calculate(auto_drivetrain.getRobotPosition(), goalPose,
-    auto_drivetrain.currentChassisSpeeds().vxMetersPerSecond,  auto_drivetrain.currentChassisSpeeds().omegaRadiansPerSecond);
+    auto_drivetrain.currentChassisSpeeds().vxMetersPerSecond, auto_drivetrain.currentChassisSpeeds().omegaRadiansPerSecond);
 
     auto_drivetrain.useChassisSpeeds(driveSpeed);
   }
@@ -56,9 +62,7 @@ public class CoordinateMovement extends CommandBase{
   /** Returns true when the command should end. */
   @Override
   public boolean isFinished() {
-    BooleanSupplier reachedPosition = () -> Math.abs(auto_drivetrain.getRobotPosition().getX() - goalPose.getX()) < Auto.AUTO_ERROR 
-    && Math.abs(auto_drivetrain.getRobotPosition().getY() - goalPose.getY()) < Auto.AUTO_ERROR 
-    && Math.abs(auto_drivetrain.getRobotPosition().getRotation().minus(goalPose.getRotation()).getDegrees()) < Auto.AUTO__DEGREES_ERROR;
+    BooleanSupplier reachedPosition = () -> ramseteControl.atReference();
     return reachedPosition.getAsBoolean();
   }
 }
