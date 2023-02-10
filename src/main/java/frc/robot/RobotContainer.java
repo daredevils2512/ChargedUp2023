@@ -5,7 +5,6 @@ import frc.robot.utils.Constants.IoConstants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.subsystems.DriveSub;
 
 public class RobotContainer {
   DriveSub driveSub = new DriveSub(); 
@@ -37,6 +36,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-   return null; 
+    return null; 
   }
 }

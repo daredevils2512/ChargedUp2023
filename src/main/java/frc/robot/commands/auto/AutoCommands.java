@@ -9,7 +9,7 @@ import frc.robot.subsystems.PigeonSub;
 
 public final class AutoCommands {
 
-  private AutoCommands(AutoDriveSub drivetrain) { 
+  private AutoCommands() { 
 
   }
   
@@ -24,8 +24,8 @@ public final class AutoCommands {
    return new CoordinateMovement(targetX, targetY, targetAngleDegrees, auto_drive);
   }
 
-  /** There's no code to create trajectories yet - in theory that's what we could do with Pathweaver.
-  * Don't know where in the code to incorporate it though.
+  /** If we use this, the paths will be defined in Robot.java.
+   * I'm sure we can figure out how to connect it to this command, but I haven't yet.
   */
   public static Command trajectoryMovement(AutoDriveSub auto_drive, Trajectory path){
    return new TrajectoryMovement(auto_drive, path);

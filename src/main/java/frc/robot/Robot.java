@@ -1,8 +1,16 @@
 package frc.robot;
 
+import java.io.IOException;
+import java.nio.file.Path;
+
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+ 
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -15,6 +23,18 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
+  private Trajectory generatePath(String path) {
+    try {
+        Path pathFilesystem = Filesystem.getDeployDirectory().toPath().resolve(path);
+        return TrajectoryUtil.fromPathweaverJson(pathFilesystem);    
+    } catch (IOException ex) {
+        DriverStation.reportError("Unable to open trajectory: " + path, ex.getStackTrace());
+        return null;
+    }
+  }
+
+  public static Trajectory path1 = new Trajectory();
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -24,6 +44,8 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    path1 = generatePath("paths/YourPath.wpilib.json");
   }
 
   /**
