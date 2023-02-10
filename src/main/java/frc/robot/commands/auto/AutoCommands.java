@@ -1,5 +1,6 @@
 package frc.robot.commands.auto;
 
+import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.AutoDriveSub;
 import frc.robot.subsystems.DriveSub;
@@ -7,7 +8,10 @@ import frc.robot.subsystems.PigeonSub;
 
 
 public final class AutoCommands {
-  private AutoCommands() { }
+
+  private AutoCommands(AutoDriveSub drivetrain) { 
+
+  }
   
   /** Auto command that only drives back.
   * @param drivetrain The drivetrain subsystem to use
@@ -16,8 +20,12 @@ public final class AutoCommands {
   * @return The command to be used when called.
   */
 
-  public static Command coordinateMovement(double targetX, double targetY, double targetAngleDegrees, AutoDriveSub drivetrain) {
-   return new CoordinateMovement(targetX, targetY, targetAngleDegrees, drivetrain);
+  public static Command coordinateMovement(AutoDriveSub auto_drive, double targetX, double targetY, double targetAngleDegrees) {
+   return new CoordinateMovement(targetX, targetY, targetAngleDegrees, auto_drive);
+  }
+
+  public static Command trajectoryMovement(AutoDriveSub auto_drive, Trajectory path){
+   return new TrajectoryMovement(auto_drive, path);
   }
 
  public static Command turnToAngle(DriveSub driveSub, PigeonSub pigeonSub, Integer angleToTurnTO){
@@ -25,6 +33,6 @@ public final class AutoCommands {
  }
 
  public static Command fullAuto(){
-    return null;
-    }
+   return null;
+   }
 }

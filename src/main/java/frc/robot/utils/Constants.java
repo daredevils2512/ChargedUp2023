@@ -1,5 +1,6 @@
 package frc.robot.utils;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
@@ -43,6 +44,8 @@ public final class Constants {
     //Track Width for Kinematics
     public static final double TRACK_WIDTH_INCHES = 27;
     public static final double TRACK_WIDTH_METERS = Units.inchesToMeters(TRACK_WIDTH_INCHES);
+    public static final DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(TRACK_WIDTH_METERS);
+
   
     //Feedforward Control
     public static final double FEEDFORWARD_KS = 1;
@@ -51,7 +54,7 @@ public final class Constants {
 
     //PID Control
     public static final double DRIVE_KP = 1;
-    public static final double DRIVE_KI = 1;
+    public static final double DRIVE_KI = 0;
     public static final double DRIVE_KD = 1;
   
   }

@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import java.util.function.BiConsumer;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
@@ -31,7 +33,6 @@ public class AutoDriveSub extends SubsystemBase {
 
     private final WPI_Pigeon2 pigeon;
     private final DifferentialDriveOdometry odometry;
-    private final DifferentialDriveKinematics kinematics;
     private final SimpleMotorFeedforward feedforward;
     private final PIDController leftPID;
     private final PIDController rightPID;
@@ -60,7 +61,6 @@ public class AutoDriveSub extends SubsystemBase {
             pigeon.getRotation2d(), getLeftDistance(), getRightDistance()
         );
 
-        kinematics = new DifferentialDriveKinematics(AutoDriveConstants.TRACK_WIDTH_METERS);
         feedforward = new SimpleMotorFeedforward(AutoDriveConstants.FEEDFORWARD_KS, AutoDriveConstants.FEEDFORWARD_KV, AutoDriveConstants.FEEDFORWARD_KA);
         
         leftPID = new PIDController(AutoDriveConstants.DRIVE_KP, AutoDriveConstants.DRIVE_KI, AutoDriveConstants.DRIVE_KD);
@@ -93,11 +93,11 @@ public class AutoDriveSub extends SubsystemBase {
     //Driving functions
     public ChassisSpeeds currentChassisSpeeds() {
         var wheelspeeds = new DifferentialDriveWheelSpeeds(getLeftSpeed(), getRightSpeed());
-        return kinematics.toChassisSpeeds(wheelspeeds);
+        return AutoDriveConstants.kinematics.toChassisSpeeds(wheelspeeds);
     }
 
     public void useChassisSpeeds(ChassisSpeeds chassisSpeeds) {
-        DifferentialDriveWheelSpeeds wheelSpeeds = kinematics.toWheelSpeeds(chassisSpeeds);
+        DifferentialDriveWheelSpeeds wheelSpeeds = AutoDriveConstants.kinematics.toWheelSpeeds(chassisSpeeds);
         double leftVelocity = feedforward.calculate(wheelSpeeds.leftMetersPerSecond);
         double rightVelocity = feedforward.calculate(wheelSpeeds.rightMetersPerSecond);
 
@@ -106,6 +106,17 @@ public class AutoDriveSub extends SubsystemBase {
 
         left.setVoltage(leftVelocity + leftOutput);
         right.setVoltage(rightVelocity + rightOutput);
+    }
+
+    public void useWheelSpeeds(double leftVelocity, double rightVelocity) {
+        double leftVoltage = feedforward.calculate(leftVelocity);
+        double rightVoltage = feedforward.calculate(rightVelocity);
+
+        double leftOutput = leftPID.calculate(getLeftSpeed(), leftVelocity);
+        double rightOutput = rightPID.calculate(getRightSpeed(), rightVelocity);
+
+        left.setVoltage(leftVoltage + leftOutput);
+        right.setVoltage(rightVoltage + rightOutput);
     }
 
     public void clearSpeed() {

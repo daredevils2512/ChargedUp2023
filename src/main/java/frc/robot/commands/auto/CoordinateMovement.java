@@ -14,7 +14,7 @@ import frc.robot.utils.Constants.Auto;
 
 public class CoordinateMovement extends CommandBase{
 
-  private final AutoDriveSub auto_drivetrain;
+  private final AutoDriveSub auto_drive;
   private final RamseteController ramseteControl;
   private Rotation2d goalRotation;
   private Translation2d goalTranslation;
@@ -22,7 +22,7 @@ public class CoordinateMovement extends CommandBase{
 
   public CoordinateMovement(double targetX, double targetY, double targetAngleDegrees, AutoDriveSub drivetrain) {
     
-    auto_drivetrain = drivetrain;
+    auto_drive = drivetrain;
 
     goalRotation = new Rotation2d(targetAngleDegrees * Math.PI / 180);
     goalTranslation = new Translation2d(targetX, targetY);
@@ -47,16 +47,16 @@ public class CoordinateMovement extends CommandBase{
   /** Called every time the scheduler runs while the command is scheduled. */
   @Override
   public void execute() {
-    ChassisSpeeds driveSpeed = ramseteControl.calculate(auto_drivetrain.getRobotPosition(), goalPose,
-    auto_drivetrain.currentChassisSpeeds().vxMetersPerSecond, auto_drivetrain.currentChassisSpeeds().omegaRadiansPerSecond);
+    ChassisSpeeds driveSpeed = ramseteControl.calculate(auto_drive.getRobotPosition(), goalPose,
+    auto_drive.currentChassisSpeeds().vxMetersPerSecond, auto_drive.currentChassisSpeeds().omegaRadiansPerSecond);
 
-    auto_drivetrain.useChassisSpeeds(driveSpeed);
+    auto_drive.useChassisSpeeds(driveSpeed);
   }
 
   /** Called once the command ends or is interrupted. */
   @Override
   public void end(boolean interrupted) {
-    auto_drivetrain.clearSpeed();
+    auto_drive.clearSpeed();
   }
 
   /** Returns true when the command should end. */
