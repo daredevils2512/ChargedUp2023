@@ -18,6 +18,26 @@ public final class Constants {
     //Error for Coordinate Movement
     public static final double AUTO_ERROR = 0.05;
     public static final double AUTO__DEGREES_ERROR = 3;  
+  
+  }
+  
+  public static class AutoDriveConstants {
+    //Kinematics
+    public static final double TRACK_WIDTH_INCHES = 27;
+    public static final double TRACK_WIDTH_METERS = Units.inchesToMeters(TRACK_WIDTH_INCHES);
+    public static final DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(TRACK_WIDTH_METERS);
+
+  
+    //Feedforward Control
+    public static final double FEEDFORWARD_KS = 1;
+    public static final double FEEDFORWARD_KV = 1;
+    public static final double FEEDFORWARD_KA = 1;
+
+    //PID Control
+    public static final double DRIVE_KP = 1;
+    public static final double DRIVE_KI = 0;
+    public static final double DRIVE_KD = 1;
+  
   }
 
   public static class DrivetrainConstants {
@@ -39,27 +59,6 @@ public final class Constants {
     public static final double DRIVETRAIN_DISTANCE_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_GEAR_RATIO / DRIVETRAIN_ENCODER_RESOLUTION;
   
   }
-  
-  public static class AutoDriveConstants {
-    //Track Width for Kinematics
-    public static final double TRACK_WIDTH_INCHES = 27;
-    public static final double TRACK_WIDTH_METERS = Units.inchesToMeters(TRACK_WIDTH_INCHES);
-    public static final DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(TRACK_WIDTH_METERS);
-
-  
-    //Feedforward Control
-    public static final double FEEDFORWARD_KS = 1;
-    public static final double FEEDFORWARD_KV = 1;
-    public static final double FEEDFORWARD_KA = 1;
-
-    //PID Control
-    public static final double DRIVE_KP = 1;
-    public static final double DRIVE_KI = 0;
-    public static final double DRIVE_KD = 1;
-  
-  }
-
-
 
   public static class IoConstants {
     // Control Board

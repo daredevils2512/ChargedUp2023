@@ -24,6 +24,9 @@ public final class AutoCommands {
    return new CoordinateMovement(targetX, targetY, targetAngleDegrees, auto_drive);
   }
 
+  /** There's no code to create trajectories yet - in theory that's what we could do with Pathweaver.
+  * Don't know where in the code to incorporate it though.
+  */
   public static Command trajectoryMovement(AutoDriveSub auto_drive, Trajectory path){
    return new TrajectoryMovement(auto_drive, path);
   }
