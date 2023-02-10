@@ -9,9 +9,13 @@ public final class Constants {
       public static final int PIGEON_PORT = 1;
       public static final double AUTO_DRIVE_SPEED = 0.5;
        //PID for Gyro
-       public static final double AutoK_P = .015;
+       public static final double AutoK_P = 0.015;
        public static final double AutoK_I = 0.04;
        public static final double AutoK_D = 0.004;
+       //PID for drivetrain
+       public static final double DRIVETRAIN_KP = 0;
+       public static final double DRIVETRAIN_KI = 0;
+       public static final double DRIVETRAIN_KD = 0;
     }
 
   public static class DrivetrainConstants {
