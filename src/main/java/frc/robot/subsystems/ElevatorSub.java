@@ -1,4 +1,4 @@
-package frc.robot.subsystems.physical;
+package frc.robot.subsystems;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.ElevatorConstants;
 
 public class ElevatorSub extends SubsystemBase {
     private final TalonSRX m_backMotor;
@@ -34,17 +35,17 @@ public class ElevatorSub extends SubsystemBase {
     private final NetworkTableEntry m_solenoidValue = m_networkTable.getEntry("solenoid value :D");
 
     public ElevatorSub () {
-        m_frontMotor = new TalonSRX(Constants.ELEVATOR_1ID);
-        m_backMotor = new TalonSRX(Constants.ELEVATOR_2ID);
+        m_frontMotor = new TalonSRX(ElevatorConstants.ELEVATOR_1ID);
+        m_backMotor = new TalonSRX(ElevatorConstants.ELEVATOR_2ID);
 
         m_backMotor.follow(m_frontMotor);
         m_backMotor.setInverted(true);
 
         m_frontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
-        m_limitSwitch = new DigitalInput(Constants.ELEVATOR_LIMIT_SWITCH_CHANNEL);
+        m_limitSwitch = new DigitalInput(ElevatorConstants.ELEVATOR_LIMIT_SWITCH_CHANNEL);
 
-        m_doubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.FORWARD_CHANNEL, Constants.REVERSE_CHANNEL);
+        m_doubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, ElevatorConstants.FORWARD_CHANNEL, ElevatorConstants.REVERSE_CHANNEL);
 
         m_logger.setLevel(Level.INFO);
     }
@@ -52,7 +53,7 @@ public class ElevatorSub extends SubsystemBase {
         if (m_limitSwitch.get()) { 
             speed = Math.max(0, speed);
         }
-        else if (getLength() >= Constants.MAX_ELEVATOR_LENGTH) {
+        else if (getLength() >= ElevatorConstants.MAX_ELEVATOR_LENGTH) {
             speed = Math.min(speed, 0);
         }
 
@@ -72,16 +73,16 @@ public class ElevatorSub extends SubsystemBase {
     }
 
     public double getLength() {
-        return m_frontMotor.getSelectedSensorPosition() / Constants.TICKS_PER_REVOLUTION * Constants.GEAR_RATIO * Constants.DISTANCE_PER_REVOLUTION;
+        return m_frontMotor.getSelectedSensorPosition() / ElevatorConstants.TICKS_PER_REVOLUTION * ElevatorConstants.GEAR_RATIO * ElevatorConstants.DISTANCE_PER_REVOLUTION;
     }
 
     public boolean getElevatorExtended() {
-        final boolean extendTrue = m_doubleSolenoid.get() == Constants.EXTENDED;
+        final boolean extendTrue = m_doubleSolenoid.get() == ElevatorConstants.EXTENDED;
         return extendTrue;
     }
 
     public void setExtended(boolean wantsExtended){
-        m_doubleSolenoid.set(wantsExtended ? Constants.EXTENDED : Constants.RETRACTED);
+        m_doubleSolenoid.set(wantsExtended ? ElevatorConstants.EXTENDED : ElevatorConstants.RETRACTED);
         m_logger.info("set extended: " + wantsExtended);
         m_setExtendedEntry.setBoolean(wantsExtended);
     }

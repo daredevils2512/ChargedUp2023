@@ -6,8 +6,9 @@ import java.util.logging.Logger;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import frc.robot.subsystems.physical.ElevatorSub;
+import frc.robot.subsystems.ElevatorSub;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.ElevatorConstants;
 
 public class ElevatorCommands {
     public static final Logger m_logger = Logger.getLogger(ElevatorCommands.class.getSimpleName());
@@ -24,7 +25,7 @@ public class ElevatorCommands {
 
     public static Command runToLength(ElevatorSub elevatorSub, double length, double tolerance){
         BooleanSupplier elevatorUp = () -> elevatorSub.getLength() < length;
-        DoubleSupplier speed = ()-> elevatorUp.getAsBoolean() ? Constants.ELEVATOR_SPEED : -Constants.ELEVATOR_SPEED;
+        DoubleSupplier speed = ()-> elevatorUp.getAsBoolean() ? ElevatorConstants.ELEVATOR_SPEED : -ElevatorConstants.ELEVATOR_SPEED;
         return runElevator(elevatorSub, speed).until(() -> elevatorSub.getLength() - length <= tolerance);
     }    
 
@@ -38,7 +39,7 @@ public class ElevatorCommands {
     }
 
     public static Command runToLengthPID(ElevatorSub elevatorSub, double length, double tolerance, double velocity){
-        PIDController pid = new PIDController(Constants.ELEVATOR_PID_KP, Constants.ELEVATOR_PID_KI, Constants.ELEVATOR_PID_KD);
+        PIDController pid = new PIDController(ElevatorConstants.ELEVATOR_PID_KP, ElevatorConstants.ELEVATOR_PID_KI, ElevatorConstants.ELEVATOR_PID_KD);
         pid.setTolerance(tolerance, velocity);
         return runElevator(elevatorSub, () -> pid.calculate(elevatorSub.getLength(), length))
             .beforeStarting(pid::reset)
