@@ -13,7 +13,9 @@ import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
@@ -31,6 +33,7 @@ public class AutoDriveSub extends SubsystemBase {
     private final MotorControllerGroup right;
     private final Encoder leftEncoder;
     private final Encoder rightEncoder;
+    private final DoubleSolenoid m_shifter;
 
     private final NetworkTable table;
     private final NetworkTableEntry robotX;
@@ -55,13 +58,21 @@ public class AutoDriveSub extends SubsystemBase {
         angularVelocity = table.getEntry("Angular velocity");
 
         //Motors here, name them something good like frontLeft, ect ect. 
-        frontLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_FRONT_RIGHT_ID);
-        backLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_BACK_RIGHT_ID);
-        frontRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_FRONT_LEFT_ID);
-        backRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_BACK_LEFT_ID);
+        frontLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_LEFT_1_ID);
+        backLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_LEFT_2_ID);
+        frontRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_RIGHT_1_ID);
+        backRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_RIGHT_2_ID);
+        m_shifter = new DoubleSolenoid(
+            PneumaticsModuleType.CTREPCM,
+            Constants.DrivetrainConstants.SHIFTER_FORWARD_CHANNEL, 
+            Constants.DrivetrainConstants.SHIFTER_REVERSE_CHANNEL
+        );
+
 
         left = new MotorControllerGroup(frontLeft, backLeft);
         right = new MotorControllerGroup(frontRight, backRight);
+        right.setInverted(true);
+
 
         leftEncoder = new Encoder(DrivetrainConstants.LEFT_ENCODER_1,DrivetrainConstants.LEFT_ENCODER_2);
         rightEncoder = new Encoder(DrivetrainConstants.RIGHT_ENCODER_1,DrivetrainConstants.RIGHT_ENCODER_2);
@@ -80,6 +91,16 @@ public class AutoDriveSub extends SubsystemBase {
         leftPID = new PIDController(AutoDriveConstants.DRIVE_KP, AutoDriveConstants.DRIVE_KI, AutoDriveConstants.DRIVE_KD);
         rightPID = new PIDController(AutoDriveConstants.DRIVE_KP, AutoDriveConstants.DRIVE_KI, AutoDriveConstants.DRIVE_KD);
 
+    }
+
+    public void setLowGear(boolean lowGear) {
+        DoubleSolenoid.Value a = lowGear ? DrivetrainConstants.LOW_GEAR_VALUE : DrivetrainConstants.HIGH_GEAR_VALUE;
+        // <condition> ? <expression 1> : <expression 2>
+        m_shifter.set(a);
+    }
+
+    public Boolean getLowGear() {
+        return m_shifter.get() == DrivetrainConstants.LOW_GEAR_VALUE;
     }
 
     //Encoder Functions

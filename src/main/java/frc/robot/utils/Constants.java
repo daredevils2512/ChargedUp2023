@@ -2,12 +2,15 @@ package frc.robot.utils;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 public final class Constants {
 
-  public static class Auto{ 
-    public static final double AUTO_DESIRED_YAW = 100;
+  public static class Auto {
+      public static final double AUTO_DESIRED_YAW = 100;
     public static final int PIGEON_PORT = 1;
 
     //PID for Gyro
@@ -26,7 +29,6 @@ public final class Constants {
     public static final double TRACK_WIDTH_INCHES = 27;
     public static final double TRACK_WIDTH_METERS = Units.inchesToMeters(TRACK_WIDTH_INCHES);
     public static final DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(TRACK_WIDTH_METERS);
-
   
     //Feedforward Control
     public static final double FEEDFORWARD_KS = 1;
@@ -40,12 +42,22 @@ public final class Constants {
   
   }
 
+
   public static class DrivetrainConstants {
-    //IDs
-    public static final int DRIVE_FRONT_LEFT_ID = 1; 
-    public static final int DRIVE_BACK_LEFT_ID = 2;
-    public static final int DRIVE_FRONT_RIGHT_ID = 3;
-    public static final int DRIVE_BACK_RIGHT_ID = 4;
+    //Motor IDs
+    public static final int DRIVE_LEFT_1_ID = 1;
+    public static final int DRIVE_LEFT_2_ID = 2;
+    public static final int DRIVE_RIGHT_1_ID = 3;
+    public static final int DRIVE_RIGHT_2_ID = 4;
+
+    //Shifters
+    public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
+    public static final int SHIFTER_FORWARD_CHANNEL = 0;
+    public static final int SHIFTER_REVERSE_CHANNEL = 1;
+    public static final DoubleSolenoid.Value HIGH_GEAR_VALUE = DoubleSolenoid.Value.kForward;
+    public static final DoubleSolenoid.Value LOW_GEAR_VALUE = DoubleSolenoid.Value.kReverse;
+
+    //Encoders
     public static final int LEFT_ENCODER_1 = 0;
     public static final int LEFT_ENCODER_2 = 1;
     public static final int RIGHT_ENCODER_1 = 2;
@@ -57,7 +69,6 @@ public final class Constants {
     public static final double DRIVETRAIN_WHEEL_DIAMETER = 6;
     public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
     public static final double DRIVETRAIN_DISTANCE_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_GEAR_RATIO / DRIVETRAIN_ENCODER_RESOLUTION;
-  
   }
 
   public static class IoConstants {
@@ -105,18 +116,20 @@ public final class Constants {
     public static final int EXTREME_POV_LEFT_DEGREES = 270;
     public static final int EXTREME_POV_UP_LEFT_DEGREES = 315;
 
-  // Button Box
-  public static final int BUTTON_BOX_TOP_WHITE_PORT = 2;
-  public static final int BUTTON_BOX_BIG_WHITE_PORT = 3;
-  public static final int BUTTON_BOX_MIDDLE_RED_PORT = 4;
-  public static final int BUTTON_BOX_BOTTOM_WHITE_PORT = 5;
-  public static final int BUTTON_BOX_TOP_RED_PORT = 6;
-  public static final int BUTTON_BOX_GREEN_PORT = 7;
-  public static final int BUTTON_BOX_MIDDLE_WHITE_PORT = 8;
-  public static final int BUTTON_BOX_BIG_RED_PORT = 14;
-  public static final int BUTTON_BOX_YELLOW_PORT = 15;
-  public static final int BUTTON_BOX_BOTTOM_RED_PORT = 16;
-  
-}
-private Constants() { }
+    // Button Box
+    public static final int BUTTON_BOX_TOP_WHITE_PORT = 2;
+    public static final int BUTTON_BOX_BIG_WHITE_PORT = 3;
+    public static final int BUTTON_BOX_MIDDLE_RED_PORT = 4;
+    public static final int BUTTON_BOX_BOTTOM_WHITE_PORT = 5;
+    public static final int BUTTON_BOX_TOP_RED_PORT = 6;
+    public static final int BUTTON_BOX_GREEN_PORT = 7;
+    public static final int BUTTON_BOX_MIDDLE_WHITE_PORT = 8;
+    public static final int BUTTON_BOX_BIG_RED_PORT = 14;
+    public static final int BUTTON_BOX_YELLOW_PORT = 15;
+    public static final int BUTTON_BOX_BOTTOM_RED_PORT = 16;
+
+  }
+
+  private Constants() {
+  }
 }
