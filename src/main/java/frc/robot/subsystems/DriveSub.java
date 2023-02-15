@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants;
+import frc.robot.utils.Constants.DrivetrainConstants;
 
 public class DriveSub extends SubsystemBase {
   // Public finals :)
@@ -31,6 +32,9 @@ public class DriveSub extends SubsystemBase {
         Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_B);
     m_rightEncoder = new Encoder(Constants.DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_A,
         Constants.DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_B);
+    
+    m_leftEncoder.setDistancePerPulse(DrivetrainConstants.INCHES_PER_PULSE);
+    m_rightEncoder.setDistancePerPulse(DrivetrainConstants.INCHES_PER_PULSE);
 
     left = new MotorControllerGroup(frontLeft, backLeft);
     right = new MotorControllerGroup(frontRight, backRight);
@@ -42,28 +46,12 @@ public class DriveSub extends SubsystemBase {
     right.set(wheelSpeeds.right);
   }
 
-  public int getLeftEncoder() {
-    return m_leftEncoder.get();
-  }
-
-  public int getRightEncoder() {
-    return m_rightEncoder.get();
-  }
-
   public double getLeftDistance() {
     return m_leftEncoder.getDistance();
   }
 
   public double getRightDistance() {
     return m_rightEncoder.getDistance();
-  }
-
-  public void setLeftDistancePerPulse(double distancePerPulse) {
-    m_leftEncoder.setDistancePerPulse(distancePerPulse);
-  }
-
-  public void setRightDistancePerPulse(double distancePerPulse) {
-    m_rightEncoder.setDistancePerPulse(distancePerPulse);
   }
 
 }

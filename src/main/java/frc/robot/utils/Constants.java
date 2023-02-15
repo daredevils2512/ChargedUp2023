@@ -20,6 +20,7 @@ public final class Constants {
 
   public static class DrivetrainConstants {
 
+    public static final double DRIVETRAIN_SPEED = 1;
     public static final int DRIVE_FRONT_LEFT_ID = 1; 
     public static final int DRIVE_BACK_LEFT_ID = 2;
     public static final int DRIVE_FRONT_RIGHT_ID = 3;
@@ -28,6 +29,9 @@ public final class Constants {
     public static final int DRIVETRAIN_LEFT_ENCODER_B = 1;
     public static final int DRIVETRAIN_RIGHT_ENCODER_A = 2;
     public static final int DRIVETRAIN_RIGHT_ENCODER_B = 3;
+    public static final double PULSES_PER_ROTATIONS = 256;
+    public static final double WHEEL_CIRCUMFERENCE = 6* Math.PI;
+    public static final double INCHES_PER_PULSE = WHEEL_CIRCUMFERENCE/PULSES_PER_ROTATIONS;
   }
 
   public static class IoConstants {
