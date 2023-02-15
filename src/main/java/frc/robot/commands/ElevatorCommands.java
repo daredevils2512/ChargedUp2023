@@ -7,7 +7,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.ElevatorSub;
-import frc.robot.utils.Constants;
 import frc.robot.utils.Constants.ElevatorConstants;
 
 public class ElevatorCommands {
@@ -41,6 +40,7 @@ public class ElevatorCommands {
     public static Command runToLengthPID(ElevatorSub elevatorSub, double length, double tolerance, double velocity){
         PIDController pid = new PIDController(ElevatorConstants.ELEVATOR_PID_KP, ElevatorConstants.ELEVATOR_PID_KI, ElevatorConstants.ELEVATOR_PID_KD);
         pid.setTolerance(tolerance, velocity);
+        pid.close();
         return runElevator(elevatorSub, () -> pid.calculate(elevatorSub.getLength(), length))
             .beforeStarting(pid::reset)
             .until(pid::atSetpoint);
