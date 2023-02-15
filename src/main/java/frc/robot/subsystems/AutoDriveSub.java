@@ -10,6 +10,9 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -29,6 +32,13 @@ public class AutoDriveSub extends SubsystemBase {
     private final Encoder leftEncoder;
     private final Encoder rightEncoder;
 
+    private final NetworkTable table;
+    private final NetworkTableEntry robotX;
+    private final NetworkTableEntry robotY;
+    private final NetworkTableEntry robotTurn;
+    private final NetworkTableEntry linearVelocity;
+    private final NetworkTableEntry angularVelocity;
+
     private final WPI_Pigeon2 pigeon;
     private final DifferentialDriveOdometry odometry;
     private final SimpleMotorFeedforward feedforward;
@@ -37,6 +47,12 @@ public class AutoDriveSub extends SubsystemBase {
   
     public AutoDriveSub() {
         //Construct them bad bois
+        table = NetworkTableInstance.create().getTable("Odometry");
+        robotX = table.getEntry("X-coordinate");
+        robotY = table.getEntry("Y-coordinate");
+        robotTurn = table.getEntry("Turn angle");
+        linearVelocity = table.getEntry("Linear velocity");
+        angularVelocity = table.getEntry("Angular velocity");
 
         //Motors here, name them something good like frontLeft, ect ect. 
         frontLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_FRONT_RIGHT_ID);
@@ -134,5 +150,10 @@ public class AutoDriveSub extends SubsystemBase {
     @Override
     public void periodic() {
         updateOdometry();
+        robotX.setNumber(odometry.getPoseMeters().getX());
+        robotY.setNumber(odometry.getPoseMeters().getY());
+        robotTurn.setNumber(odometry.getPoseMeters().getRotation().getDegrees());
+        linearVelocity.setNumber(currentChassisSpeeds().vxMetersPerSecond);
+        angularVelocity.setNumber(currentChassisSpeeds().omegaRadiansPerSecond);
     }
 }
