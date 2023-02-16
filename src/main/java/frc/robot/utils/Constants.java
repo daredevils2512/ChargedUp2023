@@ -33,6 +33,29 @@ public final class Constants {
     public static final double WHEEL_CIRCUMFERENCE = 6* Math.PI;
     public static final double INCHES_PER_PULSE = WHEEL_CIRCUMFERENCE/PULSES_PER_ROTATIONS;
   }
+  
+  public static class DumpyConstants {
+    //IDs
+    public static final int dumpyID = 0;
+    public static final int dumpyBeltID = 1;
+
+    //Encoder values
+    public static final int ENCODER_RESOLUTION = 2048;
+    public static final int DEGREES_PER_ROTATION = 30; 
+
+    //Speed modifiers for manual inputs
+    public static final double dumpySpeed = 0.3;
+    public static final double beltSpeed = 0.5;
+
+    //Non-manual dumpy movement values 
+    public static final double DUMPY_SPEED = 0.5;
+    public static final double DUMPY_TOLERANCE = 0.5;
+    public static final double DUMPY_UP = 45;  
+
+    //Auto belt values
+    public static final double AUTO_BELT = 0.5;
+    public static final double BELT_TIMER = 1.5;
+  }
 
   public static class IoConstants {
     // Control Board
