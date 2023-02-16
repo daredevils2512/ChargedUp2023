@@ -28,7 +28,7 @@ public class Extreme {
   public final Trigger joystickRight;
   public final Trigger joystickDownRight;
   public final Trigger joystickDown;
-  public final Trigger joystickDownLeft; 
+  public final Trigger joystickDownLeft;
   public final Trigger joystickLeft;
   public final Trigger joystickUpLeft;
 
@@ -77,4 +77,4 @@ public class Extreme {
     return joystick.getRawAxis(IoConstants.EXTREME_SLIDER_AXIS_ID);
   }
 
-}  
+}
