@@ -8,7 +8,7 @@ public class XboxController {
   // Joystick
   private final edu.wpi.first.wpilibj.XboxController controller;
 
-  // Buttons 
+  // Buttons
   public final Trigger aButton;
   public final Trigger bButton;
   public final Trigger xButton;
@@ -27,9 +27,9 @@ public class XboxController {
   public final POVButton dPadDownLeft;
   public final POVButton dPadLeft;
   public final POVButton dPadUpLeft;
-  
+
   public XboxController(int port) {
-    // Joystick 
+    // Joystick
     controller = new edu.wpi.first.wpilibj.XboxController(port);
 
     // Buttons
@@ -51,7 +51,7 @@ public class XboxController {
     dPadDownLeft = new POVButton(controller, IoConstants.XBOX_POV_DOWN_LEFT_DEGREES);
     dPadLeft = new POVButton(controller, IoConstants.XBOX_POV_LEFT_DEGREES);
     dPadUpLeft = new POVButton(controller, IoConstants.XBOX_POV_UP_LEFT_DEGREES);
-  
+
   }
 
   /** @return XAxisLeft */
@@ -84,21 +84,27 @@ public class XboxController {
     return controller.getRightTriggerAxis();
   }
 
-  /** Sets the left rumble
+  /**
+   * Sets the left rumble
+   * 
    * @param amount The amount to rumble between 0 (inclusive) and 1 (inclusive)
    */
   public void setLeftRumble(double amount) {
     controller.setRumble(IoConstants.XBOX_LEFT_RUMBLE, amount);
   }
 
-  /** Sets the right rumble
+  /**
+   * Sets the right rumble
+   * 
    * @param amount The amount to rumble between 0 (inclusive) and 1 (inclusive)
    */
   public void setRightRumble(double amount) {
     controller.setRumble(IoConstants.XBOX_RIGHT_RUMBLE, amount);
   }
 
-  /** Sets the right and left rumble
+  /**
+   * Sets the right and left rumble
+   * 
    * @param amount The amount to rumble between 0 (inclusive) and 1 (inclusive)
    */
   public void setRumble(double amount) {
@@ -167,9 +173,11 @@ public class XboxController {
     return getDPad() == IoConstants.XBOX_POV_RELEASED_DEGREES;
   }
 
-  /** @return The angle of the DPad in degrees.
-   * The angle is represented in 8 degrees (right being 90, left being 270).
-   * If none are being pressed, -1 is returned.
+  /**
+   * @return The angle of the DPad in degrees.
+   *         The angle is represented in 8 degrees (right being 90, left being
+   *         270).
+   *         If none are being pressed, -1 is returned.
    */
   public double getDPad() {
     return controller.getPOV();

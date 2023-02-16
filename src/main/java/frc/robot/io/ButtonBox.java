@@ -18,7 +18,7 @@ public class ButtonBox {
   public final Trigger yellow;
   public final Trigger bigWhite;
   public final Trigger bigRed;
-  
+
   public ButtonBox(int port) {
     joystick = new Joystick(port);
 
