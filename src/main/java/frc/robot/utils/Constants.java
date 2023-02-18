@@ -12,6 +12,7 @@ public final class Constants {
   public static class Auto {
       public static final double AUTO_DESIRED_YAW = 100;
     public static final int PIGEON_PORT = 1;
+    public static final double AUTO_DRIVE_SPEED = 0.5;
 
     //PID for Gyro
     public static final double AutoK_P = .015;
@@ -21,6 +22,11 @@ public final class Constants {
     //Error for Coordinate Movement
     public static final double AUTO_ERROR = 0.05;
     public static final double AUTO__DEGREES_ERROR = 3;  
+
+    //PID for drivetrain
+    public static final double DRIVETRAIN_KP = 0;
+    public static final double DRIVETRAIN_KI = 0;
+    public static final double DRIVETRAIN_KD = 0;
   
   }
   
@@ -36,15 +42,15 @@ public final class Constants {
     public static final double FEEDFORWARD_KA = 1;
 
     //PID Control
-    public static final double DRIVE_KP = 1;
-    public static final double DRIVE_KI = 0;
-    public static final double DRIVE_KD = 1;
+    public static final double AUTO_DRIVE_KP = 1;
+    public static final double AUTO_DRIVE_KI = 0;
+    public static final double AUTO_DRIVE_KD = 1;
   
   }
 
-
   public static class DrivetrainConstants {
-    //Motor IDs
+
+    public static final double DRIVETRAIN_SPEED = 1;
     public static final int DRIVE_LEFT_1_ID = 1;
     public static final int DRIVE_LEFT_2_ID = 2;
     public static final int DRIVE_RIGHT_1_ID = 3;
@@ -58,17 +64,48 @@ public final class Constants {
     public static final DoubleSolenoid.Value LOW_GEAR_VALUE = DoubleSolenoid.Value.kReverse;
 
     //Encoders
-    public static final int LEFT_ENCODER_1 = 0;
-    public static final int LEFT_ENCODER_2 = 1;
-    public static final int RIGHT_ENCODER_1 = 2;
-    public static final int RIGHT_ENCODER_2 = 3;
+    public static final int DRIVETRAIN_LEFT_ENCODER_1 = 0;
+    public static final int DRIVETRAIN_LEFT_ENCODER_2 = 1;
+    public static final int DRIVETRAIN_RIGHT_ENCODER_1 = 2;
+    public static final int DRIVETRAIN_RIGHT_ENCODER_2 = 3;
     
     //Encoder Constants
-    public static final int DRIVETRAIN_ENCODER_RESOLUTION = 1;
+    public static final int DRIVETRAIN_ENCODER_RESOLUTION = 256;
     public static final double DRIVETRAIN_GEAR_RATIO = 1;
     public static final double DRIVETRAIN_WHEEL_DIAMETER = 6;
     public static final double DRIVETRAIN_WHEEL_CIRCUMFERENCE =  DRIVETRAIN_WHEEL_DIAMETER * Math.PI;
     public static final double DRIVETRAIN_DISTANCE_PER_PULSE = DRIVETRAIN_WHEEL_CIRCUMFERENCE / DRIVETRAIN_GEAR_RATIO / DRIVETRAIN_ENCODER_RESOLUTION;
+  }
+  
+  public static class DumpyConstants {
+    //IDs
+    public static final int dumpyID = 0;
+    public static final int dumpyBeltID = 1;
+    public static final int BOTTOM_SWITCH_CHANNEL = 0;
+    public static final int TOP_SWITCH_CHANNEL = 1;
+
+    //Encoder values
+    public static final int ENCODER_RESOLUTION = 2048;
+    public static final int GEAR_RATIO = 1/1000;
+    public static final int DEGREES_PER_ROTATION = 360 * GEAR_RATIO; 
+
+    //Speed modifiers for manual inputs
+    public static final double dumpySpeed = 0.3;
+    public static final double beltSpeed = 0.5;
+
+    //Automatic dumpy movement values 
+    public static final double DUMPY_SPEED = 0.5;
+    public static final double DUMPY_TOLERANCE = 0.5;
+    public static final double DUMPY_UP = 45;  
+
+    //PID for Dumpy
+    public static final double DUMPY_KP = 1;
+    public static final double DUMPY_KI = 1;
+    public static final double DUMPY_KD = 1;
+
+    //Auto belt values
+    public static final double AUTO_BELT = 0.5;
+    public static final double BELT_TIMER = 1.5;
   }
 
   public static class IoConstants {

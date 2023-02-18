@@ -74,8 +74,8 @@ public class AutoDriveSub extends SubsystemBase {
         right.setInverted(true);
 
 
-        leftEncoder = new Encoder(DrivetrainConstants.LEFT_ENCODER_1,DrivetrainConstants.LEFT_ENCODER_2);
-        rightEncoder = new Encoder(DrivetrainConstants.RIGHT_ENCODER_1,DrivetrainConstants.RIGHT_ENCODER_2);
+        leftEncoder = new Encoder(DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_1,DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_2);
+        rightEncoder = new Encoder(DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_1,DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_2);
 
         leftEncoder.setDistancePerPulse(DrivetrainConstants.DRIVETRAIN_DISTANCE_PER_PULSE);
         rightEncoder.setDistancePerPulse(DrivetrainConstants.DRIVETRAIN_DISTANCE_PER_PULSE);
@@ -88,8 +88,8 @@ public class AutoDriveSub extends SubsystemBase {
 
         feedforward = new SimpleMotorFeedforward(AutoDriveConstants.FEEDFORWARD_KS, AutoDriveConstants.FEEDFORWARD_KV, AutoDriveConstants.FEEDFORWARD_KA);
         
-        leftPID = new PIDController(AutoDriveConstants.DRIVE_KP, AutoDriveConstants.DRIVE_KI, AutoDriveConstants.DRIVE_KD);
-        rightPID = new PIDController(AutoDriveConstants.DRIVE_KP, AutoDriveConstants.DRIVE_KI, AutoDriveConstants.DRIVE_KD);
+        leftPID = new PIDController(AutoDriveConstants.AUTO_DRIVE_KP, AutoDriveConstants.AUTO_DRIVE_KI, AutoDriveConstants.AUTO_DRIVE_KD);
+        rightPID = new PIDController(AutoDriveConstants.AUTO_DRIVE_KP, AutoDriveConstants.AUTO_DRIVE_KI, AutoDriveConstants.AUTO_DRIVE_KD);
 
     }
 
