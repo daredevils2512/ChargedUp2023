@@ -1,6 +1,10 @@
 package frc.robot;
 
+import frc.robot.commands.ElevatorCommands;
+import frc.robot.io.Extreme;
 import frc.robot.subsystems.DriveSub;
+import frc.robot.subsystems.ElevatorSub;
+import frc.robot.utils.Constants.ElevatorConstants;
 import frc.robot.utils.Constants.IoConstants;
 
 import frc.robot.commands.DumpyCommands;
@@ -17,6 +21,11 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class RobotContainer {
+  
+  private final ElevatorSub m_ElevatorSub = new ElevatorSub();
+
+  private final Extreme m_Extreme = new Extreme(0); // Move port to constats
+
   DriveSub driveSub = new DriveSub(); 
   DumpySub dumpySub = new DumpySub();
 
@@ -25,8 +34,6 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
   new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
 
-  private final CommandXboxController m_driveController =
-  new CommandXboxController(0);
   private final Extreme m_extreme = new Extreme(1);
 
 
@@ -35,7 +42,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
   }
-
+// beware the watermelon man
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -46,6 +53,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    m_Extreme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driverController.getLeftX(), m_driverController.getRightY())));
     dumpySub.setDefaultCommand(DumpyCommands.rotateDumpy(dumpySub, m_extreme.getStickY()));
     m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpySub, DumpyConstants.beltSpeed));

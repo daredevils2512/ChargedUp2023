@@ -1,5 +1,7 @@
 package frc.robot.utils;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 public final class Constants {
@@ -57,6 +59,38 @@ public final class Constants {
     public static final double BELT_TIMER = 1.5;
   }
 
+  public static class ElevatorConstants {
+
+    // elevator motors
+    public static final int ELEVATOR_1ID = 1;
+    public static final int ELEVATOR_2ID = 2;
+    public static final double ELEVATOR_SPEED = 0.5;
+
+    // elevator encoders
+    public static final double ENCODER_PER_PULSE_DISTANCE = 0 / 0; // TODO fix numbers
+    public static final int ELEVATOR_ENCODER_CHANNEL1ID = 1;
+    public static final int ELEVATOR_ENCODER_CHANNEL2ID = 2;
+
+    public static final double MAX_ELEVATOR_LENGTH = 0;
+
+    public static final int TICKS_PER_REVOLUTION = 4096;
+    public static final int DISTANCE_PER_REVOLUTION = 0 / 0; // TODO fix numbers
+    public static final double GEAR_RATIO = 0 / 0; // TODO fix numbersg
+
+    public static final int ELEVATOR_LIMIT_SWITCH_CHANNEL = 1; // TODO change channel
+
+    // double solenoid
+    public static final int FORWARD_CHANNEL = 0; // TODO channels might be wrong
+    public static final int REVERSE_CHANNEL = 1; // TODO
+    public static final DoubleSolenoid.Value EXTENDED = Value.kForward;
+    public static final DoubleSolenoid.Value RETRACTED = Value.kReverse;
+
+    // elevator pid
+    public static final double ELEVATOR_PID_KP = 0; // TODO change all numbers
+    public static final double ELEVATOR_PID_KI = 0; // TODO
+    public static final double ELEVATOR_PID_KD = 0; // TODO
+  }
+
   public static class IoConstants {
     // Control Board
     public static final int XBOX_CONTROLLER_PORT = 0;
@@ -102,18 +136,20 @@ public final class Constants {
     public static final int EXTREME_POV_LEFT_DEGREES = 270;
     public static final int EXTREME_POV_UP_LEFT_DEGREES = 315;
 
-  // Button Box
-  public static final int BUTTON_BOX_TOP_WHITE_PORT = 2;
-  public static final int BUTTON_BOX_BIG_WHITE_PORT = 3;
-  public static final int BUTTON_BOX_MIDDLE_RED_PORT = 4;
-  public static final int BUTTON_BOX_BOTTOM_WHITE_PORT = 5;
-  public static final int BUTTON_BOX_TOP_RED_PORT = 6;
-  public static final int BUTTON_BOX_GREEN_PORT = 7;
-  public static final int BUTTON_BOX_MIDDLE_WHITE_PORT = 8;
-  public static final int BUTTON_BOX_BIG_RED_PORT = 14;
-  public static final int BUTTON_BOX_YELLOW_PORT = 15;
-  public static final int BUTTON_BOX_BOTTOM_RED_PORT = 16;
-  
-}
-private Constants() { }
+    // Button Box
+    public static final int BUTTON_BOX_TOP_WHITE_PORT = 2;
+    public static final int BUTTON_BOX_BIG_WHITE_PORT = 3;
+    public static final int BUTTON_BOX_MIDDLE_RED_PORT = 4;
+    public static final int BUTTON_BOX_BOTTOM_WHITE_PORT = 5;
+    public static final int BUTTON_BOX_TOP_RED_PORT = 6;
+    public static final int BUTTON_BOX_GREEN_PORT = 7;
+    public static final int BUTTON_BOX_MIDDLE_WHITE_PORT = 8;
+    public static final int BUTTON_BOX_BIG_RED_PORT = 14;
+    public static final int BUTTON_BOX_YELLOW_PORT = 15;
+    public static final int BUTTON_BOX_BOTTOM_RED_PORT = 16;
+
+  }
+
+  private Constants() {
+  }
 }
