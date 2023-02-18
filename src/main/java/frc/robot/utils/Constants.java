@@ -45,31 +45,32 @@ public final class Constants {
     public static final double PULSES_PER_ROTATIONS = 256;
     public static final double WHEEL_CIRCUMFERENCE = 6* Math.PI;
     public static final double DISTANCE_PER_PULSE = WHEEL_CIRCUMFERENCE/PULSES_PER_ROTATIONS;
+    //shifters 1,6
   }
 
   public static class ElevatorConstants {
 
     // elevator motors
-    public static final int ELEVATOR_1ID = 1;
-    public static final int ELEVATOR_2ID = 2;
+    public static final int ELEVATOR_1ID = 5;
+    public static final int ELEVATOR_2ID = 6;
     public static final double ELEVATOR_SPEED = 0.5;
 
     // elevator encoders
-    public static final double ENCODER_PER_PULSE_DISTANCE = 0 / 0; // TODO fix numbers
+    public static final double ENCODER_PER_PULSE_DISTANCE = 1; // TODO fix numbers
     public static final int ELEVATOR_ENCODER_CHANNEL1ID = 1;
     public static final int ELEVATOR_ENCODER_CHANNEL2ID = 2;
 
     public static final double MAX_ELEVATOR_LENGTH = 0;
 
     public static final int TICKS_PER_REVOLUTION = 4096;
-    public static final int DISTANCE_PER_REVOLUTION = 0 / 0; // TODO fix numbers
-    public static final double GEAR_RATIO = 0 / 0; // TODO fix numbersg
+    public static final int DISTANCE_PER_REVOLUTION = 1; // TODO fix numbers
+    public static final double GEAR_RATIO = 1; // TODO fix numbersg
 
     public static final int ELEVATOR_LIMIT_SWITCH_CHANNEL = 1; // TODO change channel
 
     // double solenoid
-    public static final int FORWARD_CHANNEL = 0; // TODO channels might be wrong
-    public static final int REVERSE_CHANNEL = 1; // TODO
+    public static final int FORWARD_CHANNEL = 5; // TODO channels might be wrong
+    public static final int REVERSE_CHANNEL = 2; // TODO
     public static final DoubleSolenoid.Value EXTENDED = Value.kForward;
     public static final DoubleSolenoid.Value RETRACTED = Value.kReverse;
 

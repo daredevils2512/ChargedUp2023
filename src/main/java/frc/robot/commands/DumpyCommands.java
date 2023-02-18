@@ -19,7 +19,8 @@ public class DumpyCommands {
     }
 
     public static Command rotateDumpy(DumpySub dumpySub, double speed) {
-        return new RunCommand(() -> dumpySub.setDumpySpeed(speed), dumpySub).until(dumpySub.reachedBounds())
+        return new RunCommand(() -> dumpySub.setDumpySpeed(speed), dumpySub)
+        //until(dumpySub.reachedBounds())
         .finallyDo((interrupted) -> dumpySub.setDumpySpeed(0));
     }
 

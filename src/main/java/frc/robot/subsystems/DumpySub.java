@@ -17,8 +17,8 @@ public class DumpySub extends SubsystemBase{
 
     private final WPI_VictorSPX dumpyMotor;
     private final WPI_VictorSPX beltMotor;
-    private final DigitalInput topSwitch;
-    private final DigitalInput bottomSwitch;
+   // private final DigitalInput topSwitch;
+   // private final DigitalInput bottomSwitch;
     private final double slowRate;
 
     private final NetworkTable dumpyNetworkTable = NetworkTableInstance.getDefault().getTable(getName());
@@ -34,8 +34,8 @@ public class DumpySub extends SubsystemBase{
         dumpyMotor = new WPI_VictorSPX(DumpyConstants.dumpyID);
         beltMotor = new WPI_VictorSPX(DumpyConstants.dumpyBeltID);
 
-        topSwitch = new DigitalInput(DumpyConstants.TOP_SWITCH_CHANNEL);
-        bottomSwitch = new DigitalInput(DumpyConstants.BOTTOM_SWITCH_CHANNEL);
+       // topSwitch = new DigitalInput(DumpyConstants.TOP_SWITCH_CHANNEL);
+        //bottomSwitch = new DigitalInput(DumpyConstants.BOTTOM_SWITCH_CHANNEL);
 
         slowRate = DumpyConstants.dumpySpeed;
         dumpyMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
@@ -61,22 +61,22 @@ public class DumpySub extends SubsystemBase{
         return dumpyState.getAsBoolean();
     }
 
-    public BooleanSupplier reachedBounds() {
-        return () -> topSwitch.get() || bottomSwitch.get();
-    }
+//    / // public BooleanSupplier reachedBounds() {
+//         return () -> topSwitch.get() || bottomSwitch.get();
+    //}
 
     @Override
     public void periodic() {
         dumpyEncoderUnits.setDouble(dumpyMotor.getSelectedSensorPosition());
         dumpyAngle.setDouble(getAngle());
         dumpyRaised.setBoolean(checkDumpyToggled());
-        if (topSwitch.get()) {
-            dumpyMotor.setSelectedSensorPosition(DumpyConstants.DUMPY_UP);
-        }
-        else if (bottomSwitch.get()) {
-            dumpyMotor.setSelectedSensorPosition(0);
-        }
-    }
+    //     if (topSwitch.get()) {
+    //         dumpyMotor.setSelectedSensorPosition(DumpyConstants.DUMPY_UP);
+    //     }
+    //     else if (bottomSwitch.get()) {
+    //         dumpyMotor.setSelectedSensorPosition(0);
+    //     }
+     }
     
 
 }
