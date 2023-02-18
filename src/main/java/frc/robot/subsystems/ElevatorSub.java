@@ -2,11 +2,9 @@ package frc.robot.subsystems;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -15,7 +13,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.utils.Constants;
 import frc.robot.utils.Constants.ElevatorConstants;
 
 public class ElevatorSub extends SubsystemBase {
