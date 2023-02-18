@@ -69,13 +69,7 @@ public class DriveSub extends SubsystemBase {
     right.set(wheelSpeeds.right);
   }
 
-  public void setLowGear(boolean lowGear) {
-    m_setlowgEntry.setBoolean(lowGear);
-    DoubleSolenoid.Value a = lowGear ? DrivetrainConstants.LOW_GEAR_VALUE : DrivetrainConstants.HIGH_GEAR_VALUE;
-    // <condition> ? <expression 1> : <expression 2>
-    shifter.set(a);
-    m_logger.info("set low gear" + lowGear);
-}
+  
 
   public double getLeftDistance() {
     return leftEncoder.getDistance();
@@ -97,9 +91,21 @@ public double getDistance() {
   return (getLeftDistance() + getRightDistance()) / 2;
 }
 
+public void setLowGear(boolean lowGear) {
+    m_setlowgEntry.setBoolean(lowGear);
+    DoubleSolenoid.Value a = lowGear ? DrivetrainConstants.LOW_GEAR_VALUE : DrivetrainConstants.HIGH_GEAR_VALUE;
+    // <condition> ? <expression 1> : <expression 2>
+    shifter.set(a);
+    m_logger.info("set low gear" + lowGear);
+}
+
 public Boolean getLowGear() {
   return shifter.get() == DrivetrainConstants.LOW_GEAR_VALUE;
 }
+
+public void toggleShifters() {
+    setLowGear(!getLowGear());
+  }
 
 @Override
 public void periodic() {

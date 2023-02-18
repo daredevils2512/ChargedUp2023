@@ -1,5 +1,6 @@
 package frc.robot;
 
+import frc.robot.commands.DriveCommands;
 import frc.robot.commands.DumpyCommands;
 import frc.robot.io.Extreme;
 import frc.robot.subsystems.DriveSub;
@@ -52,9 +53,8 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driverController.getLeftX(), m_driverController.getRightY())));
-    
     dumpSub.setDefaultCommand(DumpyCommands.rotateDumpy(dumpSub, m_extreme.getStickY()));
-
+    m_driverController.rightBumper().onTrue(DriveCommands.driveShift(driveSub));
     m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpSub, DumpyConstants.beltSpeed));
     m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpSub, -DumpyConstants.beltSpeed));
     m_extreme.sideButton.onTrue(ElevatorCommands.elevatorToggle(m_ElevatorSub));
