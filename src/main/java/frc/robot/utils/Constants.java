@@ -1,6 +1,7 @@
 package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
@@ -22,18 +23,28 @@ public final class Constants {
 
   public static class DrivetrainConstants {
 
+    //Shifters
+    public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
+    public static final int SHIFTER_FORWARD_CHANNEL = 0;
+    public static final int SHIFTER_REVERSE_CHANNEL = 1;
+    public static final DoubleSolenoid.Value HIGH_GEAR_VALUE = DoubleSolenoid.Value.kForward;
+    public static final DoubleSolenoid.Value LOW_GEAR_VALUE = DoubleSolenoid.Value.kReverse;
+
+    //Motors
     public static final double DRIVETRAIN_SPEED = 1;
     public static final int DRIVE_FRONT_LEFT_ID = 1; 
     public static final int DRIVE_BACK_LEFT_ID = 2;
     public static final int DRIVE_FRONT_RIGHT_ID = 3;
     public static final int DRIVE_BACK_RIGHT_ID = 4;
+
+    //Encoders
     public static final int DRIVETRAIN_LEFT_ENCODER_A = 0;
     public static final int DRIVETRAIN_LEFT_ENCODER_B = 1;
     public static final int DRIVETRAIN_RIGHT_ENCODER_A = 2;
     public static final int DRIVETRAIN_RIGHT_ENCODER_B = 3;
     public static final double PULSES_PER_ROTATIONS = 256;
     public static final double WHEEL_CIRCUMFERENCE = 6* Math.PI;
-    public static final double INCHES_PER_PULSE = WHEEL_CIRCUMFERENCE/PULSES_PER_ROTATIONS;
+    public static final double DISTANCE_PER_PULSE = WHEEL_CIRCUMFERENCE/PULSES_PER_ROTATIONS;
   }
 
   public static class ElevatorConstants {
