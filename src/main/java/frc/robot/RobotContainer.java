@@ -4,13 +4,10 @@
 
 package frc.robot;
 
-import frc.robot.commands.Autos;
 import frc.robot.commands.DumpyCommands;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.io.Extreme;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.DumpySub;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.utils.Constants;
 import frc.robot.utils.Constants.DumpyConstants;
 

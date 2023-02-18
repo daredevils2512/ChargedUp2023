@@ -26,10 +26,12 @@ public final class Constants {
     //IDs
     public static final int dumpyID = 0;
     public static final int dumpyBeltID = 1;
+    public static final int BOTTOM_SWITCH_CHANNEL = 0;
+    public static final int TOP_SWITCH_CHANNEL = 1;
 
     //Encoder values
     public static final int ENCODER_RESOLUTION = 2048;
-    public static final int GEAR_RATIO = 1/100;
+    public static final int GEAR_RATIO = 1/1000;
     public static final int DEGREES_PER_ROTATION = 360 * GEAR_RATIO; 
 
     //Speed modifiers for manual inputs
@@ -40,6 +42,12 @@ public final class Constants {
     public static final double DUMPY_SPEED = 0.5;
     public static final double DUMPY_TOLERANCE = 0.5;
     public static final double DUMPY_UP = 45;  
+
+    //PID for Dumpy
+    public static final double DUMPY_KP = 1;
+    public static final double DUMPY_KI = 1;
+    public static final double DUMPY_KD = 1;
+
   }
 
   public static class IoConstants {
