@@ -18,7 +18,7 @@ public class PigeonSub extends SubsystemBase {
     public PigeonSub() {
         pigeon = new WPI_Pigeon2(Auto.PIGEON_PORT);
         
-        table = NetworkTableInstance.create().getTable("Gyro");
+        table = NetworkTableInstance.getDefault().getTable("Gyro");
         yawEntry = table.getEntry("Yaw");
         pitchEntry = table.getEntry("Pitch");
         rollEntry = table.getEntry("Roll");

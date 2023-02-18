@@ -9,8 +9,11 @@ import frc.robot.utils.Constants.DumpyConstants;
 
 import java.util.function.DoubleSupplier;
 
+import com.ctre.phoenix.sensors.Pigeon2;
+
 import frc.robot.commands.ElevatorCommands;
 import frc.robot.subsystems.ElevatorSub;
+import frc.robot.subsystems.PigeonSub;
 import frc.robot.utils.Constants.ElevatorConstants;
 import frc.robot.utils.Constants.IoConstants;
 import edu.wpi.first.wpilibj.Compressor;
@@ -25,8 +28,9 @@ public class RobotContainer {
   private final ElevatorSub m_ElevatorSub = new ElevatorSub();
   private final DriveSub driveSub = new DriveSub(); 
   private final DumpySub dumpSub = new DumpySub();
+  private final PigeonSub pigeonSub = new PigeonSub();
 
-  private final Extreme m_extreme = new Extreme(0); // Move port to constats
+  private final Extreme m_extreme = new Extreme(1); // Move port to constats
   private final CommandXboxController m_driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
 
   /** The container for the ro
@@ -48,11 +52,14 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driverController.getLeftX(), m_driverController.getRightY())));
+    
     dumpSub.setDefaultCommand(DumpyCommands.rotateDumpy(dumpSub, m_extreme.getStickY()));
+
     m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpSub, DumpyConstants.beltSpeed));
     m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpSub, -DumpyConstants.beltSpeed));
-
+    m_extreme.sideButton.onTrue(ElevatorCommands.elevatorToggle(m_ElevatorSub));
     m_extreme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
+    m_extreme.joystickTopLeft.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> -ElevatorConstants.ELEVATOR_SPEED));
   }
    
   /**
