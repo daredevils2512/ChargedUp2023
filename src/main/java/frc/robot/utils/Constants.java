@@ -1,25 +1,50 @@
 package frc.robot.utils;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 public final class Constants {
 
-  public static class Auto {
-    public static final double AUTO_DESIRED_YAW = 100;
-    public static final int PIGEON_PORT = 1;
-    // PID for Gyro
-    public static final double AutoK_P = .015;
-    public static final double AutoK_I = 0.04;
-    public static final double AutoK_D = 0.004;
-  }
+  public static class Auto{ 
+      public static final double AUTO_DESIRED_YAW = 100;
+      public static final int PIGEON_PORT = 1;
+      public static final double AUTO_DRIVE_SPEED = 0.5;
+       //PID for Gyro
+       public static final double AutoK_P = 0.015;
+       public static final double AutoK_I = 0.04;
+       public static final double AutoK_D = 0.004;
+       //PID for drivetrain
+       public static final double DRIVETRAIN_KP = 0;
+       public static final double DRIVETRAIN_KI = 0;
+       public static final double DRIVETRAIN_KD = 0;
+    }
 
   public static class DrivetrainConstants {
-    public static final int DRIVE_FRONT_LEFT_ID = 1;
+
+    //Shifters
+    public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
+    public static final int SHIFTER_FORWARD_CHANNEL = 0;
+    public static final int SHIFTER_REVERSE_CHANNEL = 1;
+    public static final DoubleSolenoid.Value HIGH_GEAR_VALUE = DoubleSolenoid.Value.kForward;
+    public static final DoubleSolenoid.Value LOW_GEAR_VALUE = DoubleSolenoid.Value.kReverse;
+
+    //Motors
+    public static final double DRIVETRAIN_SPEED = 1;
+    public static final int DRIVE_FRONT_LEFT_ID = 1; 
     public static final int DRIVE_BACK_LEFT_ID = 2;
     public static final int DRIVE_FRONT_RIGHT_ID = 3;
     public static final int DRIVE_BACK_RIGHT_ID = 4;
+
+    //Encoders
+    public static final int DRIVETRAIN_LEFT_ENCODER_A = 0;
+    public static final int DRIVETRAIN_LEFT_ENCODER_B = 1;
+    public static final int DRIVETRAIN_RIGHT_ENCODER_A = 2;
+    public static final int DRIVETRAIN_RIGHT_ENCODER_B = 3;
+    public static final double PULSES_PER_ROTATIONS = 256;
+    public static final double WHEEL_CIRCUMFERENCE = 6* Math.PI;
+    public static final double DISTANCE_PER_PULSE = WHEEL_CIRCUMFERENCE/PULSES_PER_ROTATIONS;
     //shifters 1,6
   }
 
@@ -81,6 +106,9 @@ public final class Constants {
     public static final double DUMPY_KI = 1;
     public static final double DUMPY_KD = 1;
 
+    //Auto belt values
+    public static final double AUTO_BELT = 0.5;
+    public static final double BELT_TIMER = 1.5;
   }
 
   public static class IoConstants {
