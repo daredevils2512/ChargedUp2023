@@ -19,7 +19,7 @@ public class DumpyCommands {
     }
 
     public static Command rotateDumpy(DumpySub dumpySub, double speed) {
-        return new RunCommand(() -> dumpySub.setDumpySpeed(speed), dumpySub)
+        return new RunCommand(() -> dumpySub.setDumpySpeed(speed), dumpySub).until(dumpySub.reachedBounds())
         .finallyDo((interrupted) -> dumpySub.setDumpySpeed(0));
     }
 
@@ -35,9 +35,9 @@ public class DumpyCommands {
     }
 
     public static Command dumpyToAnglePID(DumpySub dumpySub, double angle) {
-        PIDController dumpyPID = new PIDController(0,0,0);
+        PIDController dumpyPID = new PIDController(DumpyConstants.DUMPY_KP,DumpyConstants.DUMPY_KI,DumpyConstants.DUMPY_KD);
         dumpyPID.setTolerance(DumpyConstants.DUMPY_TOLERANCE);
-        return new PIDCommand(dumpyPID, () -> dumpySub.getAngle(), angle, (speed) -> dumpySub.setDumpySpeed(speed)).until(() -> dumpyPID.atSetpoint());
+        return new PIDCommand(dumpyPID, () -> dumpySub.getAngle(), angle, (speed) -> rotateDumpy(dumpySub, speed)).until(() -> dumpyPID.atSetpoint());
     }
 
     public static Command dumpyToggle(DumpySub dumpySub) {

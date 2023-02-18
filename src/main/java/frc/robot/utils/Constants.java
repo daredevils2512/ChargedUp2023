@@ -35,29 +35,6 @@ public final class Constants {
     public static final double WHEEL_CIRCUMFERENCE = 6* Math.PI;
     public static final double INCHES_PER_PULSE = WHEEL_CIRCUMFERENCE/PULSES_PER_ROTATIONS;
   }
-  
-  public static class DumpyConstants {
-    //IDs
-    public static final int dumpyID = 0;
-    public static final int dumpyBeltID = 1;
-
-    //Encoder values
-    public static final int ENCODER_RESOLUTION = 2048;
-    public static final int DEGREES_PER_ROTATION = 30; 
-
-    //Speed modifiers for manual inputs
-    public static final double dumpySpeed = 0.3;
-    public static final double beltSpeed = 0.5;
-
-    //Non-manual dumpy movement values 
-    public static final double DUMPY_SPEED = 0.5;
-    public static final double DUMPY_TOLERANCE = 0.5;
-    public static final double DUMPY_UP = 45;  
-
-    //Auto belt values
-    public static final double AUTO_BELT = 0.5;
-    public static final double BELT_TIMER = 1.5;
-  }
 
   public static class ElevatorConstants {
 
@@ -89,6 +66,37 @@ public final class Constants {
     public static final double ELEVATOR_PID_KP = 0; // TODO change all numbers
     public static final double ELEVATOR_PID_KI = 0; // TODO
     public static final double ELEVATOR_PID_KD = 0; // TODO
+  }
+  
+  public static class DumpyConstants {
+    //IDs
+    public static final int dumpyID = 0;
+    public static final int dumpyBeltID = 1;
+    public static final int BOTTOM_SWITCH_CHANNEL = 0;
+    public static final int TOP_SWITCH_CHANNEL = 1;
+
+    //Encoder values
+    public static final int ENCODER_RESOLUTION = 2048;
+    public static final int GEAR_RATIO = 1/1000;
+    public static final int DEGREES_PER_ROTATION = 360 * GEAR_RATIO; 
+
+    //Speed modifiers for manual inputs
+    public static final double dumpySpeed = 0.3;
+    public static final double beltSpeed = 0.5;
+
+    //Automatic dumpy movement values 
+    public static final double DUMPY_SPEED = 0.5;
+    public static final double DUMPY_TOLERANCE = 0.5;
+    public static final double DUMPY_UP = 45;  
+
+    //PID for Dumpy
+    public static final double DUMPY_KP = 1;
+    public static final double DUMPY_KI = 1;
+    public static final double DUMPY_KD = 1;
+
+    //Auto belt values
+    public static final double AUTO_BELT = 0.5;
+    public static final double BELT_TIMER = 1.5;
   }
 
   public static class IoConstants {
