@@ -17,7 +17,15 @@ import frc.robot.utils.Constants.DumpyConstants;
 public final class AutoCommands {
   private AutoCommands() {
   }
-  
+  public static Command arcadeDrive(DriveSub driveSub, double move, double turn){
+    return (driveSub.run(()-> driveSub.arcadeDrive(move, turn))).finallyDo((isInteruped)-> driveSub.arcadeDrive(0,0));
+  }
+  public static Command stableize(DriveSub driveSub, PigeonSub pigeonSub){
+    return new Stableize(driveSub, pigeonSub);
+  }
+  public static Command chargeStation(DriveSub drivesub, PigeonSub pigeonSub){
+    return arcadeDrive(drivesub, 1, 0).until(()-> pigeonSub.getPitch() >= 15).andThen(stableize(drivesub, pigeonSub));
+  }
  public static Command turnToAngle(DriveSub driveSub, PigeonSub pigeonSub, int angleToTurnTO){
     return new TurnToAngle(driveSub, pigeonSub, angleToTurnTO);
   }
