@@ -8,8 +8,17 @@ import frc.robot.commands.DumpyCommands;
 import frc.robot.subsystems.DumpySub;
 import frc.robot.utils.Constants.DumpyConstants;
 
+import java.util.function.DoubleSupplier;
+
+import com.ctre.phoenix.sensors.Pigeon2;
+
+import frc.robot.subsystems.PigeonSub;
+import frc.robot.utils.Constants.ElevatorConstants;
 import frc.robot.utils.Constants.IoConstants;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -17,16 +26,14 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   
   private final DriveSub driveSub = new DriveSub(); 
-  private final DumpySub dumpySub = new DumpySub();
+  private final DumpySub dumpSub = new DumpySub();
+  private final PigeonSub pigeonSub = new PigeonSub();
 
-  private final Extreme m_extreme = new Extreme(0); // Move port to constats
-  // Replace with CommandPS4Controller or CommandJoystick if needed
+  private final Extreme m_extreme = new Extreme(1); // Move port to constats
+  private final CommandXboxController m_driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
 
-  private final CommandXboxController m_driverController =
-  new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
-
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  /** The container for the ro
+   * bot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
@@ -44,10 +51,11 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driverController.getLeftX(), m_driverController.getRightY())));
-    dumpySub.setDefaultCommand(DumpyCommands.rotateDumpy(dumpySub, m_extreme.getStickY()));
-    m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpySub, DumpyConstants.beltSpeed));
-    m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpySub, -DumpyConstants.beltSpeed));
+    
+    dumpSub.setDefaultCommand(DumpyCommands.rotateDumpy(dumpSub, m_extreme.getStickY()));
 
+    m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpSub, DumpyConstants.beltSpeed));
+    m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpSub, -DumpyConstants.beltSpeed));
   }
    
   /**
