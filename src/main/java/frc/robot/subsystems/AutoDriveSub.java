@@ -58,10 +58,10 @@ public class AutoDriveSub extends SubsystemBase {
         angularVelocity = table.getEntry("Angular velocity");
 
         //Motors here, name them something good like frontLeft, ect ect. 
-        frontLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_LEFT_1_ID);
-        backLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_LEFT_2_ID);
-        frontRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_RIGHT_1_ID);
-        backRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_RIGHT_2_ID);
+        frontLeft = new WPI_TalonFX(DrivetrainConstants.DRIVE_FRONT_LEFT_ID);
+        backLeft = new WPI_TalonFX(DrivetrainConstants.DRIVE_BACK_LEFT_ID);
+        frontRight = new WPI_TalonFX(DrivetrainConstants.DRIVE_FRONT_RIGHT_ID);
+        backRight = new WPI_TalonFX(DrivetrainConstants.DRIVE_BACK_RIGHT_ID);
         m_shifter = new DoubleSolenoid(
             PneumaticsModuleType.CTREPCM,
             Constants.DrivetrainConstants.SHIFTER_FORWARD_CHANNEL, 
@@ -74,11 +74,11 @@ public class AutoDriveSub extends SubsystemBase {
         right.setInverted(true);
 
 
-        leftEncoder = new Encoder(DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_1,DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_2);
-        rightEncoder = new Encoder(DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_1,DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_2);
+        leftEncoder = new Encoder(DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_A,DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_B);
+        rightEncoder = new Encoder(DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_A,DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_B);
 
-        leftEncoder.setDistancePerPulse(DrivetrainConstants.DRIVETRAIN_DISTANCE_PER_PULSE);
-        rightEncoder.setDistancePerPulse(DrivetrainConstants.DRIVETRAIN_DISTANCE_PER_PULSE);
+        leftEncoder.setDistancePerPulse(DrivetrainConstants.DISTANCE_PER_PULSE);
+        rightEncoder.setDistancePerPulse(DrivetrainConstants.DISTANCE_PER_PULSE);
 
         pigeon = new WPI_Pigeon2(Auto.PIGEON_PORT);
         
