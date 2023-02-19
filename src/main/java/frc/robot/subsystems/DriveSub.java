@@ -100,16 +100,21 @@ public class DriveSub extends SubsystemBase {
     return leftEncoder.getRate();
   }
 
-public double getRightSpeed() {
-    return rightEncoder.getRate();
+  public double getRightSpeed() {
+      return rightEncoder.getRate();
   }
 
-public double getDistance() {
-  return (getLeftDistance() + getRightDistance()) / 2;
+  public double getDistance() {
+    return (getLeftDistance() + getRightDistance()) / 2;
   }
 
-public Boolean getLowGear() {
-  return shifter.get() == DrivetrainConstants.LOW_GEAR_VALUE;
+
+  public Boolean getLowGear() {
+    return shifter.get() == DrivetrainConstants.LOW_GEAR_VALUE;
+  }
+
+  public void toggleShifters() {
+      setLowGear(!getLowGear());
   }
 
   @Override

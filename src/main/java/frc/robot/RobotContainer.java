@@ -2,29 +2,25 @@ package frc.robot;
 
 
 
+import frc.robot.commands.DriveCommands;
+import frc.robot.commands.DumpyCommands;
+import frc.robot.commands.ElevatorCommands;
 import frc.robot.io.Extreme;
 import frc.robot.subsystems.DriveSub;
-import frc.robot.commands.DumpyCommands;
 import frc.robot.subsystems.DumpySub;
+import frc.robot.subsystems.ElevatorSub;
 import frc.robot.utils.Constants.DumpyConstants;
-
-import java.util.function.DoubleSupplier;
-
-import com.ctre.phoenix.sensors.Pigeon2;
-
-import frc.robot.subsystems.PigeonSub;
 import frc.robot.utils.Constants.ElevatorConstants;
+import frc.robot.subsystems.PigeonSub;
 import frc.robot.utils.Constants.IoConstants;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class RobotContainer {
   
+  private final ElevatorSub m_ElevatorSub = new ElevatorSub();
   private final DriveSub driveSub = new DriveSub(); 
   private final DumpySub dumpSub = new DumpySub();
   private final PigeonSub pigeonSub = new PigeonSub();
@@ -51,11 +47,14 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driverController.getLeftX(), m_driverController.getRightY())));
-    
     dumpSub.setDefaultCommand(DumpyCommands.rotateDumpy(dumpSub, m_extreme.getStickY()));
-
+    m_driverController.rightBumper().onTrue(DriveCommands.driveShift(driveSub));
     m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpSub, DumpyConstants.beltSpeed));
     m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpSub, -DumpyConstants.beltSpeed));
+    m_extreme.sideButton.onTrue(ElevatorCommands.elevatorToggle(m_ElevatorSub));
+    m_extreme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
+    m_extreme.joystickTopLeft.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> -ElevatorConstants.ELEVATOR_SPEED));
+
   }
    
   /**
