@@ -1,14 +1,13 @@
 package frc.robot;
 
-import frc.robot.commands.DumpyCommands;
+
+
 import frc.robot.io.Extreme;
 import frc.robot.subsystems.DriveSub;
+import frc.robot.commands.DumpyCommands;
 import frc.robot.subsystems.DumpySub;
 import frc.robot.utils.Constants.DumpyConstants;
 
-import frc.robot.commands.ElevatorCommands;
-import frc.robot.subsystems.ElevatorSub;
-import frc.robot.utils.Constants.ElevatorConstants;
 import frc.robot.utils.Constants.IoConstants;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -17,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class RobotContainer {
   
-  private final ElevatorSub m_ElevatorSub = new ElevatorSub();
   private final DriveSub driveSub = new DriveSub(); 
   private final DumpySub dumpySub = new DumpySub();
 
@@ -50,13 +48,12 @@ public class RobotContainer {
     m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpySub, DumpyConstants.beltSpeed));
     m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpySub, -DumpyConstants.beltSpeed));
 
-    m_extreme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
   }
    
   /**
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-   return null; 
+    return null; 
   }
 }

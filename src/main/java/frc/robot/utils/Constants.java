@@ -1,5 +1,7 @@
 package frc.robot.utils;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -7,19 +9,44 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 public final class Constants {
 
-  public static class Auto{ 
+  public static class Auto {
       public static final double AUTO_DESIRED_YAW = 100;
-      public static final int PIGEON_PORT = 1;
-      public static final double AUTO_DRIVE_SPEED = 0.5;
-       //PID for Gyro
-       public static final double AutoK_P = 0.015;
-       public static final double AutoK_I = 0.04;
-       public static final double AutoK_D = 0.004;
-       //PID for drivetrain
-       public static final double DRIVETRAIN_KP = 0;
-       public static final double DRIVETRAIN_KI = 0;
-       public static final double DRIVETRAIN_KD = 0;
-    }
+    public static final int PIGEON_PORT = 1;
+    public static final double AUTO_DRIVE_SPEED = 0.5;
+
+    //PID for Gyro
+    public static final double AutoK_P = .015;
+    public static final double AutoK_I = 0.04;
+    public static final double AutoK_D = 0.004;
+
+    //Error for Coordinate Movement
+    public static final double AUTO_ERROR = 0.05;
+    public static final double AUTO__DEGREES_ERROR = 3;  
+
+    //PID for drivetrain
+    public static final double DRIVETRAIN_KP = 0;
+    public static final double DRIVETRAIN_KI = 0;
+    public static final double DRIVETRAIN_KD = 0;
+  
+  }
+  
+  public static class AutoDriveConstants {
+    //Kinematics
+    public static final double TRACK_WIDTH_INCHES = 27;
+    public static final double TRACK_WIDTH_METERS = Units.inchesToMeters(TRACK_WIDTH_INCHES);
+    public static final DifferentialDriveKinematics kinematics = new DifferentialDriveKinematics(TRACK_WIDTH_METERS);
+  
+    //Feedforward Control
+    public static final double FEEDFORWARD_KS = 1;
+    public static final double FEEDFORWARD_KV = 1;
+    public static final double FEEDFORWARD_KA = 1;
+
+    //PID Control
+    public static final double AUTO_DRIVE_KP = 1;
+    public static final double AUTO_DRIVE_KI = 0;
+    public static final double AUTO_DRIVE_KD = 1;
+  
+  }
 
   public static class DrivetrainConstants {
 
@@ -45,38 +72,7 @@ public final class Constants {
     public static final double PULSES_PER_ROTATIONS = 256;
     public static final double WHEEL_CIRCUMFERENCE = 6* Math.PI;
     public static final double DISTANCE_PER_PULSE = WHEEL_CIRCUMFERENCE/PULSES_PER_ROTATIONS;
-  }
 
-  public static class ElevatorConstants {
-
-    // elevator motors
-    public static final int ELEVATOR_1ID = 1;
-    public static final int ELEVATOR_2ID = 2;
-    public static final double ELEVATOR_SPEED = 0.5;
-
-    // elevator encoders
-    public static final double ENCODER_PER_PULSE_DISTANCE = 0 / 0; // TODO fix numbers
-    public static final int ELEVATOR_ENCODER_CHANNEL1ID = 1;
-    public static final int ELEVATOR_ENCODER_CHANNEL2ID = 2;
-
-    public static final double MAX_ELEVATOR_LENGTH = 0;
-
-    public static final int TICKS_PER_REVOLUTION = 4096;
-    public static final int DISTANCE_PER_REVOLUTION = 0 / 0; // TODO fix numbers
-    public static final double GEAR_RATIO = 0 / 0; // TODO fix numbersg
-
-    public static final int ELEVATOR_LIMIT_SWITCH_CHANNEL = 1; // TODO change channel
-
-    // double solenoid
-    public static final int FORWARD_CHANNEL = 0; // TODO channels might be wrong
-    public static final int REVERSE_CHANNEL = 1; // TODO
-    public static final DoubleSolenoid.Value EXTENDED = Value.kForward;
-    public static final DoubleSolenoid.Value RETRACTED = Value.kReverse;
-
-    // elevator pid
-    public static final double ELEVATOR_PID_KP = 0; // TODO change all numbers
-    public static final double ELEVATOR_PID_KI = 0; // TODO
-    public static final double ELEVATOR_PID_KD = 0; // TODO
   }
   
   public static class DumpyConstants {

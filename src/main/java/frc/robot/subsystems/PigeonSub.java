@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
+
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -39,7 +41,7 @@ public class PigeonSub extends SubsystemBase {
   public double getYaw() {
     return pigeon.getYaw();
   }
-
+  
   public double getPitch() {
     return pigeon.getPitch();
   }

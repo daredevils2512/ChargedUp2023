@@ -9,6 +9,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive.WheelSpeeds;
@@ -41,26 +42,27 @@ public class DriveSub extends SubsystemBase {
 
   public DriveSub() {
 
-    frontLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_FRONT_RIGHT_ID);
-    backLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_BACK_RIGHT_ID);
-    frontRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_FRONT_LEFT_ID);
-    backRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_BACK_LEFT_ID);
+    frontLeft = new WPI_TalonFX(DrivetrainConstants.DRIVE_FRONT_LEFT_ID);
+    backLeft = new WPI_TalonFX(DrivetrainConstants.DRIVE_BACK_LEFT_ID);
+    frontRight = new WPI_TalonFX(DrivetrainConstants.DRIVE_FRONT_RIGHT_ID);
+    backRight = new WPI_TalonFX(DrivetrainConstants.DRIVE_BACK_RIGHT_ID);
     shifter = new DoubleSolenoid(
       PneumaticsModuleType.CTREPCM,
       Constants.DrivetrainConstants.SHIFTER_FORWARD_CHANNEL, 
       Constants.DrivetrainConstants.SHIFTER_REVERSE_CHANNEL
     );
+    left = new MotorControllerGroup(frontLeft, backLeft);
+    right = new MotorControllerGroup(frontRight, backRight);
+    right.setInverted(true);
 
-    leftEncoder = new Encoder(Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_A,
-        Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_B);
-    rightEncoder = new Encoder(Constants.DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_A,
-        Constants.DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_B);
+    leftEncoder = new Encoder(DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_A,
+        DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_B);
+    rightEncoder = new Encoder(DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_A,
+        DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_B);
     
     leftEncoder.setDistancePerPulse(DrivetrainConstants.DISTANCE_PER_PULSE);
     rightEncoder.setDistancePerPulse(DrivetrainConstants.DISTANCE_PER_PULSE);
 
-    left = new MotorControllerGroup(frontLeft, backLeft);
-    right = new MotorControllerGroup(frontRight, backRight);
   }
 
   public void arcadeDrive(double move, double turn) {
@@ -75,7 +77,16 @@ public class DriveSub extends SubsystemBase {
     // <condition> ? <expression 1> : <expression 2>
     shifter.set(a);
     m_logger.info("set low gear" + lowGear);
-}
+  }
+
+  //Encoder functions
+  public int getLeftEncoder() {
+    return leftEncoder.get();
+  }
+
+  public int getRightEncoder() {
+    return rightEncoder.get();
+  }
 
   public double getLeftDistance() {
     return leftEncoder.getDistance();
@@ -87,27 +98,27 @@ public class DriveSub extends SubsystemBase {
 
   public double getLeftSpeed() {
     return leftEncoder.getRate();
-}
+  }
 
 public double getRightSpeed() {
     return rightEncoder.getRate();
-}
+  }
 
 public double getDistance() {
   return (getLeftDistance() + getRightDistance()) / 2;
-}
+  }
 
 public Boolean getLowGear() {
   return shifter.get() == DrivetrainConstants.LOW_GEAR_VALUE;
-}
+  }
 
-@Override
-public void periodic() {
-  leftDistance.setDouble(getLeftDistance());
-  rightDistance.setDouble(getRightDistance());
-  leftSpeed.setDouble(getLeftSpeed());
-  rightSpeed.setDouble(getRightSpeed());
+  @Override
+  public void periodic() {
+    leftDistance.setDouble(getLeftDistance());
+    rightDistance.setDouble(getRightDistance());
+    leftSpeed.setDouble(getLeftSpeed());
+    rightSpeed.setDouble(getRightSpeed());
 
-}
+  }
 
 }
