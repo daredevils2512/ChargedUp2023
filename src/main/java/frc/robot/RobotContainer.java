@@ -71,6 +71,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-   return AutoCommands.fullAuto(m_ElevatorSub, driveSub); 
+   return AutoCommands.fullAuto( driveSub, pigeonSub, m_ElevatorSub); 
   }
 }

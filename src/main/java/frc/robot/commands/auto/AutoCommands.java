@@ -54,8 +54,13 @@ public final class AutoCommands {
  public static Command beltSpit(DumpySub dumpySub){
   return DumpyCommands.runBelt(dumpySub, -DumpyConstants.AUTO_BELT).withTimeout(DumpyConstants.BELT_TIMER);
  }
+ //Elevator Commands
+ public static Command toggleElevator( ElevatorSub elevatorSub){
+  return ElevatorCommands.elevatorToggle(elevatorSub);
+ }
 
- public static Command fullAuto(ElevatorSub elevatorSub,DriveSub driveSub){
-    return  ElevatorCommands.elevatorToggle(elevatorSub).andThen(arcadeDrive(driveSub, 0, .75).withTimeout(2).andThen(arcadeDrive(driveSub, 0, 0)));
+ public static Command fullAuto(DriveSub m_driveSub, PigeonSub m_pigeonSub, ElevatorSub elevatorSub){
+  return toggleElevator(elevatorSub).andThen(chargeStation(m_driveSub, m_pigeonSub).withTimeout(4));
+    
   }
 }
