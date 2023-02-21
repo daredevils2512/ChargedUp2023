@@ -36,8 +36,8 @@ public class DriveSub extends SubsystemBase {
   private final WPI_TalonFX backRight;
   private final MotorControllerGroup left;
   private final MotorControllerGroup right;
-  private final Encoder leftEncoder;
-  private final Encoder rightEncoder;
+  // private final Encoder leftEncoder;
+  // private final Encoder rightEncoder;
 
   public DriveSub() {
 
@@ -51,45 +51,46 @@ public class DriveSub extends SubsystemBase {
       Constants.DrivetrainConstants.SHIFTER_REVERSE_CHANNEL
     );
 
-    leftEncoder = new Encoder(Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_A,
-        Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_B);
-    rightEncoder = new Encoder(Constants.DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_A,
-        Constants.DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_B);
+    // // // leftEncoder = new Encoder(Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_A,
+    // //     Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_B);
+    // // rightEncoder = new Encoder(Constants.DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_A,
+    // //     Constants.DrivetrainConstants.DRIVETRAIN_RIGHT_ENCODER_B);
     
-    leftEncoder.setDistancePerPulse(DrivetrainConstants.DISTANCE_PER_PULSE);
-    rightEncoder.setDistancePerPulse(DrivetrainConstants.DISTANCE_PER_PULSE);
+    // leftEncoder.setDistancePerPulse(DrivetrainConstants.DISTANCE_PER_PULSE);
+    // rightEncoder.setDistancePerPulse(DrivetrainConstants.DISTANCE_PER_PULSE);
 
     left = new MotorControllerGroup(frontLeft, backLeft);
     right = new MotorControllerGroup(frontRight, backRight);
+    right.setInverted(true);
   }
 
   public void arcadeDrive(double move, double turn) {
     WheelSpeeds wheelSpeeds = DifferentialDrive.arcadeDriveIK(move, turn, true);
-    left.set(wheelSpeeds.left);
-    right.set(wheelSpeeds.right);
+    left.set(move - turn);
+    right.set(move +turn);
   }
 
   
 
-  public double getLeftDistance() {
-    return leftEncoder.getDistance();
-  }
+//   public double getLeftDistance() {
+//     return leftEncoder.getDistance();
+//   }
 
-  public double getRightDistance() {
-    return rightEncoder.getDistance();
-  }
+//   public double getRightDistance() {
+//     return rightEncoder.getDistance();
+//   }
 
-  public double getLeftSpeed() {
-    return leftEncoder.getRate();
-}
+//   public double getLeftSpeed() {
+//     return leftEncoder.getRate();
+// }
 
-public double getRightSpeed() {
-    return rightEncoder.getRate();
-}
+// public double getRightSpeed() {
+//     return rightEncoder.getRate();
+// }
 
-public double getDistance() {
-  return (getLeftDistance() + getRightDistance()) / 2;
-}
+// public double getDistance() {
+//   return (getLeftDistance() + getRightDistance()) / 2;
+// }
 
 public void setLowGear(boolean lowGear) {
     m_setlowgEntry.setBoolean(lowGear);
@@ -109,10 +110,10 @@ public void toggleShifters() {
 
 @Override
 public void periodic() {
-  leftDistance.setDouble(getLeftDistance());
-  rightDistance.setDouble(getRightDistance());
-  leftSpeed.setDouble(getLeftSpeed());
-  rightSpeed.setDouble(getRightSpeed());
+  // leftDistance.setDouble(getLeftDistance());
+  // rightDistance.setDouble(getRightDistance());
+  // leftSpeed.setDouble(getLeftSpeed());
+  // rightSpeed.setDouble(getRightSpeed());
 
 }
 

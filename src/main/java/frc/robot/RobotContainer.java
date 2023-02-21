@@ -12,11 +12,13 @@ import java.util.function.DoubleSupplier;
 import com.ctre.phoenix.sensors.Pigeon2;
 
 import frc.robot.commands.ElevatorCommands;
+import frc.robot.commands.auto.AutoCommands;
 import frc.robot.subsystems.ElevatorSub;
 import frc.robot.subsystems.PigeonSub;
 import frc.robot.utils.Constants.ElevatorConstants;
 import frc.robot.utils.Constants.IoConstants;
-
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -39,6 +41,8 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    UsbCamera camera = CameraServer.startAutomaticCapture();
+    camera.setResolution(640,480);
   }
 // beware the watermelon man
 // how bad can the watermelon man possibly be?
@@ -52,8 +56,9 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive(m_driverController.getLeftX(), m_driverController.getRightY())));
-    dumpSub.setDefaultCommand(DumpyCommands.rotateDumpy(dumpSub, m_extreme.getStickY()));
+    driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive( m_driverController.getLeftY(),m_driverController.getRightX())));
+    //driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive( 1,0 )));
+    dumpSub.setDefaultCommand(dumpSub.run(()-> dumpSub.setDumpySpeed(m_extreme.getStickY())));
     m_driverController.rightBumper().onTrue(DriveCommands.driveShift(driveSub));
     m_extreme.joystickUp.whileTrue(DumpyCommands.runBelt(dumpSub, DumpyConstants.beltSpeed));
     m_extreme.joystickDown.whileTrue(DumpyCommands.runBelt(dumpSub, -DumpyConstants.beltSpeed));
@@ -66,6 +71,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-   return null; 
+   return AutoCommands.fullAuto(m_ElevatorSub, driveSub); 
   }
 }

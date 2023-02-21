@@ -12,7 +12,7 @@ private DriveCommands() {
 
 }
 public static Command driveShift( DriveSub driveSub){
-    return driveSub.run(()-> driveSub.toggleShifters());
+    return driveSub.runOnce(()-> driveSub.toggleShifters());
 }
 public static Command arcadeDrive(DriveSub driveSub, DoubleSupplier move, DoubleSupplier turn){
     return driveSub.run(() -> driveSub.arcadeDrive(move.getAsDouble(), turn.getAsDouble()));

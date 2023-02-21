@@ -4,6 +4,7 @@ import java.util.function.BooleanSupplier;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -15,8 +16,8 @@ import frc.robot.utils.Constants.DumpyConstants;
 
 public class DumpySub extends SubsystemBase{
 
-    private final WPI_VictorSPX dumpyMotor;
-    private final WPI_VictorSPX beltMotor;
+    private final WPI_TalonSRX dumpyMotor;
+    private final WPI_TalonSRX beltMotor;
    // private final DigitalInput topSwitch;
    // private final DigitalInput bottomSwitch;
     private final double slowRate;
@@ -31,14 +32,15 @@ public class DumpySub extends SubsystemBase{
 
     public DumpySub() {
         //Constructor
-        dumpyMotor = new WPI_VictorSPX(DumpyConstants.dumpyID);
-        beltMotor = new WPI_VictorSPX(DumpyConstants.dumpyBeltID);
+        dumpyMotor = new WPI_TalonSRX(DumpyConstants.dumpyID);
+        beltMotor = new WPI_TalonSRX(DumpyConstants.dumpyBeltID);
+        beltMotor.setInverted(true);
 
        // topSwitch = new DigitalInput(DumpyConstants.TOP_SWITCH_CHANNEL);
         //bottomSwitch = new DigitalInput(DumpyConstants.BOTTOM_SWITCH_CHANNEL);
 
         slowRate = DumpyConstants.dumpySpeed;
-        dumpyMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+        //dumpyMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
     }
 
     public void setDumpySpeed(double speed) {

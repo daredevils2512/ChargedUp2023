@@ -16,8 +16,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants.ElevatorConstants;
 
 public class ElevatorSub extends SubsystemBase {
-    private final TalonSRX m_backMotor;
-    private final TalonSRX m_frontMotor;
+    private final TalonSRX m_rightMotor;
+    private final TalonSRX m_leftMotor;
     private final DigitalInput m_limitSwitch;
     private final DoubleSolenoid m_doubleSolenoid;
     private final PIDController m_pid = new PIDController(0, 0, 0);
@@ -32,13 +32,13 @@ public class ElevatorSub extends SubsystemBase {
     private final NetworkTableEntry m_solenoidValue = m_networkTable.getEntry("solenoid value :D");
 
     public ElevatorSub () {
-        m_frontMotor = new TalonSRX(ElevatorConstants.ELEVATOR_1ID);
-        m_backMotor = new TalonSRX(ElevatorConstants.ELEVATOR_2ID);
+        m_leftMotor = new TalonSRX(ElevatorConstants.ELEVATOR_1ID);
+        m_rightMotor = new TalonSRX(ElevatorConstants.ELEVATOR_2ID);
 
-        m_backMotor.follow(m_frontMotor);
-        m_backMotor.setInverted(true);
+        m_leftMotor.follow(m_rightMotor);
+        m_leftMotor.setInverted(true);
 
-        m_frontMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        //m_rightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
         m_limitSwitch = new DigitalInput(ElevatorConstants.ELEVATOR_LIMIT_SWITCH_CHANNEL);
 
@@ -54,23 +54,24 @@ public class ElevatorSub extends SubsystemBase {
             speed = Math.min(speed, 0);
         }
 
-        m_frontMotor.set(ControlMode.PercentOutput, speed);
+        m_rightMotor.set(ControlMode.PercentOutput, speed);
+        
         m_lastUsedPID = false;
         m_setSpeedEntry.setDouble(speed);
     }
-//once upon a time Kobi was a big dumb baby man, who smells like farts. then we desicrate him
+
 
     public void setLength(double length){
 
         if (! m_lastUsedPID) m_pid.reset();
-        m_frontMotor.set(ControlMode.PercentOutput, m_pid.calculate(getLength(), length));
+        m_rightMotor.set(ControlMode.PercentOutput, m_pid.calculate(getLength(), length));
         m_lastUsedPID = true;
         m_logger.finest("set length: " + length);
         m_targetLengthEntry.setDouble(length);
     }
 
     public double getLength() {
-        return m_frontMotor.getSelectedSensorPosition() / ElevatorConstants.TICKS_PER_REVOLUTION * ElevatorConstants.GEAR_RATIO * ElevatorConstants.DISTANCE_PER_REVOLUTION;
+        return m_rightMotor.getSelectedSensorPosition() / ElevatorConstants.TICKS_PER_REVOLUTION * ElevatorConstants.GEAR_RATIO * ElevatorConstants.DISTANCE_PER_REVOLUTION;
     }
 
     public boolean getElevatorExtended() {
@@ -91,7 +92,7 @@ public class ElevatorSub extends SubsystemBase {
     @Override
     public void periodic() {
         m_currentLengthEntry.setDouble(getLength());
-        m_rawEncoderUnits.setDouble(m_frontMotor.getSelectedSensorPosition());
+        m_rawEncoderUnits.setDouble(m_rightMotor.getSelectedSensorPosition());
         m_solenoidValue.setString(switch (m_doubleSolenoid.get()) {
             case kForward -> "Forward";
             case kReverse -> "Reverse";

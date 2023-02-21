@@ -21,14 +21,14 @@ public class DriveDistance extends CommandBase {
 
   @Override
   public void initialize() {
-    m_pid.reset();
-    m_driveTarget = (m_driveSub.getLeftDistance() + m_driveDistance);
-  }
+  //   m_pid.reset();
+  //   m_driveTarget = (m_driveSub.getLeftDistance() + m_driveDistance);
+  // }
 
-  @Override
-  public void execute() {
-    double output = m_pid.calculate(m_driveSub.getLeftDistance(), m_driveTarget);
-    m_driveSub.arcadeDrive(output, 0); 
+  // @Override
+  // public void execute() {
+  //   double output = m_pid.calculate(m_driveSub.getLeftDistance(), m_driveTarget);
+  //   m_driveSub.arcadeDrive(output, 0); 
   }
 
   @Override

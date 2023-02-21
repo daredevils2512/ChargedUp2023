@@ -25,8 +25,8 @@ public final class Constants {
 
     //Shifters
     public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
-    public static final int SHIFTER_FORWARD_CHANNEL = 0;
-    public static final int SHIFTER_REVERSE_CHANNEL = 1;
+    public static final int SHIFTER_FORWARD_CHANNEL = 1;
+    public static final int SHIFTER_REVERSE_CHANNEL = 6;
     public static final DoubleSolenoid.Value HIGH_GEAR_VALUE = DoubleSolenoid.Value.kForward;
     public static final DoubleSolenoid.Value LOW_GEAR_VALUE = DoubleSolenoid.Value.kReverse;
 
@@ -60,7 +60,7 @@ public final class Constants {
     public static final int ELEVATOR_ENCODER_CHANNEL1ID = 1;
     public static final int ELEVATOR_ENCODER_CHANNEL2ID = 2;
 
-    public static final double MAX_ELEVATOR_LENGTH = 0;
+    public static final double MAX_ELEVATOR_LENGTH = 10000000;
 
     public static final int TICKS_PER_REVOLUTION = 4096;
     public static final int DISTANCE_PER_REVOLUTION = 1; // TODO fix numbers
@@ -82,8 +82,8 @@ public final class Constants {
   
   public static class DumpyConstants {
     //IDs
-    public static final int dumpyID = 0;
-    public static final int dumpyBeltID = 1;
+    public static final int dumpyID = 7;
+    public static final int dumpyBeltID = 8;
     public static final int BOTTOM_SWITCH_CHANNEL = 0;
     public static final int TOP_SWITCH_CHANNEL = 1;
 
@@ -93,8 +93,8 @@ public final class Constants {
     public static final int DEGREES_PER_ROTATION = 360 * GEAR_RATIO; 
 
     //Speed modifiers for manual inputs
-    public static final double dumpySpeed = 0.3;
-    public static final double beltSpeed = 0.5;
+    public static final double dumpySpeed = 1;
+    public static final double beltSpeed = 1;
 
     //Automatic dumpy movement values 
     public static final double DUMPY_SPEED = 0.5;
