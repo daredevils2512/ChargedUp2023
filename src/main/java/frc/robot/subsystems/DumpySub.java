@@ -11,6 +11,8 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.utils.Constants.DumpyConstants;
 
@@ -28,6 +30,8 @@ public class DumpySub extends SubsystemBase{
     private final NetworkTableEntry dumpySpeed = dumpyNetworkTable.getEntry("dumpy speed: ");
     private final NetworkTableEntry dumpyBeltSpeed = dumpyNetworkTable.getEntry("dumpy's belt speed: ");
     private final NetworkTableEntry dumpyRaised = dumpyNetworkTable.getEntry("dumpy raised: ");
+    private final DoubleSolenoid m_doubleSolenoid;
+
 
 
     public DumpySub() {
@@ -35,7 +39,7 @@ public class DumpySub extends SubsystemBase{
         dumpyMotor = new WPI_TalonSRX(DumpyConstants.dumpyID);
         beltMotor = new WPI_TalonSRX(DumpyConstants.dumpyBeltID);
         beltMotor.setInverted(true);
-
+        m_doubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, DumpyConstants.FORWARD_CHANNEL, DumpyConstants.REVERSE_CHANNEL);
        // topSwitch = new DigitalInput(DumpyConstants.TOP_SWITCH_CHANNEL);
         //bottomSwitch = new DigitalInput(DumpyConstants.BOTTOM_SWITCH_CHANNEL);
 
@@ -61,6 +65,20 @@ public class DumpySub extends SubsystemBase{
     public boolean checkDumpyToggled() {
         BooleanSupplier dumpyState = () -> Math.abs(getAngle() - DumpyConstants.DUMPY_UP) < DumpyConstants.DUMPY_TOLERANCE;
         return dumpyState.getAsBoolean();
+    }
+
+    public boolean getClawGrabbed() {
+        final boolean extendTrue = m_doubleSolenoid.get() == DumpyConstants.EXTENDED;
+        return extendTrue;
+    }
+
+    public void setExtended(boolean wantsExtended){
+        m_doubleSolenoid.set(wantsExtended ? DumpyConstants.EXTENDED : DumpyConstants.RETRACTED);
+      
+    }
+
+    public void toggleClaw(){
+        setExtended(!getClawGrabbed());
     }
 
 //    / // public BooleanSupplier reachedBounds() {

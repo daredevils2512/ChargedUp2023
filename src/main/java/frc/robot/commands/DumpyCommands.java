@@ -46,6 +46,9 @@ public class DumpyCommands {
         DoubleSupplier angle = () -> defaultPosition.getAsBoolean() ? DumpyConstants.DUMPY_UP : 0;
         return dumpyToAnglePID(dumpySub, angle.getAsDouble());
     }
+    public static Command clawGrab(DumpySub dumpySub) {
+        return dumpySub.runOnce(()-> dumpySub.toggleClaw());
+    }
 
 
 }

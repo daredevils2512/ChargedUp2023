@@ -53,7 +53,7 @@ public final class Constants {
     // elevator motors
     public static final int ELEVATOR_1ID = 5;
     public static final int ELEVATOR_2ID = 6;
-    public static final double ELEVATOR_SPEED = 0.5;
+    public static final double ELEVATOR_SPEED = .5;
 
     // elevator encoders
     public static final double ENCODER_PER_PULSE_DISTANCE = 1; // TODO fix numbers
@@ -109,6 +109,11 @@ public final class Constants {
     //Auto belt values
     public static final double AUTO_BELT = 0.5;
     public static final double BELT_TIMER = 1.5;
+
+    public static final int FORWARD_CHANNEL = 0; // TODO channels might be wrong
+    public static final int REVERSE_CHANNEL = 7; // TODO
+    public static final DoubleSolenoid.Value EXTENDED = Value.kForward;
+    public static final DoubleSolenoid.Value RETRACTED = Value.kReverse;
   }
 
   public static class IoConstants {
