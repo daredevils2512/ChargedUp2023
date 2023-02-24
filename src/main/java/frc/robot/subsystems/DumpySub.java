@@ -58,8 +58,6 @@ public class DumpySub extends SubsystemBase{
         return dumpyMotor.getSelectedSensorPosition() / DumpyConstants.ENCODER_RESOLUTION * DumpyConstants.DEGREES_PER_ROTATION;
     }
 
-   
-
     public boolean getClawGrabbed() {
         final boolean extendTrue = m_doubleSolenoid.get() == DumpyConstants.EXTENDED;
         return extendTrue;
