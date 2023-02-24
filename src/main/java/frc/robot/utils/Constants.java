@@ -60,13 +60,13 @@ public final class Constants {
     public static final int ELEVATOR_ENCODER_CHANNEL1ID = 1;
     public static final int ELEVATOR_ENCODER_CHANNEL2ID = 2;
 
-    public static final double MAX_ELEVATOR_LENGTH = 10000000;
+    public static final double MAX_ELEVATOR_LENGTH = -5.2;
 
     public static final int TICKS_PER_REVOLUTION = 4096;
     public static final int DISTANCE_PER_REVOLUTION = 1; // TODO fix numbers
     public static final double GEAR_RATIO = 1; // TODO fix numbersg
 
-    public static final int ELEVATOR_LIMIT_SWITCH_CHANNEL = 1; // TODO change channel
+    public static final int ELEVATOR_LIMIT_SWITCH_CHANNEL = 4; // 
 
     // double solenoid
     public static final int FORWARD_CHANNEL = 5; // TODO channels might be wrong

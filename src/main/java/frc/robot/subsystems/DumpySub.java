@@ -53,19 +53,12 @@ public class DumpySub extends SubsystemBase{
         dumpySpeed.setDouble(speed);
       }
     
-    public void setBeltSpeed(double speed) {
-        beltMotor.set(ControlMode.PercentOutput, speed);
-        dumpyBeltSpeed.setDouble(speed);
-    }
 
     public double getAngle() {
         return dumpyMotor.getSelectedSensorPosition() / DumpyConstants.ENCODER_RESOLUTION * DumpyConstants.DEGREES_PER_ROTATION;
     }
 
-    public boolean checkDumpyToggled() {
-        BooleanSupplier dumpyState = () -> Math.abs(getAngle() - DumpyConstants.DUMPY_UP) < DumpyConstants.DUMPY_TOLERANCE;
-        return dumpyState.getAsBoolean();
-    }
+   
 
     public boolean getClawGrabbed() {
         final boolean extendTrue = m_doubleSolenoid.get() == DumpyConstants.EXTENDED;
@@ -89,13 +82,7 @@ public class DumpySub extends SubsystemBase{
     public void periodic() {
         dumpyEncoderUnits.setDouble(dumpyMotor.getSelectedSensorPosition());
         dumpyAngle.setDouble(getAngle());
-        dumpyRaised.setBoolean(checkDumpyToggled());
-    //     if (topSwitch.get()) {
-    //         dumpyMotor.setSelectedSensorPosition(DumpyConstants.DUMPY_UP);
-    //     }
-    //     else if (bottomSwitch.get()) {
-    //         dumpyMotor.setSelectedSensorPosition(0);
-    //     }
+      
      }
     
 

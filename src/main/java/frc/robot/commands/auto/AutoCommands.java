@@ -47,13 +47,7 @@ public final class AutoCommands {
   return DumpyCommands.dumpyToAnglePID(dumpySub, 0);
  }
 
- public static Command beltSuck(DumpySub dumpySub){
-  return DumpyCommands.runBelt(dumpySub, DumpyConstants.AUTO_BELT).withTimeout(DumpyConstants.BELT_TIMER);
- }
 
- public static Command beltSpit(DumpySub dumpySub){
-  return DumpyCommands.runBelt(dumpySub, -DumpyConstants.AUTO_BELT).withTimeout(DumpyConstants.BELT_TIMER);
- }
  //Elevator Commands
  public static Command toggleElevator( ElevatorSub elevatorSub){
   return ElevatorCommands.elevatorToggle(elevatorSub);

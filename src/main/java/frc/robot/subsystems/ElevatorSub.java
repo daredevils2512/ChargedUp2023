@@ -36,7 +36,7 @@ public class ElevatorSub extends SubsystemBase {
         m_rightMotor = new TalonSRX(ElevatorConstants.ELEVATOR_2ID);
 
         // m_leftMotor.follow(m_rightMotor);
-        m_rightMotor.follow(m_leftMotor);
+    
         m_leftMotor.setInverted(true);
 
         //m_rightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
@@ -51,10 +51,11 @@ public class ElevatorSub extends SubsystemBase {
         if (m_limitSwitch.get() && speed < 0) { 
              speed = Math.max(0, speed);
         }
-         else  if (getLength() >= ElevatorConstants.MAX_ELEVATOR_LENGTH && speed>0)   {
+         else  if (getLength() <= ElevatorConstants.MAX_ELEVATOR_LENGTH && speed>0)   {
              speed = Math.min(speed, 0);
         } else{
         m_leftMotor.set(ControlMode.PercentOutput, speed);  
+        m_rightMotor.set(ControlMode.PercentOutput, speed);
         }
 
     
@@ -94,6 +95,7 @@ public class ElevatorSub extends SubsystemBase {
 
     @Override
     public void periodic() {
+        
         m_currentLengthEntry.setDouble(getLength());
         m_rawEncoderUnits.setDouble(m_rightMotor.getSelectedSensorPosition());
         m_solenoidValue.setString(switch (m_doubleSolenoid.get()) {

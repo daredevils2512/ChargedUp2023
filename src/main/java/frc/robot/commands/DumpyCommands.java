@@ -24,11 +24,6 @@ public class DumpyCommands {
         .finallyDo((interrupted) -> dumpySub.setDumpySpeed(0));
     }
 
-    public static Command runBelt(DumpySub dumpySub, double speed) {
-        return new RunCommand(() -> dumpySub.setBeltSpeed(speed), dumpySub)
-        .finallyDo((interrupted) -> dumpySub.setBeltSpeed(0));
-    }
-
     public static Command dumpyToAngle(DumpySub dumpySub, double angle) {
         BooleanSupplier dumpyAngle = () -> dumpySub.getAngle() < angle;
         DoubleSupplier speed = ()-> dumpyAngle.getAsBoolean() ? DumpyConstants.DUMPY_SPEED : -DumpyConstants.DUMPY_SPEED;
