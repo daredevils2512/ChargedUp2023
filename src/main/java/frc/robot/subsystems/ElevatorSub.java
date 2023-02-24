@@ -34,19 +34,13 @@ public class ElevatorSub extends SubsystemBase {
     public ElevatorSub () {
         m_leftMotor = new TalonSRX(ElevatorConstants.ELEVATOR_1ID);
         m_rightMotor = new TalonSRX(ElevatorConstants.ELEVATOR_2ID);
-
-        // m_leftMotor.follow(m_rightMotor);
-    
         m_leftMotor.setInverted(true);
-
         //m_rightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-
         m_limitSwitch = new DigitalInput(ElevatorConstants.ELEVATOR_LIMIT_SWITCH_CHANNEL);
-
         m_doubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, ElevatorConstants.FORWARD_CHANNEL, ElevatorConstants.REVERSE_CHANNEL);
-
         m_logger.setLevel(Level.INFO);
     }
+
     public void setSpeed(double speed) {
         if (m_limitSwitch.get() && speed < 0) { 
              speed = Math.max(0, speed);
@@ -57,16 +51,12 @@ public class ElevatorSub extends SubsystemBase {
         m_leftMotor.set(ControlMode.PercentOutput, speed);  
         m_rightMotor.set(ControlMode.PercentOutput, speed);
         }
-
-    
-        
         m_lastUsedPID = false;
         m_setSpeedEntry.setDouble(speed);
     }
 
 
     public void setLength(double length){
-
         if (! m_lastUsedPID) m_pid.reset();
         m_rightMotor.set(ControlMode.PercentOutput, m_pid.calculate(getLength(), length));
         m_lastUsedPID = true;
@@ -95,7 +85,9 @@ public class ElevatorSub extends SubsystemBase {
 
     @Override
     public void periodic() {
-        
+        if (m_limitSwitch.get()){
+            m_rightMotor.setSelectedSensorPosition(0);
+        } 
         m_currentLengthEntry.setDouble(getLength());
         m_rawEncoderUnits.setDouble(m_rightMotor.getSelectedSensorPosition());
         m_solenoidValue.setString(switch (m_doubleSolenoid.get()) {
