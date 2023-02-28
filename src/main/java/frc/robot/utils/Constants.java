@@ -18,24 +18,12 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
-  public static final int INTAKE_SHIFTER_FORWARD_ID1 = 4;
-  public static final int INTAKE_SHIFTER_BACKWARD_ID1 = 5;
-  public static final Value INTAKE_EXTENDED_VALUE = Value.kForward;
-  public static final Value INTAKE_RETRACTED_VALUE = Value.kReverse;
-  public static class DrivetrainConstants {
-    public static final int DRIVE_LEFT_1_ID = 1;
-    //drive front left 
-    public static final int DRIVE_LEFT_2_ID = 2;
-    //drive back left
-    public static final int DRIVE_RIGHT_1_ID = 3;
-    // drive right front
-    public static final int DRIVE_RIGHT_2_ID = 4;
-    //drive back right
-    public static final int SHIFTER_FORWARD_CHANNEL = 0;
-    public static final int SHIFTER_REVERSE_CHANNEL = 1; 
-    public static final DoubleSolenoid.Value HIGH_GEAR_VALUE = DoubleSolenoid.Value.kForward;
-    public static final DoubleSolenoid.Value LOW_GEAR_VALUE = DoubleSolenoid.Value.kReverse;
+  public static class GrabbyConstants {
+    public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
+    public static final int INTAKE_SHIFTER_FORWARD_ID1 = 4;
+    public static final int INTAKE_SHIFTER_BACKWARD_ID1 = 5;
+    public static final Value INTAKE_EXTENDED_VALUE = Value.kForward;
+    public static final Value INTAKE_RETRACTED_VALUE = Value.kReverse;
   }
 
   public static class IoConstants {
