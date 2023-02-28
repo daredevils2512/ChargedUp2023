@@ -4,11 +4,13 @@ import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommands;
-import frc.robot.commands.DumpyCommands;
+// import frc.robot.commands.DumpyCommands;
 import frc.robot.commands.ElevatorCommands;
+import frc.robot.commands.GrabbyCommands;
 import frc.robot.subsystems.DriveSub;
-import frc.robot.subsystems.DumpySub;
+// import frc.robot.subsystems.DumpySub;
 import frc.robot.subsystems.ElevatorSub;
+import frc.robot.subsystems.GrabbySub;
 import frc.robot.subsystems.PigeonSub;
 import frc.robot.utils.Constants.DrivetrainConstants;
 import frc.robot.utils.Constants.DumpyConstants;
@@ -37,13 +39,13 @@ public final class AutoCommands {
   // }    
 
  //Dumpy commands
- public static Command dumpyUp(DumpySub dumpySub){
-  return DumpyCommands.dumpyToAnglePID(dumpySub, DumpyConstants.DUMPY_UP);
- }
+//  public static Command dumpyUp(DumpySub dumpySub){
+//   return DumpyCommands.dumpyToAnglePID(dumpySub, DumpyConstants.DUMPY_UP);
+//  }
 
- public static Command dumpyDown(DumpySub dumpySub){
-  return DumpyCommands.dumpyToAnglePID(dumpySub, 0);
- }
+//  public static Command dumpyDown(DumpySub dumpySub){
+//   return DumpyCommands.dumpyToAnglePID(dumpySub, 0);
+//  }
 
 
  //Elevator Commands
@@ -51,16 +53,16 @@ public final class AutoCommands {
   return ElevatorCommands.elevatorToggle(elevatorSub);
  }
 
- public static Command toggleClaw(DumpySub dumpySub){
-  return DumpyCommands.clawGrab(dumpySub);
+ public static Command toggleClaw(GrabbySub grabbySub){
+  return GrabbyCommands.grabThingy(grabbySub);
  }
 
- public static Command runToLengthAndDrop( ElevatorSub elevatorSub,DumpySub dumpySub, Double length, Double tolorance){
-  return ElevatorCommands.runToLength(elevatorSub, length, tolorance).andThen(toggleClaw(dumpySub));
+ public static Command runToLengthAndDrop( ElevatorSub elevatorSub, GrabbySub grabbySub, Double length, Double tolorance){
+  return ElevatorCommands.runToLength(elevatorSub, length, tolorance).andThen(toggleClaw(grabbySub));
  }
 
- public static Command fullAuto(DriveSub m_driveSub, PigeonSub m_pigeonSub, ElevatorSub elevatorSub, DumpySub dumpySub){
-  return runToLengthAndDrop(elevatorSub, dumpySub, 4.8,.1).andThen((toggleElevator(elevatorSub).andThen(chargeStation(m_driveSub, m_pigeonSub))));
+ public static Command fullAuto(DriveSub m_driveSub, PigeonSub m_pigeonSub, ElevatorSub elevatorSub, GrabbySub grabbySub){
+  return runToLengthAndDrop(elevatorSub, grabbySub, 4.8,.1).andThen((toggleElevator(elevatorSub).andThen(chargeStation(m_driveSub, m_pigeonSub))));
     
   }
 }

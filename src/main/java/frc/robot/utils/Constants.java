@@ -8,18 +8,18 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 public final class Constants {
 
   public static class Auto{ 
-      public static final double AUTO_DESIRED_YAW = 100;
-      public static final int PIGEON_PORT = 1;
-      public static final double AUTO_DRIVE_SPEED = 0.5;
-       //PID for Gyro
-       public static final double AutoK_P = 0.015;
-       public static final double AutoK_I = 0.00;
-       public static final double AutoK_D = 0.000;
-       //PID for drivetrain
-       public static final double DRIVETRAIN_KP = 0;
-       public static final double DRIVETRAIN_KI = 0;
-       public static final double DRIVETRAIN_KD = 0;
-    }
+    public static final double AUTO_DESIRED_YAW = 100;
+    public static final int PIGEON_PORT = 1;
+    public static final double AUTO_DRIVE_SPEED = 0.5;
+    //PID for Gyro
+    public static final double AutoK_P = 0.015;
+    public static final double AutoK_I = 0.00;
+    public static final double AutoK_D = 0.000;
+    //PID for drivetrain
+    public static final double DRIVETRAIN_KP = 0;
+    public static final double DRIVETRAIN_KI = 0;
+    public static final double DRIVETRAIN_KD = 0;
+  }
 
   public static class DrivetrainConstants {
 
@@ -110,10 +110,14 @@ public final class Constants {
     public static final double AUTO_BELT = 0.5;
     public static final double BELT_TIMER = 1.5;
 
+  }
+
+  public static class GrabbyConstants {
+    public static final PneumaticsModuleType PNEUMATICS_MODULE_TYPE = PneumaticsModuleType.CTREPCM;
     public static final int FORWARD_CHANNEL = 0; // TODO channels might be wrong
-    public static final int REVERSE_CHANNEL = 7; // TODO
-    public static final DoubleSolenoid.Value EXTENDED = Value.kForward;
-    public static final DoubleSolenoid.Value RETRACTED = Value.kReverse;
+    public static final int REVERSE_CHANNEL = 7; //TODO
+    public static final Value INTAKE_EXTENDED_VALUE = Value.kForward;
+    public static final Value INTAKE_RETRACTED_VALUE = Value.kReverse;
   }
 
   public static class IoConstants {
