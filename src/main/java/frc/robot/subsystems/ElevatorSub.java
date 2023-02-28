@@ -35,7 +35,7 @@ public class ElevatorSub extends SubsystemBase {
         m_leftMotor = new TalonSRX(ElevatorConstants.ELEVATOR_1ID);
         m_rightMotor = new TalonSRX(ElevatorConstants.ELEVATOR_2ID);
         m_leftMotor.setInverted(true);
-        //m_rightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        m_leftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         m_limitSwitch = new DigitalInput(ElevatorConstants.ELEVATOR_LIMIT_SWITCH_CHANNEL);
         m_doubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, ElevatorConstants.FORWARD_CHANNEL, ElevatorConstants.REVERSE_CHANNEL);
         m_logger.setLevel(Level.INFO);
@@ -43,29 +43,33 @@ public class ElevatorSub extends SubsystemBase {
 
     public void setSpeed(double speed) {
         if (m_limitSwitch.get() && speed < 0) { 
-             speed = Math.max(0, speed);
+             m_leftMotor.set(ControlMode.PercentOutput, 0);  
+             m_rightMotor.set(ControlMode.PercentOutput, 0);
         }
          else  if (getLength() <= ElevatorConstants.MAX_ELEVATOR_LENGTH && speed>0)   {
              speed = Math.min(speed, 0);
+             m_leftMotor.set(ControlMode.PercentOutput, 0);  
+             m_rightMotor.set(ControlMode.PercentOutput, 0);
         } else{
         m_leftMotor.set(ControlMode.PercentOutput, speed);  
         m_rightMotor.set(ControlMode.PercentOutput, speed);
         }
         m_lastUsedPID = false;
         m_setSpeedEntry.setDouble(speed);
+    
     }
 
 
     public void setLength(double length){
         if (! m_lastUsedPID) m_pid.reset();
-        m_rightMotor.set(ControlMode.PercentOutput, m_pid.calculate(getLength(), length));
+        m_leftMotor.set(ControlMode.PercentOutput, m_pid.calculate(getLength(), length));
         m_lastUsedPID = true;
         m_logger.finest("set length: " + length);
         m_targetLengthEntry.setDouble(length);
     }
 
     public double getLength() {
-        return m_rightMotor.getSelectedSensorPosition() / ElevatorConstants.TICKS_PER_REVOLUTION * ElevatorConstants.GEAR_RATIO * ElevatorConstants.DISTANCE_PER_REVOLUTION;
+        return m_leftMotor.getSelectedSensorPosition() / ElevatorConstants.TICKS_PER_REVOLUTION * ElevatorConstants.GEAR_RATIO * ElevatorConstants.DISTANCE_PER_REVOLUTION;
     }
 
     public boolean getElevatorExtended() {
@@ -86,10 +90,10 @@ public class ElevatorSub extends SubsystemBase {
     @Override
     public void periodic() {
         if (m_limitSwitch.get()){
-            m_rightMotor.setSelectedSensorPosition(0);
+            m_leftMotor.setSelectedSensorPosition(0);
         } 
         m_currentLengthEntry.setDouble(getLength());
-        m_rawEncoderUnits.setDouble(m_rightMotor.getSelectedSensorPosition());
+        m_rawEncoderUnits.setDouble(m_leftMotor.getSelectedSensorPosition());
         m_solenoidValue.setString(switch (m_doubleSolenoid.get()) {
             case kForward -> "Forward";
             case kReverse -> "Reverse";

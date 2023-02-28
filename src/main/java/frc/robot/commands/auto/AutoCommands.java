@@ -21,7 +21,7 @@ public final class AutoCommands {
     return new Stableize(driveSub, pigeonSub);
   }
   public static Command chargeStation(DriveSub drivesub, PigeonSub pigeonSub){
-    return (DriveCommands.arcadeDrive(drivesub, .25, 0).until(()-> pigeonSub.getPitch() >= 15)).andThen(stableize(drivesub, pigeonSub));
+    return (DriveCommands.arcadeDrive(drivesub, -.25, 0).until(()-> pigeonSub.getPitch() >= 8)).andThen(stableize(drivesub, pigeonSub)).withTimeout(4);
   }
  public static Command turnToAngle(DriveSub driveSub, PigeonSub pigeonSub, int angleToTurnTO){
     return new TurnToAngle(driveSub, pigeonSub, angleToTurnTO);
@@ -51,8 +51,16 @@ public final class AutoCommands {
   return ElevatorCommands.elevatorToggle(elevatorSub);
  }
 
- public static Command fullAuto(DriveSub m_driveSub, PigeonSub m_pigeonSub, ElevatorSub elevatorSub){
-  return toggleElevator(elevatorSub).andThen(chargeStation(m_driveSub, m_pigeonSub).withTimeout(4));
+ public static Command toggleClaw(DumpySub dumpySub){
+  return DumpyCommands.clawGrab(dumpySub);
+ }
+
+ public static Command runToLengthAndDrop( ElevatorSub elevatorSub,DumpySub dumpySub, Double length, Double tolorance){
+  return ElevatorCommands.runToLength(elevatorSub, length, tolorance).andThen(toggleClaw(dumpySub));
+ }
+
+ public static Command fullAuto(DriveSub m_driveSub, PigeonSub m_pigeonSub, ElevatorSub elevatorSub, DumpySub dumpySub){
+  return runToLengthAndDrop(elevatorSub, dumpySub, 4.8,.1).andThen((toggleElevator(elevatorSub).andThen(chargeStation(m_driveSub, m_pigeonSub))));
     
   }
 }

@@ -16,7 +16,7 @@ public class Stableize extends CommandBase{
     public Stableize(DriveSub driveSub, PigeonSub pigeonSub) {
     m_DriveSub = driveSub;
     m_PigeonSub = pigeonSub; 
-   pid.setTolerance(2);
+   pid.setTolerance(1);
     addRequirements(m_DriveSub, m_PigeonSub);
 }
 @Override
@@ -29,7 +29,7 @@ public class Stableize extends CommandBase{
   public void execute() {
    // double output = Auto.AutoK_P * (0 - m_PigeonSub.getPitch());
     double output = pid.calculate(m_PigeonSub.getPitch(), 0);
-    m_DriveSub.arcadeDrive(-output, 0);
+    m_DriveSub.arcadeDrive(output, 0);
     
    
   }

@@ -63,12 +63,18 @@ public class RobotContainer {
     m_extreme.joystickTopLeft.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> -ElevatorConstants.ELEVATOR_SPEED));
     m_extreme.trigger.onTrue(DumpyCommands.clawGrab(dumpSub));
     m_extreme.sideButton.onTrue(ElevatorCommands.elevatorToggle(m_ElevatorSub));
+    m_extreme.baseBackLeft.whileTrue(ElevatorCommands.runToLength(m_ElevatorSub, -4.8, .1));
+    m_extreme.baseBackRight.whileTrue(ElevatorCommands.runToLength(m_ElevatorSub, -2.3, .1));
+    m_extreme.baseFrontLeft.whileTrue(AutoCommands.fullAuto(driveSub, pigeonSub, m_ElevatorSub, dumpSub));
+    //add run to length commands, -4.8, 
+    //2.3
+ 
   }
    
   /**
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-   return AutoCommands.fullAuto( driveSub, pigeonSub, m_ElevatorSub); 
+   return AutoCommands.fullAuto( driveSub, pigeonSub, m_ElevatorSub, dumpSub); 
   }
 }

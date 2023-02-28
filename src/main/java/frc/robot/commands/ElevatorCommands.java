@@ -23,9 +23,9 @@ public class ElevatorCommands {
     }
 
     public static Command runToLength(ElevatorSub elevatorSub, double length, double tolerance){
-        BooleanSupplier elevatorUp = () -> elevatorSub.getLength() < length;
+        BooleanSupplier elevatorUp = () -> elevatorSub.getLength() > length;
         DoubleSupplier speed = ()-> elevatorUp.getAsBoolean() ? ElevatorConstants.ELEVATOR_SPEED : -ElevatorConstants.ELEVATOR_SPEED;
-        return runElevator(elevatorSub, speed).until(() -> elevatorSub.getLength() - length <= tolerance);
+        return runElevator(elevatorSub, speed).until(() -> Math.abs(elevatorSub.getLength() - length) <= tolerance);
     }    
 
     public static Command setElevatorExtended(ElevatorSub elevatorSub, boolean extended){

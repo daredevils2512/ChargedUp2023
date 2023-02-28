@@ -13,8 +13,8 @@ public final class Constants {
       public static final double AUTO_DRIVE_SPEED = 0.5;
        //PID for Gyro
        public static final double AutoK_P = 0.015;
-       public static final double AutoK_I = 0.04;
-       public static final double AutoK_D = 0.004;
+       public static final double AutoK_I = 0.00;
+       public static final double AutoK_D = 0.000;
        //PID for drivetrain
        public static final double DRIVETRAIN_KP = 0;
        public static final double DRIVETRAIN_KI = 0;
@@ -53,14 +53,14 @@ public final class Constants {
     // elevator motors
     public static final int ELEVATOR_1ID = 5;
     public static final int ELEVATOR_2ID = 6;
-    public static final double ELEVATOR_SPEED = .5;
+    public static final double ELEVATOR_SPEED = .9;
 
     // elevator encoders
     public static final double ENCODER_PER_PULSE_DISTANCE = 1; // TODO fix numbers
     public static final int ELEVATOR_ENCODER_CHANNEL1ID = 1;
     public static final int ELEVATOR_ENCODER_CHANNEL2ID = 2;
 
-    public static final double MAX_ELEVATOR_LENGTH = -5.2;
+    public static final double MAX_ELEVATOR_LENGTH = -5;
 
     public static final int TICKS_PER_REVOLUTION = 4096;
     public static final int DISTANCE_PER_REVOLUTION = 1; // TODO fix numbers
