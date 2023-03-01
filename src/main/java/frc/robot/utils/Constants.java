@@ -88,9 +88,9 @@ public final class Constants {
     public static final int TOP_SWITCH_CHANNEL = 1;
 
     //Encoder values
-    public static final int ENCODER_RESOLUTION = 2048;
-    public static final int GEAR_RATIO = 1/1000;
-    public static final int DEGREES_PER_ROTATION = 360 * GEAR_RATIO; 
+    public static final double ENCODER_RESOLUTION = 2048;
+    public static final double GEAR_RATIO = .0001;
+    public static final double DEGREES_PER_ROTATION = 360 * GEAR_RATIO; 
 
     //Speed modifiers for manual inputs
     public static final double dumpySpeed = 1;
