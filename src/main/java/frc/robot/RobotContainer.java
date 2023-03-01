@@ -6,11 +6,9 @@ import frc.robot.io.Extreme;
 import frc.robot.subsystems.DriveSub;
 // import frc.robot.subsystems.DumpySub;
 // import frc.robot.utils.Constants.DumpyConstants;
-
+import frc.robot.subsystems.DumpySub;
 import java.util.function.DoubleSupplier;
-
 import com.ctre.phoenix.sensors.Pigeon2;
-
 import frc.robot.commands.ElevatorCommands;
 import frc.robot.commands.GrabbyCommands;
 import frc.robot.commands.auto.AutoCommands;
@@ -32,7 +30,7 @@ public class RobotContainer {
   
   private final ElevatorSub m_ElevatorSub = new ElevatorSub();
   private final DriveSub driveSub = new DriveSub(); 
-//  private final DumpySub dumpSub = new DumpySub();
+  private final DumpySub dumpSub = new DumpySub();
   private final PigeonSub pigeonSub = new PigeonSub();
   private final GrabbySub grabbySub = new GrabbySub();
 
@@ -60,7 +58,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive( -m_driverController.getLeftY(),m_driverController.getRightX())));
-  //  dumpSub.setDefaultCommand(dumpSub.run(()-> dumpSub.setDumpySpeed(m_extreme.getStickY())));
+    dumpSub.setDefaultCommand(dumpSub.run(()-> dumpSub.setDumpySpeed(m_extreme.getStickY())));
     m_driverController.rightBumper().onTrue(DriveCommands.driveShift(driveSub));  
     m_extreme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
     m_extreme.joystickTopLeft.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> -ElevatorConstants.ELEVATOR_SPEED));
