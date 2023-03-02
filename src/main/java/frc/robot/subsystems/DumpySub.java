@@ -17,9 +17,6 @@ import frc.robot.utils.Constants.DumpyConstants;
 public class DumpySub extends SubsystemBase{
 
     private final WPI_TalonSRX dumpyMotor;
-    private final WPI_TalonSRX beltMotor;
-   // private final DigitalInput topSwitch;
-   // private final DigitalInput bottomSwitch;
     private final double slowRate;
 
     private final NetworkTable dumpyNetworkTable = NetworkTableInstance.getDefault().getTable(getName());
@@ -32,9 +29,8 @@ public class DumpySub extends SubsystemBase{
     public DumpySub() {
         //Constructor
         dumpyMotor = new WPI_TalonSRX(DumpyConstants.dumpyID);
-        beltMotor = new WPI_TalonSRX(DumpyConstants.dumpyBeltID);
         slowRate = DumpyConstants.dumpySpeed;
-        dumpyMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute);
+        dumpyMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     }
 
     public void setDumpySpeed(double speed) {

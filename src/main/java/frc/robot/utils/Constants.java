@@ -103,8 +103,8 @@ public final class Constants {
 
     //PID for Dumpy
     public static final double DUMPY_KP = 1;
-    public static final double DUMPY_KI = 1;
-    public static final double DUMPY_KD = 1;
+    public static final double DUMPY_KI = 0;
+    public static final double DUMPY_KD = 0;
 
     //Auto belt values
     public static final double AUTO_BELT = 0.5;
