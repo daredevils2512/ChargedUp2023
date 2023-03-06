@@ -20,14 +20,14 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class RobotContainer {
   
-  private final ElevatorSub m_ElevatorSub = new ElevatorSub();
+  private final ElevatorSub elevatorSub = new ElevatorSub();
   private final DriveSub driveSub = new DriveSub(); 
   private final DumpySub dumpSub = new DumpySub();
   private final PigeonSub pigeonSub = new PigeonSub();
   private final GrabbySub grabbySub = new GrabbySub();
 
-  private final Extreme m_extreme = new Extreme(1); // Move port to constats
-  private final CommandXboxController m_driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
+  private final Extreme extreeme = new Extreme(1); // Move port to constats
+  private final CommandXboxController driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
 
   /** The container for the ro
    * bot. Contains subsystems, OI devices, and commands. */
@@ -49,17 +49,17 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive( -m_driverController.getLeftY(),m_driverController.getRightX())));
-    dumpSub.setDefaultCommand(dumpSub.run(()-> dumpSub.setDumpySpeed(m_extreme.getStickY())));
-    m_driverController.rightBumper().onTrue(DriveCommands.driveShift(driveSub));  
-    m_extreme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
-    m_extreme.joystickTopLeft.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> -ElevatorConstants.ELEVATOR_SPEED));
-    m_extreme.trigger.onTrue(GrabbyCommands.grabThingy(grabbySub));
-    m_extreme.sideButton.whileTrue(GrabbyCommands.limitGrab(grabbySub));
-    m_extreme.baseMiddleLeft.onTrue(ElevatorCommands.elevatorToggle(m_ElevatorSub));
-    m_extreme.baseBackLeft.onTrue(ElevatorCommands.runToLength(m_ElevatorSub, -4.8, .1));
-    m_extreme.baseBackRight.onTrue(ElevatorCommands.runToLength(m_ElevatorSub, -2.3, .1));
-    m_extreme.baseFrontLeft.onTrue(AutoCommands.fullAuto(driveSub, pigeonSub, m_ElevatorSub, grabbySub, dumpSub));
+    driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive( -driverController.getLeftY(),driverController.getRightX())));
+    dumpSub.setDefaultCommand(dumpSub.run(()-> dumpSub.setDumpySpeed(extreeme.getStickY())));
+    driverController.rightBumper().onTrue(DriveCommands.driveShift(driveSub));  
+    extreeme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(elevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
+    extreeme.joystickTopLeft.whileTrue(ElevatorCommands.runElevator(elevatorSub, ()-> -ElevatorConstants.ELEVATOR_SPEED));
+    extreeme.trigger.onTrue(GrabbyCommands.grabThingy(grabbySub));
+    extreeme.sideButton.whileTrue(GrabbyCommands.limitGrab(grabbySub));
+    extreeme.baseMiddleLeft.onTrue(ElevatorCommands.elevatorToggle(elevatorSub));
+    extreeme.baseBackLeft.onTrue(ElevatorCommands.runToLength(elevatorSub, -4.8, .1));
+    extreeme.baseBackRight.onTrue(ElevatorCommands.runToLength(elevatorSub, -2.3, .1));
+    extreeme.baseFrontLeft.onTrue(AutoCommands.fullAuto(driveSub, pigeonSub, elevatorSub, grabbySub, dumpSub));
    
     
   }
@@ -68,6 +68,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-   return AutoCommands.fullAuto(driveSub, pigeonSub, m_ElevatorSub, grabbySub, dumpSub);
+   return AutoCommands.fullAuto(driveSub, pigeonSub, elevatorSub, grabbySub, dumpSub);
   }
 }

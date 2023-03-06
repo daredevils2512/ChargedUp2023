@@ -77,12 +77,12 @@ public final class AutoCommands {
   .andThen(ElevatorCommands.runToLength(elevatorSub, -.5, .1));
  }
 
- public static Command fullAuto(DriveSub m_driveSub, PigeonSub m_pigeonSub, ElevatorSub elevatorSub, GrabbySub grabbySub, DumpySub dumpySub){
+ public static Command fullAuto(DriveSub  driveSub, PigeonSub  pigeonSub, ElevatorSub elevatorSub, GrabbySub grabbySub, DumpySub dumpySub){
   return
     toggleElevator(elevatorSub)
    .andThen(WaitCommand(1.5))
    .andThen(runToLengthAndDrop(elevatorSub, dumpySub, grabbySub, -4.8,.1))
-  .andThen(chargeStation(m_driveSub, m_pigeonSub));
+  .andThen(chargeStation( driveSub,  pigeonSub));
   }
 
 

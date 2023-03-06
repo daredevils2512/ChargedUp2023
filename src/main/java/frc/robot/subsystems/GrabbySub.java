@@ -13,7 +13,7 @@ import frc.robot.utils.Constants.GrabbyConstants;
 
 public class GrabbySub  extends SubsystemBase {
   private final DoubleSolenoid grabber;
-  private final DigitalInput m_limitSwitch;
+  private final DigitalInput  limitSwitch;
   private final NetworkTable grabbyNetworkTable = NetworkTableInstance.getDefault().getTable(getName());
   private final NetworkTableEntry grabbyExtended = grabbyNetworkTable.getEntry("extended");
   private final NetworkTableEntry grabbyLimit = grabbyNetworkTable.getEntry("Tripped");
@@ -21,7 +21,7 @@ public class GrabbySub  extends SubsystemBase {
   
 
   public GrabbySub() {
-    m_limitSwitch = new DigitalInput(GrabbyConstants.LIMIT_SWITCH_PORT);
+     limitSwitch = new DigitalInput(GrabbyConstants.LIMIT_SWITCH_PORT);
     grabber = new DoubleSolenoid(GrabbyConstants.PNEUMATICS_MODULE_TYPE, GrabbyConstants.FORWARD_CHANNEL, GrabbyConstants.REVERSE_CHANNEL);
     grabbyExtended.setBoolean(getGrab());
     
@@ -41,14 +41,14 @@ public class GrabbySub  extends SubsystemBase {
   }
 
   public void limitGrab(){
-    if (m_limitSwitch.get()== true && getGrab() == true) {
+    if ( limitSwitch.get()== true && getGrab() == true) {
       setGrab(!getGrab());
     }
 
   } 
   @Override
   public void periodic() {
-    grabbyLimit.setBoolean(m_limitSwitch.get());
+    grabbyLimit.setBoolean( limitSwitch.get());
     getGrabby.setBoolean(getGrab());
   }
 }
