@@ -14,7 +14,6 @@ import frc.robot.utils.Constants.ElevatorConstants;
 import frc.robot.utils.Constants.IoConstants;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -63,10 +62,4 @@ public class RobotContainer {
     
   }
    
-  /**
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-   return AutoCommands.fullAuto(driveSub, pigeonSub, m_ElevatorSub, grabbySub, dumpSub);
-  }
 }
