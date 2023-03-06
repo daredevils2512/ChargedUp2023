@@ -24,7 +24,7 @@ public class GrabbySub  extends SubsystemBase {
     m_limitSwitch = new DigitalInput(GrabbyConstants.LIMIT_SWITCH_PORT);
     grabber = new DoubleSolenoid(GrabbyConstants.PNEUMATICS_MODULE_TYPE, GrabbyConstants.FORWARD_CHANNEL, GrabbyConstants.REVERSE_CHANNEL);
     grabbyExtended.setBoolean(getGrab());
-    dumpyMotor = new WPI_TalonSRX(DumpyConstants.dumpyID);
+    
   }
 
   public void setGrab(boolean wantsGrab) {
