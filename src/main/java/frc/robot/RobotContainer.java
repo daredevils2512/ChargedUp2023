@@ -1,12 +1,12 @@
 package frc.robot;
 
+import frc.robot.commands.AutoCommands;
 import frc.robot.commands.DriveCommands;
 import frc.robot.io.Extreme;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.DumpySub;
 import frc.robot.commands.ElevatorCommands;
 import frc.robot.commands.GrabbyCommands;
-import frc.robot.commands.auto.AutoCommands;
 import frc.robot.subsystems.ElevatorSub;
 import frc.robot.subsystems.GrabbySub;
 import frc.robot.subsystems.PigeonSub;

@@ -1,10 +1,13 @@
-package frc.robot.commands.auto;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.DumpyCommands;
 import frc.robot.commands.ElevatorCommands;
 import frc.robot.commands.GrabbyCommands;
+import frc.robot.commands.automodes.DriveDistance;
+import frc.robot.commands.automodes.Stableize;
+import frc.robot.commands.automodes.TurnToAngle;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.DumpySub;
 import frc.robot.subsystems.ElevatorSub;
