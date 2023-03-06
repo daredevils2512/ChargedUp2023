@@ -3,13 +3,11 @@ package frc.robot.commands;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.lang.Math;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.DumpySub;
-import frc.robot.utils.Constants;
 import frc.robot.utils.Constants.DumpyConstants;
 
 public class DumpyCommands {
