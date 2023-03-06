@@ -1,7 +1,5 @@
 package frc.robot.commands.auto;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.DriveCommands;
@@ -13,9 +11,6 @@ import frc.robot.subsystems.DumpySub;
 import frc.robot.subsystems.ElevatorSub;
 import frc.robot.subsystems.GrabbySub;
 import frc.robot.subsystems.PigeonSub;
-import frc.robot.utils.Constants.DrivetrainConstants;
-import frc.robot.utils.Constants.DumpyConstants;
-
 public final class AutoCommands {
   private AutoCommands() {
   }

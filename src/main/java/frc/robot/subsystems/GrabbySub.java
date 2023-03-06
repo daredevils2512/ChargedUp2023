@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -19,7 +18,6 @@ public class GrabbySub  extends SubsystemBase {
   private final NetworkTableEntry grabbyExtended = grabbyNetworkTable.getEntry("extended");
   private final NetworkTableEntry grabbyLimit = grabbyNetworkTable.getEntry("Tripped");
   private final NetworkTableEntry getGrabby = grabbyNetworkTable.getEntry("getGrabby");
- private final WPI_TalonSRX dumpyMotor;
   
 
   public GrabbySub() {

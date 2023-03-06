@@ -2,7 +2,6 @@ package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.controller.PIDController;
-import frc.robot.utils.Constants;
 import frc.robot.utils.Constants.Auto;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;

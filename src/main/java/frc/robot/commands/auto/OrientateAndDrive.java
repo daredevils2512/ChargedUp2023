@@ -3,8 +3,6 @@ package frc.robot.commands.auto;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
-
-import frc.robot.utils.Constants;
 import frc.robot.utils.Constants.Auto;
 
 public class OrientateAndDrive extends CommandBase {
