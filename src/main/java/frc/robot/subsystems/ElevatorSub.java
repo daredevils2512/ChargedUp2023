@@ -35,7 +35,7 @@ public class ElevatorSub extends SubsystemBase {
         m_leftMotor = new TalonSRX(ElevatorConstants.ELEVATOR_1ID);
         m_rightMotor = new TalonSRX(ElevatorConstants.ELEVATOR_2ID);
         m_leftMotor.setInverted(true);
-        m_leftMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+        m_rightMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         m_limitSwitch = new DigitalInput(ElevatorConstants.ELEVATOR_LIMIT_SWITCH_CHANNEL);
         m_doubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, ElevatorConstants.FORWARD_CHANNEL, ElevatorConstants.REVERSE_CHANNEL);
         m_logger.setLevel(Level.INFO);
@@ -69,7 +69,7 @@ public class ElevatorSub extends SubsystemBase {
     }
 
     public double getLength() {
-        return m_leftMotor.getSelectedSensorPosition() / ElevatorConstants.TICKS_PER_REVOLUTION * ElevatorConstants.GEAR_RATIO * ElevatorConstants.DISTANCE_PER_REVOLUTION;
+        return m_rightMotor.getSelectedSensorPosition() / ElevatorConstants.TICKS_PER_REVOLUTION * ElevatorConstants.GEAR_RATIO * ElevatorConstants.DISTANCE_PER_REVOLUTION;
     }
 
     public boolean getElevatorExtended() {
@@ -90,10 +90,10 @@ public class ElevatorSub extends SubsystemBase {
     @Override
     public void periodic() {
         if (m_limitSwitch.get()){
-            m_leftMotor.setSelectedSensorPosition(0);
+            m_rightMotor.setSelectedSensorPosition(0);
         } 
         m_currentLengthEntry.setDouble(getLength());
-        m_rawEncoderUnits.setDouble(m_leftMotor.getSelectedSensorPosition());
+        m_rawEncoderUnits.setDouble(m_rightMotor.getSelectedSensorPosition());
         m_solenoidValue.setString(switch (m_doubleSolenoid.get()) {
             case kForward -> "Forward";
             case kReverse -> "Reverse";

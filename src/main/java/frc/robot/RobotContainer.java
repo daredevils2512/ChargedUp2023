@@ -63,11 +63,12 @@ public class RobotContainer {
     m_extreme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
     m_extreme.joystickTopLeft.whileTrue(ElevatorCommands.runElevator(m_ElevatorSub, ()-> -ElevatorConstants.ELEVATOR_SPEED));
     m_extreme.trigger.onTrue(GrabbyCommands.grabThingy(grabbySub));
-    m_extreme.sideButton.onTrue(ElevatorCommands.elevatorToggle(m_ElevatorSub));
+    m_extreme.sideButton.whileTrue(GrabbyCommands.limitGrab(grabbySub));
+    m_extreme.baseMiddleLeft.onTrue(ElevatorCommands.elevatorToggle(m_ElevatorSub));
     m_extreme.baseBackLeft.onTrue(ElevatorCommands.runToLength(m_ElevatorSub, -4.8, .1));
     m_extreme.baseBackRight.onTrue(ElevatorCommands.runToLength(m_ElevatorSub, -2.3, .1));
     m_extreme.baseFrontLeft.onTrue(AutoCommands.fullAuto(driveSub, pigeonSub, m_ElevatorSub, grabbySub, dumpSub));
-    m_extreme.baseMiddleLeft.onTrue((AutoCommands.runDumpy(dumpSub, -.5)).withTimeout(1));
+   
     
   }
    

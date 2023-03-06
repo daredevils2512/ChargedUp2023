@@ -3,6 +3,7 @@ package frc.robot.commands.auto;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.DumpyCommands;
 import frc.robot.commands.ElevatorCommands;
@@ -23,7 +24,7 @@ public final class AutoCommands {
     return new Stableize(driveSub, pigeonSub);
   }
   public static Command chargeStation(DriveSub drivesub, PigeonSub pigeonSub){
-    return ((DriveCommands.arcadeDrive(drivesub, -.25, 0).withTimeout(4)).until(()-> pigeonSub.getPitch() >= 8)).andThen(stableize(drivesub, pigeonSub));
+    return ((DriveCommands.arcadeDrive(drivesub, -.35, 0).withTimeout(5.5)).until(()-> pigeonSub.getPitch() >= 8)).andThen(stableize(drivesub, pigeonSub));
   }
   public static Command turnToAngle(DriveSub driveSub, PigeonSub pigeonSub, int angleToTurnTO){
     return new TurnToAngle(driveSub, pigeonSub, angleToTurnTO);
@@ -51,6 +52,10 @@ public final class AutoCommands {
   return DumpyCommands.dumpyToAnglePID(dumpySub, 90);
  }
 
+ private static Command WaitCommand(double d) {
+  return new WaitCommand(d);
+}
+
  //Elevator Commands
  public static Command toggleElevator( ElevatorSub elevatorSub){
   return ElevatorCommands.elevatorToggle(elevatorSub);
@@ -66,16 +71,26 @@ public final class AutoCommands {
  public static Command runToLengthAndDrop(  ElevatorSub elevatorSub, DumpySub dumpySub, GrabbySub grabbySub, Double length, Double tolorance){
   return 
   (runToLength(elevatorSub, length, tolorance)
-    .andThen((runDumpy(dumpySub, -.5)).withTimeout(1))
-    .andThen(toggleClaw(grabbySub)))
-  .andThen((runDumpy(dumpySub, .5).withTimeout(.75)))
+    .andThen((runDumpy(dumpySub, -.5)).withTimeout(.5))
+    .andThen(WaitCommand(1))
+      .andThen(toggleClaw(grabbySub))
+        .andThen(WaitCommand(1)) 
+      .andThen(toggleClaw(grabbySub))
+        .andThen(WaitCommand(1))
+      .andThen(toggleClaw(grabbySub)))
+  .andThen((runDumpy(dumpySub, .5).withTimeout(.5)))
   .andThen(ElevatorCommands.runToLength(elevatorSub, -.5, .1));
  }
 
  public static Command fullAuto(DriveSub m_driveSub, PigeonSub m_pigeonSub, ElevatorSub elevatorSub, GrabbySub grabbySub, DumpySub dumpySub){
-  return toggleElevator(elevatorSub)
-  .andThen(runToLengthAndDrop(elevatorSub, dumpySub, grabbySub, -4.8,.1))
-  .andThen((toggleElevator(elevatorSub)
-    .andThen(chargeStation(m_driveSub, m_pigeonSub))));
+  return
+    toggleElevator(elevatorSub)
+   .andThen(WaitCommand(1.5))
+   .andThen(runToLengthAndDrop(elevatorSub, dumpySub, grabbySub, -4.8,.1))
+  .andThen(chargeStation(m_driveSub, m_pigeonSub));
   }
+
+
+
+
 }
