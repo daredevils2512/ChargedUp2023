@@ -1,15 +1,13 @@
-package frc.robot.commands.actions.Elevator;
+package frc.robot.functionality.actions.drive;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ElevatorSub;
+import frc.robot.functionality.actions.Action;
+import frc.robot.subsystems.DriveSub;
 
-public class ElevatorToggle extends CommandBase {
-    private final ElevatorSub elevator;
-
-    public ElevatorToggle(ElevatorSub elevator) {
-        this.elevator = elevator;
-
-        addRequirements(this.elevator);
+public class DriveShift implements Action {
+    private final DriveSub drivetrain;
+    
+    public DriveShift(DriveSub drivetrain) {
+        this.drivetrain = drivetrain;
     }
 
     /** Called when the command starts */
@@ -21,12 +19,12 @@ public class ElevatorToggle extends CommandBase {
     /** Called every time the scheduler runs while the command is scheduled. */
     @Override
     public void execute() {
-        elevator.toggleElevatorExtended();
+        drivetrain.toggleShifters();
     }
 
     /** Called once the command ends or is interrupted. */
     @Override
-    public void end(boolean interrupted) {
+    public void onEnd() {
         
     }
 

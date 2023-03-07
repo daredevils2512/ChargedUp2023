@@ -1,8 +1,28 @@
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.functionality.CommandExecutor;
+import frc.robot.functionality.actions.drive.ArcadeDrive;
+import frc.robot.functionality.actions.drive.DriveShift;
+import frc.robot.functionality.actions.dumpy.RotateDumpy;
+import frc.robot.functionality.actions.elevator.ElevatorToggle;
+import frc.robot.functionality.actions.elevator.RunElevator;
+import frc.robot.functionality.actions.elevator.RunToLength;
+import frc.robot.functionality.actions.grabby.GrabThingy;
+import frc.robot.functionality.commands.Command;
+import frc.robot.functionality.commands.FullAuto;
+import frc.robot.io.Extreme;
+import frc.robot.subsystems.DriveSub;
+import frc.robot.subsystems.DumpySub;
+import frc.robot.subsystems.ElevatorSub;
+import frc.robot.subsystems.GrabbySub;
+import frc.robot.subsystems.PigeonSub;
+import frc.robot.utils.Constants.ElevatorConstants;
+import frc.robot.utils.Constants.IoConstants;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -12,10 +32,18 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
-  private RobotContainer m_robotContainer;
+  private CommandExecutor autoExecutor;
 
   private AutoModeSelector m_AutoModeSelector;
+
+  private ElevatorSub m_ElevatorSub;
+  private DriveSub driveSub;
+  private DumpySub dumpSub;
+  private PigeonSub pigeonSub;
+  private GrabbySub grabbySub;
+
+  private Extreme m_extreme;
+  private CommandXboxController m_driverController;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -23,9 +51,19 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+    m_ElevatorSub = new ElevatorSub();
+    driveSub = new DriveSub(); 
+    dumpSub = new DumpySub();
+    pigeonSub = new PigeonSub();
+    grabbySub = new GrabbySub();
+  
+    m_extreme = new Extreme(1); // Move port to constats
+    m_driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
+
+    autoExecutor = new CommandExecutor(m_autonomousCommand);
+    
+    UsbCamera camera = CameraServer.startAutomaticCapture();
+    camera.setResolution(640,480);
   }
 
   /**
@@ -58,8 +96,8 @@ public class Robot extends TimedRobot {
     m_autonomousCommand = m_AutoModeSelector.getAutoMode().get();
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
+    if (autoExecutor != null) {
+      autoExecutor.execute();
     }
   }
 
@@ -73,14 +111,118 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+    if (autoExecutor != null) {
+      autoExecutor.stop();
     }
   }
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    if (m_driverController.rightBumper().getAsBoolean()) {
+      new CommandExecutor(new Command() {
+        @Override
+        public void routine() {
+          runAction(new DriveShift(driveSub));
+        }
+      });
+    }
+
+    new CommandExecutor(new Command() {
+      @Override
+      public void routine() {
+        runAction(new ArcadeDrive(driveSub, () -> m_driverController.getLeftY(), () -> m_driverController.getRightX()));
+      }
+    });
+
+    new CommandExecutor(new Command() {
+      @Override
+      public void routine() {
+        runAction(new RotateDumpy(dumpSub, () -> m_extreme.getStickY()));
+      };
+    });
+
+    if (m_extreme.joystickTopRight.getAsBoolean()) {
+      new CommandExecutor(new Command() {
+        @Override
+        public void routine() {
+          runAction(new RunElevator(m_ElevatorSub, () -> ElevatorConstants.ELEVATOR_SPEED));
+        };
+      });
+    }
+
+    if (m_extreme.joystickTopLeft.getAsBoolean()) {
+      new CommandExecutor(new Command() {
+        @Override
+        public void routine() {
+          runAction(new RunElevator(m_ElevatorSub, () -> -ElevatorConstants.ELEVATOR_SPEED));
+        };
+      });
+    }
+
+    if (m_extreme.trigger.getAsBoolean()) {
+      new CommandExecutor(new Command() {
+        @Override
+        public void routine() {
+          runAction(new GrabThingy(grabbySub));
+        };
+      });
+    }
+
+    if (m_extreme.sideButton.getAsBoolean()) {
+      new CommandExecutor(new Command() {
+        @Override
+        public void routine() {
+          runAction(new ElevatorToggle(m_ElevatorSub));
+        };
+      });
+    }
+
+    if (m_extreme.baseBackLeft.getAsBoolean()) {
+      new CommandExecutor(new Command() {
+        @Override
+        public void routine() {
+          runAction(new RunToLength(m_ElevatorSub, -4.8, 0.1));
+        };
+      });
+    }
+
+    if (m_extreme.baseBackRight.getAsBoolean()) {
+      new CommandExecutor(new Command() {
+        @Override
+        public void routine() {
+          runAction(new RunToLength(m_ElevatorSub, -2.3, 0.1));
+        };
+      });
+    }
+
+    if (m_extreme.baseMiddleLeft.getAsBoolean()) {
+      new CommandExecutor(new Command() {
+        @Override
+        public void routine() {
+          runAction(new RotateDumpy(dumpSub, () -> -0.5, 1));
+        }
+      });
+    }
+
+    if (m_extreme.baseFrontLeft.getAsBoolean()) {
+      new CommandExecutor(new Command() {
+        private Command fullAuto;
+        @Override
+        public void initialize() {
+          fullAuto = new FullAuto(driveSub, pigeonSub, m_ElevatorSub, grabbySub, dumpSub);
+        };
+        @Override
+        public void routine() {
+          do {
+            fullAuto.routine();
+          } while (!fullAuto.isFinished());
+        }
+      });
+    }
+
+
+  }
 
   @Override
   public void testInit() {

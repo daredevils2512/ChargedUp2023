@@ -1,12 +1,12 @@
-package frc.robot.commands.automodes;
+package frc.robot.functionality.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.controller.PIDController;
 import frc.robot.utils.Constants.Auto;
+import frc.robot.functionality.actions.drive.ArcadeDrive;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
 
-public class TurnToAngle extends CommandBase{
+public class TurnToAngle extends Command {
     private final DriveSub m_DriveSub;
     private final PigeonSub m_PigeonSub;
     private double yawTarget;
@@ -15,38 +15,34 @@ public class TurnToAngle extends CommandBase{
 
 
     public TurnToAngle(DriveSub driveSub, PigeonSub pigeonSub, Integer angleToTurnTO) {
-    m_DriveSub = driveSub;
-    m_PigeonSub = pigeonSub; 
-    m_angleToTurnTO = angleToTurnTO;
-
-    addRequirements(m_DriveSub, m_PigeonSub);
-}
-@Override
-  public void initialize() {  
-  System.out.println("Turning!!");
-  yawTarget = m_PigeonSub.getYaw() + m_angleToTurnTO;
-  }
+      m_DriveSub = driveSub;
+      m_PigeonSub = pigeonSub; 
+      m_angleToTurnTO = angleToTurnTO;
+      
+      System.out.println("Turning!!");
+      yawTarget = m_PigeonSub.getYaw() + m_angleToTurnTO;
+    }
 
   /** Called every time the scheduler runs while the command is scheduled. */
   @Override
-  public void execute() {
+  public void routine() {
    
     // double output = Constants.AutoK_P * (yawTarget - m_PigeonSub.getYaw());
     double output = pid.calculate(m_PigeonSub.getYaw(), yawTarget);
-    m_DriveSub.arcadeDrive(0, -output);
+    runAction(new ArcadeDrive(m_DriveSub, () -> 0.0, () -> -output));
    
   }
 
   /** Called once the command ends or is interrupted. */
   @Override
-  public void end(boolean interrupted) {
-    m_DriveSub.arcadeDrive(0, 0);
+  public void onEnd() {
+    runAction(new ArcadeDrive(m_DriveSub, () -> 0.0, () -> 0.0));
     
   }
 
   /** Returns true when the command should end. */
   @Override
   public boolean isFinished() {
-    return false;
+    return pid.atSetpoint();
   }
 }

@@ -179,6 +179,10 @@ public final class Constants {
 
   }
 
+  public static class AutoConstants {
+    public static final double AUTO_WAIT_TIME = 0.200;
+  }
+
   private Constants() {
   }
 }

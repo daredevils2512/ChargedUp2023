@@ -1,43 +1,35 @@
-package frc.robot.commands.automodes;
+package frc.robot.functionality.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.math.controller.PIDController;
 import frc.robot.utils.Constants.Auto;
+import frc.robot.functionality.actions.drive.ArcadeDrive;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
 
-public class Stableize extends CommandBase{
+public class Stableize extends Command {
     private final DriveSub m_DriveSub;
     private final PigeonSub m_PigeonSub;
     PIDController pid = new PIDController(Auto.AutoK_P, Auto.AutoK_I, Auto.AutoK_D);
 
-
     public Stableize(DriveSub driveSub, PigeonSub pigeonSub) {
-    m_DriveSub = driveSub;
-    m_PigeonSub = pigeonSub; 
-   pid.setTolerance(1);
-    addRequirements(m_DriveSub, m_PigeonSub);
-}
-@Override
-  public void initialize() {  
-  
-  }
+      m_DriveSub = driveSub;
+      m_PigeonSub = pigeonSub; 
+      pid.setTolerance(1);
+    }
 
   /** Called every time the scheduler runs while the command is scheduled. */
   @Override
-  public void execute() {
+  public void routine() {
    // double output = Auto.AutoK_P * (0 - m_PigeonSub.getPitch());
     double output = pid.calculate(m_PigeonSub.getPitch(), 0);
-    m_DriveSub.arcadeDrive(output, 0);
-    
-   
+    runAction(new ArcadeDrive(m_DriveSub, () -> output, () -> 0.0));
+
   }
 
   /** Called once the command ends or is interrupted. */
   @Override
-  public void end(boolean interrupted) {
-    m_DriveSub.arcadeDrive(0, 0);
-    
+  public void onEnd() {
+    runAction(new ArcadeDrive(m_DriveSub, () -> 0.0, () -> 0.0));
   }
 
   /** Returns true when the command should end. */

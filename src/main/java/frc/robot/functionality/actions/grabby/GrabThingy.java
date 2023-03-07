@@ -1,15 +1,13 @@
-package frc.robot.commands.actions.Grabby;
+package frc.robot.functionality.actions.grabby;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.functionality.actions.Action;
 import frc.robot.subsystems.GrabbySub;
 
-public class GrabThingy extends CommandBase {
+public class GrabThingy implements Action {
     private final GrabbySub grabby;
 
     public GrabThingy(GrabbySub grabby) {
         this.grabby = grabby;
-
-        addRequirements(this.grabby);
     }
 
     /** Called when the command starts */
@@ -26,7 +24,7 @@ public class GrabThingy extends CommandBase {
 
     /** Called once the command ends or is interrupted. */
     @Override
-    public void end(boolean interrupted) {
+    public void onEnd() {
       
     }
 

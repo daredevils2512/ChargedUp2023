@@ -1,12 +1,13 @@
-package frc.robot.commands.actions.Elevator;
+package frc.robot.functionality.actions.elevator;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+
+import frc.robot.functionality.actions.Action;
 import frc.robot.subsystems.ElevatorSub;
 import frc.robot.utils.Constants.ElevatorConstants;
 
-public class RunToLength extends CommandBase {
+public class RunToLength implements Action {
     private final ElevatorSub elevator;
     private final double length;
     private final double tolerance;
@@ -18,8 +19,6 @@ public class RunToLength extends CommandBase {
         this.elevator = elevator;
         this.length = length;
         this.tolerance = tolerance;
-
-        addRequirements(this.elevator);
     }
 
     /** Called when the command starts */
@@ -38,7 +37,7 @@ public class RunToLength extends CommandBase {
 
     /** Called once the command ends or is interrupted. */
     @Override
-    public void end(boolean interrupted) {
+    public void onEnd() {
         elevator.setSpeed(0.0);
     }
 
@@ -50,7 +49,7 @@ public class RunToLength extends CommandBase {
             return true;
         }
         
-        return false;
+        return true;
     }
     
 }

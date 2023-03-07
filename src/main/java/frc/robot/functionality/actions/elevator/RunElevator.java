@@ -1,24 +1,31 @@
-package frc.robot.commands.actions.Elevator;
+package frc.robot.functionality.actions.elevator;
 
 import java.util.function.DoubleSupplier;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+
+import edu.wpi.first.wpilibj.Timer;
+import frc.robot.functionality.actions.Action;
 import frc.robot.subsystems.ElevatorSub;
 
-public class RunElevator extends CommandBase {
+public class RunElevator implements Action {
     private final ElevatorSub elevator;
     private final DoubleSupplier speed;
+    private final double timeout;
+    private double startTime;
 
-    public RunElevator(ElevatorSub elevator, DoubleSupplier speed) {
+    public RunElevator(ElevatorSub elevator, DoubleSupplier speed, double timeout) {
         this.elevator = elevator;
         this.speed = speed;
+        this.timeout = timeout;
+    }
 
-        addRequirements(this.elevator);
+    public RunElevator(ElevatorSub elevator, DoubleSupplier speed) {
+        this(elevator, speed, -1.0);
     }
 
     /** Called when the command starts */
     @Override
     public void initialize() { 
-
+        startTime = Timer.getFPGATimestamp();
     }
 
     /** Called every time the scheduler runs while the command is scheduled. */
@@ -29,14 +36,16 @@ public class RunElevator extends CommandBase {
 
     /** Called once the command ends or is interrupted. */
     @Override
-    public void end(boolean interrupted) {
+    public void onEnd() {
         elevator.setSpeed(0.0);
     }
 
     /** Returns true when the command should end. */
     @Override
     public boolean isFinished() {
-        return false;
+        if (timeout == -1) return true;
+        double elapsed = Timer.getFPGATimestamp() - startTime;
+        return elapsed >= timeout;
     }
     
 }

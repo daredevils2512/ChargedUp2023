@@ -1,10 +1,11 @@
-package frc.robot.commands.actions.Drive;
+package frc.robot.functionality.actions.drive;
 
 import java.util.function.DoubleSupplier;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+
+import frc.robot.functionality.actions.Action;
 import frc.robot.subsystems.DriveSub;
 
-public class ArcadeDrive extends CommandBase {
+public class ArcadeDrive implements Action {
     private final DriveSub drivetrain;
     private final DoubleSupplier move;
     private final DoubleSupplier turn;
@@ -13,8 +14,6 @@ public class ArcadeDrive extends CommandBase {
         this.drivetrain = drivetrain;
         this.move = move;
         this.turn = turn;
-
-        addRequirements(this.drivetrain);
     }
 
     /** Called when the command starts */
@@ -31,14 +30,14 @@ public class ArcadeDrive extends CommandBase {
 
     /** Called once the command ends or is interrupted. */
     @Override
-    public void end(boolean interrupted) {
+    public void onEnd() {
         drivetrain.arcadeDrive(0.0, 0.0);
     }
 
     /** Returns true when the command should end. */
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
     
 }

@@ -1,11 +1,11 @@
-package frc.robot.commands.actions.Elevator;
+package frc.robot.functionality.actions.elevator;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.functionality.actions.Action;
 import frc.robot.subsystems.ElevatorSub;
 import frc.robot.utils.Constants.ElevatorConstants;
 
-public class RunToLengthPID extends CommandBase {
+public class RunToLengthPID implements Action {
     private final ElevatorSub elevator;
     private final double length;
     private final double tolerance;
@@ -18,8 +18,6 @@ public class RunToLengthPID extends CommandBase {
         this.length = length;
         this.tolerance = tolerance;
         this.velocity = velocity;
-
-        addRequirements(this.elevator);
     }
 
     /** Called when the command starts */
@@ -38,14 +36,14 @@ public class RunToLengthPID extends CommandBase {
 
     /** Called once the command ends or is interrupted. */
     @Override
-    public void end(boolean interrupted) {
+    public void onEnd() {
         elevator.setSpeed(0.0);
     }
 
     /** Returns true when the command should end. */
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
     
 }

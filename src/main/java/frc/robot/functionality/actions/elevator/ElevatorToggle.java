@@ -1,34 +1,37 @@
-package frc.robot.commands;
+package frc.robot.functionality.actions.elevator;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.functionality.actions.Action;
+import frc.robot.subsystems.ElevatorSub;
 
-public class ExampleCommand extends CommandBase {
-    public ExampleCommand() {
+public class ElevatorToggle implements Action {
+    private final ElevatorSub elevator;
 
+    public ElevatorToggle(ElevatorSub elevator) {
+        this.elevator = elevator;
     }
 
     /** Called when the command starts */
     @Override
     public void initialize() { 
-
+        
     }
 
     /** Called every time the scheduler runs while the command is scheduled. */
     @Override
     public void execute() {
-
+        elevator.toggleElevatorExtended();
     }
 
     /** Called once the command ends or is interrupted. */
     @Override
-    public void end(boolean interrupted) {
+    public void onEnd() {
         
     }
 
     /** Returns true when the command should end. */
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
     
 }
