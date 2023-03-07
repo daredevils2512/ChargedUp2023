@@ -31,19 +31,19 @@ import frc.robot.utils.Constants.IoConstants;
  * project.
  */
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
+  private Command autonomousCommand;
   private CommandExecutor autoExecutor;
 
-  private ElevatorSub m_ElevatorSub;
+  private ElevatorSub ElevatorSub;
   private DriveSub driveSub;
   private DumpySub dumpSub;
   private PigeonSub pigeonSub;
   private GrabbySub grabbySub;
 
-  private Extreme m_extreme;
-  private CommandXboxController m_driverController;
+  private Extreme extreme;
+  private CommandXboxController driverController;
 
-  private AutoModeSelector m_AutoModeSelector;
+  private AutoModeSelector AutoModeSelector;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -51,16 +51,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_ElevatorSub = new ElevatorSub();
+    ElevatorSub = new ElevatorSub();
     driveSub = new DriveSub(); 
     dumpSub = new DumpySub();
     pigeonSub = new PigeonSub();
     grabbySub = new GrabbySub();
   
-    m_extreme = new Extreme(1); // Move port to constats
-    m_driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
+    extreme = new Extreme(1); // Move port to constats
+    driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
 
-    autoExecutor = new CommandExecutor(m_autonomousCommand);
+    autoExecutor = new CommandExecutor(autonomousCommand);
     
     UsbCamera camera = CameraServer.startAutomaticCapture();
     camera.setResolution(640,480);
@@ -92,8 +92,8 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_AutoModeSelector.updateAutoChoice();
-    m_autonomousCommand = m_AutoModeSelector.getAutoMode().get();
+    AutoModeSelector.updateAutoChoice();
+    autonomousCommand = AutoModeSelector.getAutoMode().get();
 
     // schedule the autonomous command (example)
     if (autoExecutor != null) {
@@ -119,7 +119,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if (m_driverController.rightBumper().getAsBoolean()) {
+    if (driverController.rightBumper().getAsBoolean()) {
       new CommandExecutor(new Command() {
         @Override
         public void routine() {
@@ -131,36 +131,36 @@ public class Robot extends TimedRobot {
     new CommandExecutor(new Command() {
       @Override
       public void routine() {
-        runAction(new ArcadeDrive(driveSub, () -> m_driverController.getLeftY(), () -> m_driverController.getRightX()));
+        runAction(new ArcadeDrive(driveSub, () -> driverController.getLeftY(), () -> driverController.getRightX()));
       }
     });
 
     new CommandExecutor(new Command() {
       @Override
       public void routine() {
-        runAction(new RotateDumpy(dumpSub, () -> m_extreme.getStickY()));
+        runAction(new RotateDumpy(dumpSub, () -> extreme.getStickY()));
       };
     });
 
-    if (m_extreme.joystickTopRight.getAsBoolean()) {
+    if (extreme.joystickTopRight.getAsBoolean()) {
       new CommandExecutor(new Command() {
         @Override
         public void routine() {
-          runAction(new RunElevator(m_ElevatorSub, () -> ElevatorConstants.ELEVATOR_SPEED));
+          runAction(new RunElevator(ElevatorSub, () -> ElevatorConstants.ELEVATOR_SPEED));
         };
       });
     }
 
-    if (m_extreme.joystickTopLeft.getAsBoolean()) {
+    if (extreme.joystickTopLeft.getAsBoolean()) {
       new CommandExecutor(new Command() {
         @Override
         public void routine() {
-          runAction(new RunElevator(m_ElevatorSub, () -> -ElevatorConstants.ELEVATOR_SPEED));
+          runAction(new RunElevator(ElevatorSub, () -> -ElevatorConstants.ELEVATOR_SPEED));
         };
       });
     }
 
-    if (m_extreme.trigger.getAsBoolean()) {
+    if (extreme.trigger.getAsBoolean()) {
       new CommandExecutor(new Command() {
         @Override
         public void routine() {
@@ -169,34 +169,34 @@ public class Robot extends TimedRobot {
       });
     }
 
-    if (m_extreme.sideButton.getAsBoolean()) {
+    if (extreme.sideButton.getAsBoolean()) {
       new CommandExecutor(new Command() {
         @Override
         public void routine() {
-          runAction(new ElevatorToggle(m_ElevatorSub));
+          runAction(new ElevatorToggle(ElevatorSub));
         };
       });
     }
 
-    if (m_extreme.baseBackLeft.getAsBoolean()) {
+    if (extreme.baseBackLeft.getAsBoolean()) {
       new CommandExecutor(new Command() {
         @Override
         public void routine() {
-          runAction(new RunToLength(m_ElevatorSub, -4.8, 0.1));
+          runAction(new RunToLength(ElevatorSub, -4.8, 0.1));
         };
       });
     }
 
-    if (m_extreme.baseBackRight.getAsBoolean()) {
+    if (extreme.baseBackRight.getAsBoolean()) {
       new CommandExecutor(new Command() {
         @Override
         public void routine() {
-          runAction(new RunToLength(m_ElevatorSub, -2.3, 0.1));
+          runAction(new RunToLength(ElevatorSub, -2.3, 0.1));
         };
       });
     }
 
-    if (m_extreme.baseMiddleLeft.getAsBoolean()) {
+    if (extreme.baseMiddleLeft.getAsBoolean()) {
       new CommandExecutor(new Command() {
         @Override
         public void routine() {
@@ -205,12 +205,12 @@ public class Robot extends TimedRobot {
       });
     }
 
-    if (m_extreme.baseFrontLeft.getAsBoolean()) {
+    if (extreme.baseFrontLeft.getAsBoolean()) {
       new CommandExecutor(new Command() {
         private Command fullAuto;
         @Override
         public void initialize() {
-          fullAuto = new FullAuto(driveSub, pigeonSub, m_ElevatorSub, grabbySub, dumpSub);
+          fullAuto = new FullAuto(driveSub, pigeonSub, ElevatorSub, grabbySub, dumpSub);
         };
         @Override
         public void routine() {

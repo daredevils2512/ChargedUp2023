@@ -16,15 +16,15 @@ import frc.robot.utils.Constants.DrivetrainConstants;
 
 public class DriveSub extends SubsystemBase {
   // Public finals :)
-  private final NetworkTable m_networktable = NetworkTableInstance.getDefault().getTable(getName());
-  private final NetworkTableEntry m_setlowgEntry = m_networktable.getEntry("lowgear");
-  private final NetworkTableEntry leftDistance = m_networktable.getEntry("left distance");
-  private final NetworkTableEntry rightDistance = m_networktable.getEntry("right distance");
-  private final NetworkTableEntry leftSpeed = m_networktable.getEntry("left speed");
-  private final NetworkTableEntry rightSpeed = m_networktable.getEntry("right speed");
+  private final NetworkTable networktable = NetworkTableInstance.getDefault().getTable(getName());
+  private final NetworkTableEntry setlowgEntry = networktable.getEntry("lowgear");
+  private final NetworkTableEntry leftDistance = networktable.getEntry("left distance");
+  private final NetworkTableEntry rightDistance = networktable.getEntry("right distance");
+  private final NetworkTableEntry leftSpeed = networktable.getEntry("left speed");
+  private final NetworkTableEntry rightSpeed = networktable.getEntry("right speed");
 
   
-  private final Logger m_logger = Logger.getLogger(getName());
+  private final Logger logger = Logger.getLogger(getName());
   private final DoubleSolenoid shifter;
 
   private final WPI_TalonFX frontLeft;
@@ -90,11 +90,11 @@ public class DriveSub extends SubsystemBase {
 // }
 
 public void setLowGear(boolean lowGear) {
-    m_setlowgEntry.setBoolean(lowGear);
+    setlowgEntry.setBoolean(lowGear);
     DoubleSolenoid.Value a = lowGear ? DrivetrainConstants.LOW_GEAR_VALUE : DrivetrainConstants.HIGH_GEAR_VALUE;
     // <condition> ? <expression 1> : <expression 2>
     shifter.set(a);
-    m_logger.info("set low gear" + lowGear);
+    logger.info("set low gear" + lowGear);
 }
 
 public Boolean getLowGear() {
