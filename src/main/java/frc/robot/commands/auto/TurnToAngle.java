@@ -7,40 +7,40 @@ import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
 
 public class TurnToAngle extends CommandBase{
-    private final DriveSub m_DriveSub;
-    private final PigeonSub m_PigeonSub;
+    private final DriveSub  DriveSub;
+    private final PigeonSub  PigeonSub;
     private double yawTarget;
-    private final int m_angleToTurnTO;
+    private final int  angleToTurnTO;
     PIDController pid = new PIDController(Auto.AutoK_P, Auto.AutoK_I, Auto.AutoK_D);
 
 
     public TurnToAngle(DriveSub driveSub, PigeonSub pigeonSub, Integer angleToTurnTO) {
-    m_DriveSub = driveSub;
-    m_PigeonSub = pigeonSub; 
-    m_angleToTurnTO = angleToTurnTO;
+     this.DriveSub = driveSub;
+     this.PigeonSub = pigeonSub; 
+     this.angleToTurnTO = angleToTurnTO;
 
-    addRequirements(m_DriveSub, m_PigeonSub);
+    addRequirements( DriveSub,  PigeonSub);
 }
 @Override
   public void initialize() {  
   System.out.println("Turning!!");
-  yawTarget = m_PigeonSub.getYaw() + m_angleToTurnTO;
+  yawTarget =  PigeonSub.getYaw() +  angleToTurnTO;
   }
 
   /** Called every time the scheduler runs while the command is scheduled. */
   @Override
   public void execute() {
    
-    // double output = Constants.AutoK_P * (yawTarget - m_PigeonSub.getYaw());
-    double output = pid.calculate(m_PigeonSub.getYaw(), yawTarget);
-    m_DriveSub.arcadeDrive(0, -output);
+    // double output = Constants.AutoK_P * (yawTarget -  PigeonSub.getYaw());
+    double output = pid.calculate( PigeonSub.getYaw(), yawTarget);
+     DriveSub.arcadeDrive(0, -output);
    
   }
 
   /** Called once the command ends or is interrupted. */
   @Override
   public void end(boolean interrupted) {
-    m_DriveSub.arcadeDrive(0, 0);
+     DriveSub.arcadeDrive(0, 0);
     
   }
 

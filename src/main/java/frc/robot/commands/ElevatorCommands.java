@@ -10,7 +10,7 @@ import frc.robot.subsystems.ElevatorSub;
 import frc.robot.utils.Constants.ElevatorConstants;
 
 public class ElevatorCommands {
-    public static final Logger m_logger = Logger.getLogger(ElevatorCommands.class.getSimpleName());
+    public static final Logger  logger = Logger.getLogger(ElevatorCommands.class.getSimpleName());
 
     private ElevatorCommands(){
 
@@ -18,7 +18,7 @@ public class ElevatorCommands {
 
     public static Command runElevator(ElevatorSub elevatorSub, DoubleSupplier speed){
         return new RunCommand(() -> elevatorSub.setSpeed(speed.getAsDouble()), elevatorSub)
-            .beforeStarting (() -> m_logger.info("runElevator" + speed.getAsDouble()))
+            .beforeStarting (() ->  logger.info("runElevator" + speed.getAsDouble()))
             .finallyDo((interrupted) -> elevatorSub.setSpeed(0));
     }
 
@@ -30,7 +30,7 @@ public class ElevatorCommands {
 
     public static Command setElevatorExtended(ElevatorSub elevatorSub, boolean extended){
         return elevatorSub.runOnce(() -> elevatorSub.setExtended(extended))
-            .beforeStarting(() -> m_logger.info("setElevatorExtended" + extended));
+            .beforeStarting(() ->  logger.info("setElevatorExtended" + extended));
     }
 
     public static Command elevatorToggle(ElevatorSub elevatorSub){

@@ -7,16 +7,16 @@ import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
 
 public class Stableize extends CommandBase{
-    private final DriveSub m_DriveSub;
-    private final PigeonSub m_PigeonSub;
+    private final DriveSub  DriveSub;
+    private final PigeonSub  PigeonSub;
     PIDController pid = new PIDController(Auto.AutoK_P, Auto.AutoK_I, Auto.AutoK_D);
 
 
     public Stableize(DriveSub driveSub, PigeonSub pigeonSub) {
-    m_DriveSub = driveSub;
-    m_PigeonSub = pigeonSub; 
-   pid.setTolerance(1);
-    addRequirements(m_DriveSub, m_PigeonSub);
+     DriveSub = driveSub;
+     PigeonSub = pigeonSub; 
+   pid.setTolerance(.5);
+    addRequirements( DriveSub,  PigeonSub);
 }
 @Override
   public void initialize() {  
@@ -26,9 +26,9 @@ public class Stableize extends CommandBase{
   /** Called every time the scheduler runs while the command is scheduled. */
   @Override
   public void execute() {
-   // double output = Auto.AutoK_P * (0 - m_PigeonSub.getPitch());
-    double output = pid.calculate(m_PigeonSub.getPitch(), 0);
-    m_DriveSub.arcadeDrive(output, 0);
+   // double output = Auto.AutoK_P * (0 -  PigeonSub.getPitch());
+    double output = pid.calculate( PigeonSub.getPitch(), 0);
+     DriveSub.arcadeDrive(output, 0);
     
    
   }
@@ -36,7 +36,7 @@ public class Stableize extends CommandBase{
   /** Called once the command ends or is interrupted. */
   @Override
   public void end(boolean interrupted) {
-    m_DriveSub.arcadeDrive(0, 0);
+     DriveSub.arcadeDrive(0, 0);
     
   }
 
