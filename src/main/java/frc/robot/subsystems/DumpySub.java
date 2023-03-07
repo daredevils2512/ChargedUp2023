@@ -24,13 +24,14 @@ public class DumpySub extends SubsystemBase{
     public DumpySub() {
         //Constructor
         dumpyMotor = new WPI_TalonSRX(DumpyConstants.dumpyID);
+        dumpyMotor.setInverted(false);
         slowRate = DumpyConstants.dumpySpeed;
         dumpyMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     }
 
     public void setDumpySpeed(double speed) {
-        double outputSpeed = speed * slowRate;
-        dumpyMotor.set(ControlMode.PercentOutput, outputSpeed);
+        double outputSpeed = speed;
+        dumpyMotor.set(ControlMode.PercentOutput, -outputSpeed);
         dumpySpeed.setDouble(speed);
       }
     

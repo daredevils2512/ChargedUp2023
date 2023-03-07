@@ -12,7 +12,7 @@ public final class Constants {
     public static final int PIGEON_PORT = 1;
     public static final double AUTO_DRIVE_SPEED = 0.5;
     //PID for Gyro
-    public static final double AutoK_P = 0.015;
+    public static final double AutoK_P = 0.01;
     public static final double AutoK_I = 0.00;
     public static final double AutoK_D = 0.000;
     //PID for drivetrain
@@ -53,7 +53,7 @@ public final class Constants {
     // elevator motors
     public static final int ELEVATOR_1ID = 5;
     public static final int ELEVATOR_2ID = 6;
-    public static final double ELEVATOR_SPEED = .9;
+    public static final double ELEVATOR_SPEED = .7;
 
     // elevator encoders
     public static final double ENCODER_PER_PULSE_DISTANCE = 1; // TODO fix numbers
@@ -118,6 +118,7 @@ public final class Constants {
     public static final int REVERSE_CHANNEL = 7; //TODO
     public static final Value INTAKE_EXTENDED_VALUE = Value.kForward;
     public static final Value INTAKE_RETRACTED_VALUE = Value.kReverse;
+    public static final int LIMIT_SWITCH_PORT = 5;
   }
 
   public static class IoConstants {
