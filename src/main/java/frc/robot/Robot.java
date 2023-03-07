@@ -34,11 +34,11 @@ public class Robot extends TimedRobot {
   private Command autonomousCommand;
   private CommandExecutor autoExecutor;
 
-  private ElevatorSub ElevatorSub;
-  private DriveSub driveSub;
-  private DumpySub dumpSub;
-  private PigeonSub pigeonSub;
-  private GrabbySub grabbySub;
+  public static ElevatorSub ElevatorSub;
+  public static DriveSub driveSub;
+  public static DumpySub dumpSub;
+  public static PigeonSub pigeonSub;
+  public static GrabbySub grabbySub;
 
   private Extreme extreme;
   private CommandXboxController driverController;

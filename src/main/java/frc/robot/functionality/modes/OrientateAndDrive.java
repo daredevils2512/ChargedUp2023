@@ -1,5 +1,6 @@
 package frc.robot.functionality.modes;
 
+import frc.robot.Robot;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
 
@@ -12,6 +13,10 @@ public class OrientateAndDrive extends Command {
   public OrientateAndDrive(DriveSub drivetrain, PigeonSub gyro) {
     driveSub = drivetrain;
     this.gyro = gyro;
+  }
+
+  public OrientateAndDrive() {
+    this(Robot.driveSub, Robot.pigeonSub);
   }
 
   @Override

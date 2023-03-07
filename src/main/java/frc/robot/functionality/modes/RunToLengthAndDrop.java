@@ -1,5 +1,6 @@
 package frc.robot.functionality.modes;
 
+import frc.robot.Robot;
 import frc.robot.functionality.actions.dumpy.RotateDumpy;
 import frc.robot.functionality.actions.elevator.RunToLength;
 import frc.robot.functionality.actions.grabby.GrabThingy;
@@ -20,6 +21,10 @@ public class RunToLengthAndDrop extends Command {
         this.grabby = grabby;
         this.length = length;
         this.tolerance = tolerance;
+    }
+
+    public RunToLengthAndDrop() {
+        this(Robot.ElevatorSub, Robot.dumpSub, Robot.grabbySub, -4.8, 1.0);
     }
 
     @Override

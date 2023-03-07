@@ -1,5 +1,6 @@
 package frc.robot.functionality.modes;
 
+import frc.robot.Robot;
 import frc.robot.functionality.actions.drive.ArcadeDrive;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;
@@ -12,6 +13,10 @@ public class ChargeStation extends Command {
     public ChargeStation(PigeonSub pigeon, DriveSub drivetrain) {
         this.pigeon = pigeon;
         this.drivetrain = drivetrain;
+    }
+
+    public ChargeStation() {
+        this(Robot.pigeonSub, Robot.driveSub);
     }
 
     @Override

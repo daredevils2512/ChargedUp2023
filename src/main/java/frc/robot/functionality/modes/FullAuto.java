@@ -1,5 +1,6 @@
 package frc.robot.functionality.modes;
 
+import frc.robot.Robot;
 import frc.robot.functionality.actions.elevator.ElevatorToggle;
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.DumpySub;
@@ -23,6 +24,10 @@ public class FullAuto extends Command {
         this.elevator = elevator;
         this.grabby = grabby;
         this.dumpy = dumpy;
+    }
+
+    public FullAuto() {
+        this(Robot.driveSub, Robot.pigeonSub, Robot.ElevatorSub, Robot.grabbySub, Robot.dumpSub);
     }
 
     public void initialize() {
