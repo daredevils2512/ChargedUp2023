@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.functionality.commands.Command;
+import frc.robot.functionality.modes.Command;
 
 public class AutoModeSelector {
     enum DesiredMode {

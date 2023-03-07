@@ -1,4 +1,4 @@
-package frc.robot.functionality.commands;
+package frc.robot.functionality.modes;
 
 import frc.robot.functionality.actions.dumpy.RotateDumpy;
 import frc.robot.functionality.actions.elevator.RunToLength;

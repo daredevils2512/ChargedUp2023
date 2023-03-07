@@ -1,4 +1,4 @@
-package frc.robot.functionality.commands;
+package frc.robot.functionality.modes;
 
 import edu.wpi.first.math.controller.PIDController;
 import frc.robot.utils.Constants.Auto;

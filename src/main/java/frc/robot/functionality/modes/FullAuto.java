@@ -1,4 +1,4 @@
-package frc.robot.functionality.commands;
+package frc.robot.functionality.modes;
 
 import frc.robot.functionality.actions.elevator.ElevatorToggle;
 import frc.robot.subsystems.DriveSub;

@@ -1,6 +1,6 @@
 package frc.robot.functionality;
 
-import frc.robot.functionality.commands.Command;
+import frc.robot.functionality.modes.Command;
 
 public class CommandExecutor {
     private final Thread thread;

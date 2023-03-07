@@ -1,4 +1,4 @@
-package frc.robot.functionality.commands;
+package frc.robot.functionality.modes;
 
 import frc.robot.subsystems.DriveSub;
 import frc.robot.subsystems.PigeonSub;

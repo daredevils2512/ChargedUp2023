@@ -16,21 +16,12 @@ import frc.robot.utils.Constants.DrivetrainConstants;
 
 public class DriveSub extends SubsystemBase {
   // Public finals :)
-<<<<<<< HEAD
   private final NetworkTable networktable = NetworkTableInstance.getDefault().getTable(getName());
   private final NetworkTableEntry setlowgEntry = networktable.getEntry("lowgear");
   private final NetworkTableEntry leftDistance = networktable.getEntry("left distance");
   private final NetworkTableEntry rightDistance = networktable.getEntry("right distance");
   private final NetworkTableEntry leftSpeed = networktable.getEntry("left speed");
   private final NetworkTableEntry rightSpeed = networktable.getEntry("right speed");
-=======
-  private final NetworkTable networkTable = NetworkTableInstance.getDefault().getTable(getName());
-  private final NetworkTableEntry setLowGentry = networkTable.getEntry("lowgear");
-  private final NetworkTableEntry leftDistance = networkTable.getEntry("left distance");
-  private final NetworkTableEntry rightDistance = networkTable.getEntry("right distance");
-  private final NetworkTableEntry leftSpeed = networkTable.getEntry("left speed");
-  private final NetworkTableEntry rightSpeed = networkTable.getEntry("right speed");
->>>>>>> cael/master
 
   
   private final Logger logger = Logger.getLogger(getName());
@@ -99,11 +90,7 @@ public class DriveSub extends SubsystemBase {
 // }
 
 public void setLowGear(boolean lowGear) {
-<<<<<<< HEAD
     setlowgEntry.setBoolean(lowGear);
-=======
-    setLowGentry.setBoolean(lowGear);
->>>>>>> cael/master
     DoubleSolenoid.Value a = lowGear ? DrivetrainConstants.LOW_GEAR_VALUE : DrivetrainConstants.HIGH_GEAR_VALUE;
     // <condition> ? <expression 1> : <expression 2>
     shifter.set(a);
