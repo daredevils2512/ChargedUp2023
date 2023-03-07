@@ -34,8 +34,6 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private CommandExecutor autoExecutor;
 
-  private AutoModeSelector m_AutoModeSelector;
-
   private ElevatorSub m_ElevatorSub;
   private DriveSub driveSub;
   private DumpySub dumpSub;
@@ -44,6 +42,8 @@ public class Robot extends TimedRobot {
 
   private Extreme m_extreme;
   private CommandXboxController m_driverController;
+
+  private AutoModeSelector m_AutoModeSelector;
 
   /**
    * This function is run when the robot is first started up and should be used for any
