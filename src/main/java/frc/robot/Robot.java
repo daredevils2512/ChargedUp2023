@@ -59,8 +59,6 @@ public class Robot extends TimedRobot {
   
     extreme = new Extreme(1); // Move port to constats
     driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
-
-    autoExecutor = new CommandExecutor(autonomousCommand);
     
     UsbCamera camera = CameraServer.startAutomaticCapture();
     camera.setResolution(640,480);
@@ -94,6 +92,8 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     AutoModeSelector.updateAutoChoice();
     autonomousCommand = AutoModeSelector.getAutoMode().get();
+
+    autoExecutor = new CommandExecutor(autonomousCommand);
 
     // schedule the autonomous command (example)
     if (autoExecutor != null) {
