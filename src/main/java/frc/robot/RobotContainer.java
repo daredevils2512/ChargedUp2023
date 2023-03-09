@@ -20,16 +20,16 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class RobotContainer {
   
-  private final ElevatorSub elevatorSub = new ElevatorSub();
-  private final DriveSub driveSub = new DriveSub(); 
-  private final DumpySub dumpSub = new DumpySub();
-  private final PigeonSub pigeonSub = new PigeonSub();
-  private final GrabbySub grabbySub = new GrabbySub();
+  public static final ElevatorSub elevatorSub = new ElevatorSub();
+  public static final DriveSub driveSub = new DriveSub(); 
+  public static final DumpySub dumpSub = new DumpySub();
+  public static final PigeonSub pigeonSub = new PigeonSub();
+  public static final GrabbySub grabbySub = new GrabbySub();
 
-  private final Extreme extreme = new Extreme(1); // Move port to constats
-  private final CommandXboxController driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
+  public static final Extreme extreme = new Extreme(1); // Move port to constats
+  public static final CommandXboxController driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
 
-  private final AutoModeSelector autoSelector = new AutoModeSelector();
+  public static final AutoModeSelector autoSelector = new AutoModeSelector();
 
   /** The container for the ro
    * bot. Contains subsystems, OI devices, and commands. */
