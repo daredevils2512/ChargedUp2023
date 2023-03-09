@@ -1,30 +1,28 @@
 package frc.robot;
 
 import java.util.Optional;
-
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.auto.AutoCommands;
 
 public class AutoModeSelector {
     enum DesiredMode {
         // Just example modes, add yours later
-        DONOTHING,
-        MODE1,
-        MODE2;
+        DO_NOTHING,
+        FULL_AUTO;
     }
 
     private final SendableChooser<DesiredMode> modeChooser;
 
     private final Optional<Command> autoMode = Optional.empty();
 
-    private DesiredMode cachedAutoMode = DesiredMode.DONOTHING;
+    private DesiredMode cachedAutoMode = DesiredMode.DO_NOTHING;
 
     public AutoModeSelector() {
         modeChooser = new SendableChooser<>();
-        modeChooser.setDefaultOption("Do Nothing", DesiredMode.DONOTHING);
-        modeChooser.addOption("Mode 1", DesiredMode.MODE1);
-        modeChooser.addOption("Mode 2", DesiredMode.MODE2);
+        modeChooser.setDefaultOption("Do Nothing", DesiredMode.DO_NOTHING);
+        modeChooser.addOption("Full Auto", DesiredMode.FULL_AUTO);
         SmartDashboard.putData(modeChooser);
     }
 
@@ -32,7 +30,7 @@ public class AutoModeSelector {
         DesiredMode desiredMode = modeChooser.getSelected();
 
         if (desiredMode == null) {
-            desiredMode = DesiredMode.DONOTHING;
+            desiredMode = DesiredMode.DO_NOTHING;
         }
 
         if (cachedAutoMode != desiredMode) {
@@ -44,12 +42,10 @@ public class AutoModeSelector {
 
     private Optional<Command> getAutoMode(DesiredMode desiredMode) {
         switch (desiredMode) {
-            case DONOTHING:
+            case DO_NOTHING:
                 return Optional.empty();
-            case MODE1:
-                return Optional.empty(); // too lazy to make entire commands for this. just return a class. you get the point
-            case MODE2:
-                return Optional.empty(); // too lazy to make entire commands for this. just return a class. you get the point
+            case FULL_AUTO:
+                return Optional.of(AutoCommands.fullAuto(RobotContainer.driveSub, RobotContainer.pigeonSub, RobotContainer.elevatorSub, RobotContainer.grabbySub, RobotContainer.dumpSub)); 
             default:
                 System.out.println("No valid mode found. Doing nothing");
                 return Optional.empty();

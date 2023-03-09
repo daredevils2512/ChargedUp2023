@@ -18,10 +18,10 @@ public class DriveSub extends SubsystemBase {
   // Public finals :)
   private final NetworkTable networkTable = NetworkTableInstance.getDefault().getTable(getName());
   private final NetworkTableEntry setLowGentry = networkTable.getEntry("lowgear");
-  private final NetworkTableEntry leftDistance = networkTable.getEntry("left distance");
-  private final NetworkTableEntry rightDistance = networkTable.getEntry("right distance");
-  private final NetworkTableEntry leftSpeed = networkTable.getEntry("left speed");
-  private final NetworkTableEntry rightSpeed = networkTable.getEntry("right speed");
+  // private final NetworkTableEntry leftDistance = networkTable.getEntry("left distance");
+  // private final NetworkTableEntry rightDistance = networkTable.getEntry("right distance");
+  // private final NetworkTableEntry leftSpeed = networkTable.getEntry("left speed");
+  // private final NetworkTableEntry rightSpeed = networkTable.getEntry("right speed");
 
   
   private final Logger logger = Logger.getLogger(getName());
@@ -64,7 +64,7 @@ public class DriveSub extends SubsystemBase {
   public void arcadeDrive(double move, double turn) {
     WheelSpeeds wheelSpeeds = DifferentialDrive.arcadeDriveIK(move, turn, true);
     left.set(move - turn);
-    right.set(move +turn);
+    right.set(move + turn);
   }
 
   
