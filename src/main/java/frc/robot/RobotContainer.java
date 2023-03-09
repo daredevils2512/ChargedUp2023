@@ -1,12 +1,12 @@
 package frc.robot;
 
 import frc.robot.commands.DriveCommands;
-import frc.robot.io.Extreme;
-import frc.robot.subsystems.DriveSub;
-import frc.robot.subsystems.DumpySub;
 import frc.robot.commands.ElevatorCommands;
 import frc.robot.commands.GrabbyCommands;
 import frc.robot.commands.auto.AutoCommands;
+import frc.robot.io.Extreme;
+import frc.robot.subsystems.DriveSub;
+import frc.robot.subsystems.DumpySub;
 import frc.robot.subsystems.ElevatorSub;
 import frc.robot.subsystems.GrabbySub;
 import frc.robot.subsystems.PigeonSub;
@@ -14,6 +14,7 @@ import frc.robot.utils.Constants.ElevatorConstants;
 import frc.robot.utils.Constants.IoConstants;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -25,8 +26,10 @@ public class RobotContainer {
   private final PigeonSub pigeonSub = new PigeonSub();
   private final GrabbySub grabbySub = new GrabbySub();
 
-  private final Extreme extreeme = new Extreme(1); // Move port to constats
+  private final Extreme extreme = new Extreme(1); // Move port to constats
   private final CommandXboxController driverController = new CommandXboxController(IoConstants.XBOX_CONTROLLER_PORT);
+
+  private final AutoModeSelector autoSelector = new AutoModeSelector();
 
   /** The container for the ro
    * bot. Contains subsystems, OI devices, and commands. */
@@ -49,18 +52,23 @@ public class RobotContainer {
    */
   private void configureBindings() {
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive( -driverController.getLeftY(),driverController.getRightX())));
-    dumpSub.setDefaultCommand(dumpSub.run(()-> dumpSub.setDumpySpeed(extreeme.getStickY())));
+    dumpSub.setDefaultCommand(dumpSub.run(()-> dumpSub.setDumpySpeed(extreme.getStickY())));
     driverController.rightBumper().onTrue(DriveCommands.driveShift(driveSub));  
-    extreeme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(elevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
-    extreeme.joystickTopLeft.whileTrue(ElevatorCommands.runElevator(elevatorSub, ()-> -ElevatorConstants.ELEVATOR_SPEED));
-    extreeme.trigger.onTrue(GrabbyCommands.grabThingy(grabbySub));
-    extreeme.sideButton.whileTrue(GrabbyCommands.limitGrab(grabbySub));
-    extreeme.baseMiddleLeft.onTrue(ElevatorCommands.elevatorToggle(elevatorSub));
-    extreeme.baseBackLeft.onTrue(ElevatorCommands.runToLength(elevatorSub, -4.8, .1));
-    extreeme.baseBackRight.onTrue(ElevatorCommands.runToLength(elevatorSub, -2.3, .1));
-    extreeme.baseFrontLeft.onTrue(AutoCommands.fullAuto(driveSub, pigeonSub, elevatorSub, grabbySub, dumpSub));
+    extreme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(elevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
+    extreme.joystickTopLeft.whileTrue(ElevatorCommands.runElevator(elevatorSub, ()-> -ElevatorConstants.ELEVATOR_SPEED));
+    extreme.trigger.onTrue(GrabbyCommands.grabThingy(grabbySub));
+    extreme.sideButton.whileTrue(GrabbyCommands.limitGrab(grabbySub));
+    extreme.baseMiddleLeft.onTrue(ElevatorCommands.elevatorToggle(elevatorSub));
+    extreme.baseBackLeft.onTrue(ElevatorCommands.runToLength(elevatorSub, -4.8, .1));
+    extreme.baseBackRight.onTrue(ElevatorCommands.runToLength(elevatorSub, -2.3, .1));
+    extreme.baseFrontLeft.onTrue(AutoCommands.fullAuto(driveSub, pigeonSub, elevatorSub, grabbySub, dumpSub));
    
     
+  }
+
+  public Command getAutoMode() {
+    autoSelector.updateAutoChoice();
+    return autoSelector.getAutoMode().get();
   }
 
 }

@@ -12,7 +12,7 @@ import frc.robot.utils.Constants.DumpyConstants;
 public class DumpySub extends SubsystemBase{
 
     private final WPI_TalonSRX dumpyMotor;
-    private final double slowRate;
+    // private final double slowRate;
 
     private final NetworkTable dumpyNetworkTable = NetworkTableInstance.getDefault().getTable(getName());
     private final NetworkTableEntry dumpyEncoderUnits = dumpyNetworkTable.getEntry("dumpy encoder units: ");  
@@ -25,7 +25,7 @@ public class DumpySub extends SubsystemBase{
         //Constructor
         dumpyMotor = new WPI_TalonSRX(DumpyConstants.dumpyID);
         dumpyMotor.setInverted(false);
-        slowRate = DumpyConstants.dumpySpeed;
+        // slowRate = DumpyConstants.dumpySpeed;
         dumpyMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     }
 
