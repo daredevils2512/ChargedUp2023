@@ -30,7 +30,7 @@ public class AutoModeSelector {
         DesiredMode desiredMode = modeChooser.getSelected();
 
         if (desiredMode == null) {
-            desiredMode = DesiredMode.DO_NOTHING;
+            desiredMode = DesiredMode.FULL_AUTO;
         }
 
         if (cachedAutoMode != desiredMode) {
@@ -47,8 +47,8 @@ public class AutoModeSelector {
             case FULL_AUTO:
                 return Optional.of(AutoCommands.fullAuto(RobotContainer.driveSub, RobotContainer.pigeonSub, RobotContainer.elevatorSub, RobotContainer.grabbySub, RobotContainer.dumpSub)); 
             default:
-                System.out.println("No valid mode found. Doing nothing");
-                return Optional.empty();
+                System.out.println("No valid mode found. Defaulting to Full Auto");
+                return Optional.of(AutoCommands.fullAuto(RobotContainer.driveSub, RobotContainer.pigeonSub, RobotContainer.elevatorSub, RobotContainer.grabbySub, RobotContainer.dumpSub));
         }
     }
 
