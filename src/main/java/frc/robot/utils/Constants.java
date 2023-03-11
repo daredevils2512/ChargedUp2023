@@ -118,7 +118,7 @@ public final class Constants {
     public static final int REVERSE_CHANNEL = 7; //TODO
     public static final Value INTAKE_EXTENDED_VALUE = Value.kForward;
     public static final Value INTAKE_RETRACTED_VALUE = Value.kReverse;
-    public static final int LIMIT_SWITCH_PORT = 5;
+    public static final int LIMIT_SWITCH_PORT = 6;
   }
 
   public static class IoConstants {

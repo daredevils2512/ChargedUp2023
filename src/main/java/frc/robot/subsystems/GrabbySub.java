@@ -41,7 +41,7 @@ public class GrabbySub  extends SubsystemBase {
   }
 
   public void limitGrab(){
-    if ( limitSwitch.get()== true && getGrab() == true) {
+    if ( limitSwitch.get()== false && getGrab() == true) {
       setGrab(!getGrab());
     }
 

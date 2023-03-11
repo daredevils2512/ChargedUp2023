@@ -70,8 +70,6 @@ public final class AutoCommands {
     .andThen(WaitCommand(1))
       .andThen(toggleClaw(grabbySub))
         .andThen(WaitCommand(1)) 
-      .andThen(toggleClaw(grabbySub))
-        .andThen(WaitCommand(1))
       .andThen(toggleClaw(grabbySub)))
   .andThen((runDumpy(dumpySub, .5).withTimeout(.5)))
   .andThen(ElevatorCommands.runToLength(elevatorSub, -.5, .1));
