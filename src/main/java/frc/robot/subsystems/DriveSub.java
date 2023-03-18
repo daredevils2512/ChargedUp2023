@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import java.util.logging.Logger;
   import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
@@ -29,10 +30,10 @@ public class DriveSub extends SubsystemBase {
   private final Logger logger = Logger.getLogger(getName());
   private final DoubleSolenoid shifter;
 
-  private final WPI_TalonFX frontLeft;
-  private final WPI_TalonFX frontRight;
-  private final WPI_TalonFX backLeft;
-  private final WPI_TalonFX backRight;
+  private final WPI_TalonSRX frontLeft;
+  private final WPI_TalonSRX frontRight;
+  private final WPI_TalonSRX backLeft;
+  private final WPI_TalonSRX backRight;
   private final MotorControllerGroup left;
   private final MotorControllerGroup right;
   // private final SlewRateLimiter drivelimit;
@@ -41,10 +42,10 @@ public class DriveSub extends SubsystemBase {
 
   public DriveSub() {
 
-    frontLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_FRONT_RIGHT_ID);
-    backLeft = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_BACK_RIGHT_ID);
-    frontRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_FRONT_LEFT_ID);
-    backRight = new WPI_TalonFX(Constants.DrivetrainConstants.DRIVE_BACK_LEFT_ID);
+    frontLeft = new WPI_TalonSRX(Constants.DrivetrainConstants.DRIVE_FRONT_RIGHT_ID);
+    backLeft = new WPI_TalonSRX(Constants.DrivetrainConstants.DRIVE_BACK_RIGHT_ID);
+    frontRight = new WPI_TalonSRX(Constants.DrivetrainConstants.DRIVE_FRONT_LEFT_ID);
+    backRight = new WPI_TalonSRX(Constants.DrivetrainConstants.DRIVE_BACK_LEFT_ID);
     shifter = new DoubleSolenoid(
       PneumaticsModuleType.CTREPCM,
       Constants.DrivetrainConstants.SHIFTER_FORWARD_CHANNEL, 
