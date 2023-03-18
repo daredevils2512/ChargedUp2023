@@ -1,7 +1,9 @@
 package frc.robot.subsystems;
 
 import java.util.logging.Logger;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+  import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -33,6 +35,7 @@ public class DriveSub extends SubsystemBase {
   private final WPI_TalonFX backRight;
   private final MotorControllerGroup left;
   private final MotorControllerGroup right;
+  // private final SlewRateLimiter drivelimit;
   // private final Encoder leftEncoder;
   // private final Encoder rightEncoder;
 
@@ -47,6 +50,7 @@ public class DriveSub extends SubsystemBase {
       Constants.DrivetrainConstants.SHIFTER_FORWARD_CHANNEL, 
       Constants.DrivetrainConstants.SHIFTER_REVERSE_CHANNEL
     );
+    // drivelimit  = new SlewRateLimiter(0);
 
     // // // leftEncoder = new Encoder(Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_A,
     // //     Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_B);
@@ -64,7 +68,7 @@ public class DriveSub extends SubsystemBase {
   public void arcadeDrive(double move, double turn) {
     WheelSpeeds wheelSpeeds = DifferentialDrive.arcadeDriveIK(move, turn, true);
     left.set(move - turn);
-    right.set(move +turn);
+    right.set(move + turn); 
   }
 
   
