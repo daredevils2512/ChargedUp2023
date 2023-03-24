@@ -15,7 +15,7 @@ public class Stableize extends CommandBase{
     public Stableize(DriveSub driveSub, PigeonSub pigeonSub) {
      DriveSub = driveSub;
      PigeonSub = pigeonSub; 
-   pid.setTolerance(.5);
+   pid.setTolerance(.2);
     addRequirements( DriveSub,  PigeonSub);
 }
 @Override

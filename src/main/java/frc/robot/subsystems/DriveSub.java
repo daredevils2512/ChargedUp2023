@@ -24,8 +24,11 @@ public class DriveSub extends SubsystemBase {
   private final NetworkTableEntry rightDistance = networkTable.getEntry("right distance");
   private final NetworkTableEntry leftSpeed = networkTable.getEntry("left speed");
   private final NetworkTableEntry rightSpeed = networkTable.getEntry("right speed");
+  private final NetworkTableEntry right1Temp = networkTable.getEntry("right 1 temp");
+  private final NetworkTableEntry right2Temp = networkTable.getEntry("right 2 temp");
+  private final NetworkTableEntry left1Temp = networkTable.getEntry("left 1 temp");
+  private final NetworkTableEntry left2Temp = networkTable.getEntry("left 2 temp");
 
-  
   private final Logger logger = Logger.getLogger(getName());
   private final DoubleSolenoid shifter;
 
@@ -50,6 +53,7 @@ public class DriveSub extends SubsystemBase {
       Constants.DrivetrainConstants.SHIFTER_FORWARD_CHANNEL, 
       Constants.DrivetrainConstants.SHIFTER_REVERSE_CHANNEL
     );
+    
     // drivelimit  = new SlewRateLimiter(0);
 
     // // // leftEncoder = new Encoder(Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_A,
@@ -115,7 +119,10 @@ public void periodic() {
   // rightDistance.setDouble(getRightDistance());
   // leftSpeed.setDouble(getLeftSpeed());
   // rightSpeed.setDouble(getRightSpeed());
-
+  right1Temp.setDouble(frontRight.getTemperature());
+  right2Temp.setDouble(backRight.getTemperature());
+  left1Temp.setDouble(frontLeft.getTemperature());
+  left2Temp.setDouble(backLeft.getTemperature()); 
 }
 
 }

@@ -51,7 +51,11 @@ public class RobotContainer {
   private void configureBindings() {
     driveSub.setDefaultCommand(driveSub.run(() -> driveSub.arcadeDrive( -driverController.getLeftY(),driverController.getRightX())));
     dumpSub.setDefaultCommand(dumpSub.run(()-> dumpSub.setDumpySpeed(extreeme.getStickY())));
+    
     driverController.rightBumper().onTrue(DriveCommands.driveShift(driveSub));  
+    driverController.rightTrigger().onTrue(GrabbyCommands.grabThingy(grabbySub));
+    driverController.leftTrigger().whileTrue(GrabbyCommands.limitGrab(grabbySub));
+
     extreeme.joystickTopRight.whileTrue(ElevatorCommands.runElevator(elevatorSub, ()-> ElevatorConstants.ELEVATOR_SPEED));
     extreeme.joystickTopLeft.whileTrue(ElevatorCommands.runElevator(elevatorSub, ()-> -ElevatorConstants.ELEVATOR_SPEED));
     extreeme.trigger.onTrue(GrabbyCommands.grabThingy(grabbySub));
@@ -60,7 +64,7 @@ public class RobotContainer {
     extreeme.baseBackLeft.onTrue(ElevatorCommands.runToLength(elevatorSub, -4.8, .1));
     extreeme.baseBackRight.onTrue(ElevatorCommands.runToLength(elevatorSub, -2.3, .1));
     extreeme.baseFrontLeft.onTrue(AutoCommands.fullAuto(driveSub, pigeonSub, elevatorSub, grabbySub, dumpSub));
-   
+    extreeme.joystickBottomLeft.onTrue(ElevatorCommands.setElevatorExtendedTrue(elevatorSub));
     
   }
    

@@ -36,6 +36,9 @@ public class ElevatorCommands {
     public static Command elevatorToggle(ElevatorSub elevatorSub){
         return elevatorSub.runOnce(elevatorSub::toggleElevatorExtended);
     }
+    public static Command setElevatorExtendedTrue(ElevatorSub elevatorSub){
+        return elevatorSub.runOnce(()->elevatorSub.setExtended(true));
+    }
 
     public static Command runToLengthPID(ElevatorSub elevatorSub, double length, double tolerance, double velocity){
         PIDController pid = new PIDController(ElevatorConstants.ELEVATOR_PID_KP, ElevatorConstants.ELEVATOR_PID_KI, ElevatorConstants.ELEVATOR_PID_KD);
