@@ -21,7 +21,7 @@ public final class AutoCommands {
     return new Stableize(driveSub, pigeonSub);
   }
   public static Command chargeStation(DriveSub drivesub, PigeonSub pigeonSub){
-    return ((DriveCommands.arcadeDrive(drivesub, -.35, 0).withTimeout(5.5)).until(()-> pigeonSub.getPitch() >= 8)).andThen(stableize(drivesub, pigeonSub));
+    return ((DriveCommands.arcadeDrive(drivesub, -.35, 0).withTimeout(5.5)).until(()-> pigeonSub.getPitch() >= 9)).andThen(stableize(drivesub, pigeonSub));
   }
   public static Command turnToAngle(DriveSub driveSub, PigeonSub pigeonSub, int angleToTurnTO){
     return new TurnToAngle(driveSub, pigeonSub, angleToTurnTO);
@@ -57,6 +57,9 @@ public final class AutoCommands {
  public static Command toggleElevator( ElevatorSub elevatorSub){
   return ElevatorCommands.elevatorToggle(elevatorSub);
  }
+ public static Command setElevatorExtendedTrue(ElevatorSub elevatorSub){
+  return ElevatorCommands.setElevatorExtendedTrue(elevatorSub);
+ }
  public static Command runToLength(ElevatorSub elevatorSub, Double length, Double tolorance){
   return ElevatorCommands.runToLength(elevatorSub, length, tolorance);
  }
@@ -72,8 +75,6 @@ public final class AutoCommands {
     .andThen(WaitCommand(1))
       .andThen(toggleClaw(grabbySub))
         .andThen(WaitCommand(1)) 
-      .andThen(toggleClaw(grabbySub))
-        .andThen(WaitCommand(1))
       .andThen(toggleClaw(grabbySub)))
   .andThen((runDumpy(dumpySub, .5).withTimeout(.5)))
   .andThen(ElevatorCommands.runToLength(elevatorSub, -.5, .1));
@@ -81,7 +82,7 @@ public final class AutoCommands {
 
  public static Command fullAuto(DriveSub  driveSub, PigeonSub  pigeonSub, ElevatorSub elevatorSub, GrabbySub grabbySub, DumpySub dumpySub){
   return
-    toggleElevator(elevatorSub)
+    setElevatorExtendedTrue(elevatorSub).andThen(setElevatorExtendedTrue(elevatorSub).andThen(setElevatorExtendedTrue(elevatorSub)))
    .andThen(WaitCommand(1.5))
    .andThen(runToLengthAndDrop(elevatorSub, dumpySub, grabbySub, -4.8,.1))
   .andThen(chargeStation( driveSub,  pigeonSub));

@@ -1,7 +1,9 @@
 package frc.robot.subsystems;
 
 import java.util.logging.Logger;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+  import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -18,12 +20,15 @@ public class DriveSub extends SubsystemBase {
   // Public finals :)
   private final NetworkTable networkTable = NetworkTableInstance.getDefault().getTable(getName());
   private final NetworkTableEntry setLowGentry = networkTable.getEntry("lowgear");
-  // private final NetworkTableEntry leftDistance = networkTable.getEntry("left distance");
-  // private final NetworkTableEntry rightDistance = networkTable.getEntry("right distance");
-  // private final NetworkTableEntry leftSpeed = networkTable.getEntry("left speed");
-  // private final NetworkTableEntry rightSpeed = networkTable.getEntry("right speed");
+  private final NetworkTableEntry leftDistance = networkTable.getEntry("left distance");
+  private final NetworkTableEntry rightDistance = networkTable.getEntry("right distance");
+  private final NetworkTableEntry leftSpeed = networkTable.getEntry("left speed");
+  private final NetworkTableEntry rightSpeed = networkTable.getEntry("right speed");
+  private final NetworkTableEntry right1Temp = networkTable.getEntry("right 1 temp");
+  private final NetworkTableEntry right2Temp = networkTable.getEntry("right 2 temp");
+  private final NetworkTableEntry left1Temp = networkTable.getEntry("left 1 temp");
+  private final NetworkTableEntry left2Temp = networkTable.getEntry("left 2 temp");
 
-  
   private final Logger logger = Logger.getLogger(getName());
   private final DoubleSolenoid shifter;
 
@@ -33,6 +38,7 @@ public class DriveSub extends SubsystemBase {
   private final WPI_TalonFX backRight;
   private final MotorControllerGroup left;
   private final MotorControllerGroup right;
+  // private final SlewRateLimiter drivelimit;
   // private final Encoder leftEncoder;
   // private final Encoder rightEncoder;
 
@@ -47,6 +53,8 @@ public class DriveSub extends SubsystemBase {
       Constants.DrivetrainConstants.SHIFTER_FORWARD_CHANNEL, 
       Constants.DrivetrainConstants.SHIFTER_REVERSE_CHANNEL
     );
+    
+    // drivelimit  = new SlewRateLimiter(0);
 
     // // // leftEncoder = new Encoder(Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_A,
     // //     Constants.DrivetrainConstants.DRIVETRAIN_LEFT_ENCODER_B);
@@ -64,7 +72,7 @@ public class DriveSub extends SubsystemBase {
   public void arcadeDrive(double move, double turn) {
     WheelSpeeds wheelSpeeds = DifferentialDrive.arcadeDriveIK(move, turn, true);
     left.set(move - turn);
-    right.set(move + turn);
+    right.set(move + turn); 
   }
 
   
@@ -111,7 +119,10 @@ public void periodic() {
   // rightDistance.setDouble(getRightDistance());
   // leftSpeed.setDouble(getLeftSpeed());
   // rightSpeed.setDouble(getRightSpeed());
-
+  right1Temp.setDouble(frontRight.getTemperature());
+  right2Temp.setDouble(backRight.getTemperature());
+  left1Temp.setDouble(frontLeft.getTemperature());
+  left2Temp.setDouble(backLeft.getTemperature()); 
 }
 
 }

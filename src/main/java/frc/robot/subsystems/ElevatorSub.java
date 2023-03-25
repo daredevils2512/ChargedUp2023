@@ -30,6 +30,7 @@ public class ElevatorSub extends SubsystemBase {
     private final NetworkTableEntry  currentLengthEntry =  networkTable.getEntry("current length >:(");
     private final NetworkTableEntry  rawEncoderUnits =  networkTable.getEntry("raw encoder units >:)");
     private final NetworkTableEntry  solenoidValue =  networkTable.getEntry("solenoid value :D");
+    private final NetworkTableEntry limitSwitchEntry = networkTable.getEntry("Elevator Limit Switch");
 
     public ElevatorSub () {
          leftMotor = new TalonSRX(ElevatorConstants.ELEVATOR_1ID);
@@ -87,12 +88,16 @@ public class ElevatorSub extends SubsystemBase {
         setExtended(!getElevatorExtended());
     }
 
+    
+    
+
     @Override
     public void periodic() {
         if ( limitSwitch.get()){
              rightMotor.setSelectedSensorPosition(0);
         } 
          currentLengthEntry.setDouble(getLength());
+         limitSwitchEntry.setBoolean(limitSwitch.get());
          rawEncoderUnits.setDouble( rightMotor.getSelectedSensorPosition());
          solenoidValue.setString(switch ( doubleSolenoid.get()) {
             case kForward -> "Forward";
