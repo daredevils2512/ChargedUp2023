@@ -21,8 +21,8 @@ public class AutoModeSelector {
 
     public AutoModeSelector() {
         modeChooser = new SendableChooser<>();
-        modeChooser.setDefaultOption("Do Nothing", DesiredMode.DO_NOTHING);
-        modeChooser.addOption("Full Auto", DesiredMode.FULL_AUTO);
+        modeChooser.setDefaultOption("Full Auto", DesiredMode.FULL_AUTO);
+        modeChooser.addOption("Do Nothing", DesiredMode.DO_NOTHING);
         SmartDashboard.putData(modeChooser);
     }
 
