@@ -19,7 +19,9 @@ public final class AutoCommands {
     return new Stableize(driveSub, pigeonSub);
   }
   public static Command chargeStation(DriveSub drivesub, PigeonSub pigeonSub){
-    return ((DriveCommands.arcadeDrive(drivesub, -.35, 0).withTimeout(5.5)).until(()-> pigeonSub.getPitch() >= 9)).andThen(stableize(drivesub, pigeonSub));
+    return ((DriveCommands.arcadeDrive(drivesub, -.35, 0).withTimeout(5.5))
+    .until(()-> pigeonSub.getPitch() >= 8)).andThen(stableize(drivesub, pigeonSub)
+    );
   }
   public static Command turnToAngle(DriveSub driveSub, PigeonSub pigeonSub, int angleToTurnTO){
     return new TurnToAngle(driveSub, pigeonSub, angleToTurnTO);

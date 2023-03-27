@@ -12,7 +12,7 @@ public final class Constants {
     public static final int PIGEON_PORT = 1;
     public static final double AUTO_DRIVE_SPEED = 0.5;
     //PID for Gyro
-    public static final double AutoK_P = 0.011;
+    public static final double AutoK_P = 0.009;
     public static final double AutoK_I = 0.00;
     public static final double AutoK_D = 0.000;
     //PID for drivetrain
